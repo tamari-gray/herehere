@@ -56,8 +56,26 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "flutter_riverpod",
+      "rootUri": "file:///usr/local/Caskroom/flutter/2.2.3/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_riverpod-1.0.0-dev.7",
+      "packageUri": "lib/",
+      "languageVersion": "2.13"
+    },
+    {
       "name": "flutter_test",
       "rootUri": "file:///usr/local/Caskroom/flutter/2.2.3/flutter/packages/flutter_test",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "freezed_annotation",
+      "rootUri": "file:///usr/local/Caskroom/flutter/2.2.3/flutter/.pub-cache/hosted/pub.dartlang.org/freezed_annotation-0.14.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "json_annotation",
+      "rootUri": "file:///usr/local/Caskroom/flutter/2.2.3/flutter/.pub-cache/hosted/pub.dartlang.org/json_annotation-4.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -80,6 +98,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "riverpod",
+      "rootUri": "file:///usr/local/Caskroom/flutter/2.2.3/flutter/.pub-cache/hosted/pub.dartlang.org/riverpod-1.0.0-dev.7",
+      "packageUri": "lib/",
+      "languageVersion": "2.13"
+    },
+    {
       "name": "sky_engine",
       "rootUri": "file:///usr/local/Caskroom/flutter/2.2.3/flutter/bin/cache/pkg/sky_engine",
       "packageUri": "lib/",
@@ -94,6 +118,12 @@
     {
       "name": "stack_trace",
       "rootUri": "file:///usr/local/Caskroom/flutter/2.2.3/flutter/.pub-cache/hosted/pub.dartlang.org/stack_trace-1.10.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "state_notifier",
+      "rootUri": "file:///usr/local/Caskroom/flutter/2.2.3/flutter/.pub-cache/hosted/pub.dartlang.org/state_notifier-0.7.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -140,7 +170,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2021-08-29T15:24:54.728662Z",
+  "generated": "2021-08-30T07:42:58.707866Z",
   "generator": "pub",
   "generatorVersion": "2.13.4"
 }
