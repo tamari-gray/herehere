@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:niira2/route_generator.dart';
 
 void main() {
   runApp(MyApp());
@@ -12,12 +13,14 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: WelcomeScreen(),
+      initialRoute: '/',
+      onGenerateRoute: RouteGenerator.generateRoute,
+      home: SplashPage(),
     );
   }
 }
 
-class WelcomeScreen extends StatelessWidget {
+class SplashPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,7 +82,10 @@ class WelcomeScreen extends StatelessWidget {
                           // minimumSize: Size(50, 50),
                           primary: Color.fromRGBO(247, 152, 0, 1),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context)
+                              .pushNamed('/lobby', arguments: false);
+                        },
                         child: Text(
                           'Play game',
                           style: TextStyle(color: Colors.white),
@@ -96,7 +102,9 @@ class WelcomeScreen extends StatelessWidget {
                             textStyle: TextStyle(
                               color: Color.fromRGBO(247, 152, 0, 1),
                             )),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).pushNamed('/admin');
+                        },
                         child: Text(
                           'Admin',
                           style: TextStyle(color: Colors.white),
@@ -108,6 +116,97 @@ class WelcomeScreen extends StatelessWidget {
               )
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class AdminSignIn extends StatefulWidget {
+  AdminSignIn({Key? key}) : super(key: key);
+
+  @override
+  _AdminSignInState createState() => _AdminSignInState();
+}
+
+class _AdminSignInState extends State<AdminSignIn> {
+  final myController = TextEditingController();
+
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    myController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+      body: Container(
+        child: Center(
+          child: TextField(
+            controller: myController,
+          ),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(onPressed: () {
+        if (myController.text == 'i eat poo') {
+          Navigator.of(context).pushNamed('/lobby', arguments: true);
+        }
+      }),
+    );
+  }
+}
+
+class Lobby extends StatefulWidget {
+  final bool isAdmin;
+  Lobby(this.isAdmin);
+
+  @override
+  _LobbyState createState() => _LobbyState();
+}
+
+class _LobbyState extends State<Lobby> {
+  double _seekPhase = 2.5;
+  double _hidePhase = 5;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+      body: Container(
+        child: Column(
+          children: [
+            Text(
+              'Seek phase time',
+              style: TextStyle(fontSize: 18),
+            ),
+            widget.isAdmin
+                ? Slider(
+                    max: 5,
+                    value: this._seekPhase,
+                    label: '$_seekPhase minutes',
+                    divisions: 10,
+                    onChanged: (double val) => setState(() {
+                          _seekPhase = val;
+                        }))
+                : Container(),
+            Text(
+              'Hide phase time',
+              style: TextStyle(fontSize: 18),
+            ),
+            widget.isAdmin
+                ? Slider(
+                    max: 10,
+                    value: this._hidePhase,
+                    label: '$_hidePhase minutes',
+                    divisions: 10,
+                    onChanged: (double val) => setState(() {
+                          _hidePhase = val;
+                        }))
+                : Container(),
+          ],
         ),
       ),
     );
