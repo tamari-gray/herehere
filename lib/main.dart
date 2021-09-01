@@ -1,8 +1,47 @@
+import 'dart:developer';
+
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:niira2/route_generator.dart';
+// import 'package:niira2/route_generator.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+final JoinedGameProvider = Provider<bool>((ref) {
+  return true;
+});
 
 void main() {
-  runApp(MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(ProviderScope(child: App()));
+}
+
+class App extends StatefulWidget {
+  @override
+  _AppState createState() => _AppState();
+}
+
+class _AppState extends State<App> {
+  final Future<FirebaseApp> _initialization = Firebase.initializeApp();
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+      future: _initialization,
+      builder: (context, snapshot) {
+        // Check for errors
+        if (snapshot.hasError) {
+          log('dang it');
+        }
+
+        // Once complete, show your application
+        if (snapshot.connectionState == ConnectionState.done) {
+          return MyApp();
+        }
+
+        // Otherwise, show something whilst waiting for initialization to complete
+        return Text('loading');
+      },
+    );
+  }
 }
 
 class MyApp extends StatelessWidget {
@@ -13,8 +52,6 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: '/',
-      onGenerateRoute: RouteGenerator.generateRoute,
       home: SplashPage(),
     );
   }
