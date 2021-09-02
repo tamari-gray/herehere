@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:niira2/services/database.dart';
 
 class SplashPage extends StatefulWidget {
   @override
@@ -88,10 +89,14 @@ class _SplashPageState extends State<SplashPage> {
                       ),
                       OutlinedButton(
                         onPressed: () {
-                          if (usernameController.text == 'pooeater') {
-                            // sign in as admin
-                          } else {
-                            // sign up as player
+                          if (usernameController.text != '') {
+                            if (usernameController.text == 'pooeater') {
+                              // sign in as admin
+
+                            } else {
+                              // sign up as player
+                              Database().joinGame(usernameController.text);
+                            }
                           }
                         },
                         child: Text(
