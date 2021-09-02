@@ -3,7 +3,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class Database {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   Future<void> joinGame(String username) async {
-    print('$username joining game in db');
     try {
       await _firestore.collection("game").add({
         'dateCreated': Timestamp.now(),
