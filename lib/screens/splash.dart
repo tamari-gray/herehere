@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/instance_manager.dart';
+import 'package:niira2/controllers/player_controller.dart';
 import 'package:niira2/services/database.dart';
 
 class SplashPage extends StatefulWidget {
@@ -8,6 +10,7 @@ class SplashPage extends StatefulWidget {
 
 class _SplashPageState extends State<SplashPage> {
   final usernameController = TextEditingController();
+  final PlayerController _playerController = Get.find();
 
   @override
   void dispose() {
@@ -88,21 +91,22 @@ class _SplashPageState extends State<SplashPage> {
                         ),
                       ),
                       OutlinedButton(
-                        onPressed: () {
-                          if (usernameController.text != '') {
-                            if (usernameController.text == 'pooeater') {
-                              // sign in as admin
-
-                            } else {
-                              // sign up as player
-                              Database().joinGame(usernameController.text);
+                        onPressed: () async {
+                          final _username = usernameController.text;
+                          if (_username != '') {
+                            if (_username == 'kawaiifreak97ftp') {
+                              _playerController.isAdmin.value = true;
                             }
+                            final userId = await Database().joinGame(_username);
+                            _playerController.hasLoggedIn.value = true;
                           }
                         },
                         child: Text(
                           'Play',
-                          style:
-                              TextStyle(color: Color.fromRGBO(247, 152, 0, 1)),
+                          style: TextStyle(
+                            // color: Color.fromRGBO(247, 152, 0, 1),
+                            color: const Color(0xff82fab8),
+                          ),
                         ),
                       ),
                     ],

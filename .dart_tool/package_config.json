@@ -116,6 +116,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "get",
+      "rootUri": "file:///usr/local/Caskroom/flutter/2.2.3/flutter/.pub-cache/hosted/pub.dartlang.org/get-4.3.8",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "js",
       "rootUri": "file:///usr/local/Caskroom/flutter/2.2.3/flutter/.pub-cache/hosted/pub.dartlang.org/js-0.6.3",
       "packageUri": "lib/",
@@ -224,7 +230,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2021-09-02T02:31:23.435593Z",
+  "generated": "2021-09-02T14:00:16.987323Z",
   "generator": "pub",
   "generatorVersion": "2.13.4"
 }

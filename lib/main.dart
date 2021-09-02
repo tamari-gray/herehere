@@ -1,6 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:get/instance_manager.dart';
+import 'package:niira2/controllers/player_controller.dart';
+import 'package:niira2/screens/lobby.dart';
 import 'package:niira2/screens/splash.dart';
 
 void main() {
@@ -39,6 +43,7 @@ class _AppState extends State<App> {
 }
 
 class MyApp extends StatelessWidget {
+  final PlayerController _playerController = Get.put(PlayerController());
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -46,7 +51,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: SplashPage(),
+      home: Obx(
+        () => _playerController.hasLoggedIn.value ? Lobby() : SplashPage(),
+      ),
     );
   }
 }
