@@ -1,7 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:get/instance_manager.dart';
 import 'package:niira2/controllers/game_controller.dart';
-import 'package:niira2/controllers/user_controller.dart';
 import 'package:niira2/models/player.dart';
 
 class Database {
@@ -66,11 +64,11 @@ class Database {
         final docData = doc.data();
         final String phase = docData!['game_phase'].toString();
 
-        if (phase == 'initialising') {
+        if (phase == 'gamePhase.initialising') {
           return gamePhase.initialising;
-        } else if (phase == 'playing') {
+        } else if (phase == 'gamePhase.playing') {
           return gamePhase.playing;
-        } else if (phase == 'finished') {
+        } else if (phase == 'gamePhase.finished') {
           return gamePhase.finished;
         } else {
           return gamePhase.initialising;
@@ -79,6 +77,18 @@ class Database {
         return gamePhase.initialising;
       }
     });
+  }
+
+  Future<void> updateGamePhase(gamePhase phase) {
+    try {
+      return _firestore
+          .collection("beta")
+          .doc("game")
+          .update({'game_phase': phase.toString()});
+    } catch (e) {
+      print(e);
+      rethrow;
+    }
   }
 
   Stream<List<Player>> playersStream() {

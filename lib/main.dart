@@ -5,7 +5,7 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
 import 'package:niira2/controllers/game_controller.dart';
 import 'package:niira2/controllers/user_controller.dart';
-import 'package:niira2/screens/game_screen.dart';
+import 'package:niira2/screens/game_screens/game_screen.dart';
 import 'package:niira2/screens/splash.dart';
 
 void main() {

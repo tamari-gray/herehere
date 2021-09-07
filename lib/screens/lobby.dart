@@ -11,11 +11,10 @@ class Lobby extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
+      final bool isAdmin = _userController.user.value.isAdmin;
       return Scaffold(
         appBar: AppBar(
-          title: _userController.user.value.isAdmin
-              ? Text('Select tagger')
-              : Text('lobby'),
+          title: isAdmin ? Text('Select tagger') : Text('lobby'),
           actions: [
             ElevatedButton(
               onPressed: () async {
@@ -24,7 +23,7 @@ class Lobby extends StatelessWidget {
               },
               child: Text('leave game'),
             ),
-            _userController.user.value.isAdmin
+            isAdmin
                 ? ElevatedButton(
                     onPressed: () async {
                       await Database().reset();
@@ -35,6 +34,14 @@ class Lobby extends StatelessWidget {
                 : Container(),
           ],
         ),
+        floatingActionButton: isAdmin
+            ? FloatingActionButton.extended(
+                onPressed: () async {
+                  await Database().updateGamePhase(gamePhase.playing);
+                },
+                label: Text('Start game'),
+              )
+            : Container(),
         body: Container(
           child: ListView.builder(
               shrinkWrap: true,
@@ -56,7 +63,7 @@ class Lobby extends StatelessWidget {
                             ),
                           ),
                         ),
-                        _userController.user.value.isAdmin
+                        isAdmin
                             ? Checkbox(
                                 value: player.isTagger,
                                 onChanged: (newValue) {
