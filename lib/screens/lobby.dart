@@ -39,7 +39,9 @@ class Lobby extends StatelessWidget {
                 onPressed: () async {
                   await Database().updateGamePhase(gamePhase.playing);
                 },
-                label: Text('Start game'),
+                label: _gameController.players.any((player) => player.isTagger)
+                    ? Text('Start game')
+                    : Text('Select Tagger to start game'),
               )
             : Container(),
         body: Container(

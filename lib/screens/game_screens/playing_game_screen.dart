@@ -12,6 +12,7 @@ class PlayingGameScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('2:39'),
+        centerTitle: true,
         actions: [
           Directionality(
             textDirection: TextDirection.rtl,

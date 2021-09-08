@@ -102,6 +102,13 @@
     <string name="common_open_on_phone">Open on phone</string>
     <string name="common_signin_button_text">Sign in</string>
     <string name="common_signin_button_text_long">Sign in with Google</string>
+    <string name="default_web_client_id" translatable="false">833322515004-4q4lci8i1fhrjvvgu3fn76o5qi2n551h.apps.googleusercontent.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">833322515004</string>
+    <string name="google_api_key" translatable="false">AIzaSyC-3C1ZgYuahgyqXW6TT1feFnb_vP5kkY8</string>
+    <string name="google_app_id" translatable="false">1:833322515004:android:a628acade306ded2896139</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyC-3C1ZgYuahgyqXW6TT1feFnb_vP5kkY8</string>
+    <string name="google_storage_bucket" translatable="false">niira2.appspot.com</string>
+    <string name="project_id" translatable="false">niira2</string>
     <string name="status_bar_notification_info_overflow">999+</string>
     <style name="LaunchTheme" parent="@android:style/Theme.Light.NoTitleBar">
         <!-- Show a splash screen on the activity. Automatically removed when
