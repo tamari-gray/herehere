@@ -27,6 +27,7 @@ class PlayingGameScreen extends StatelessWidget {
                       textConfirm: 'leave game',
                       middleText: '',
                       onConfirm: () async {
+                        Get.back();
                         await Database().reset();
                         _userController.userId.value = '';
                       });
@@ -36,6 +37,7 @@ class PlayingGameScreen extends StatelessWidget {
                       textConfirm: 'leave game',
                       middleText: '',
                       onConfirm: () async {
+                        Get.back();
                         _userController.userId.value = '';
                       });
                 }
