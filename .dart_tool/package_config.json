@@ -62,6 +62,18 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "enum_to_string",
+      "rootUri": "file:///usr/local/Caskroom/flutter/2.2.3/flutter/.pub-cache/hosted/pub.dartlang.org/enum_to_string-2.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "fading_edge_scrollview",
+      "rootUri": "file:///usr/local/Caskroom/flutter/2.2.3/flutter/.pub-cache/hosted/pub.dartlang.org/fading_edge_scrollview-2.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "fake_async",
       "rootUri": "file:///usr/local/Caskroom/flutter/2.2.3/flutter/.pub-cache/hosted/pub.dartlang.org/fake_async-1.2.0",
       "packageUri": "lib/",
@@ -130,6 +142,12 @@
     {
       "name": "json_annotation",
       "rootUri": "file:///usr/local/Caskroom/flutter/2.2.3/flutter/.pub-cache/hosted/pub.dartlang.org/json_annotation-4.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "marquee",
+      "rootUri": "file:///usr/local/Caskroom/flutter/2.2.3/flutter/.pub-cache/hosted/pub.dartlang.org/marquee-2.2.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -230,7 +248,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2021-09-08T12:05:39.695615Z",
+  "generated": "2021-09-10T02:38:07.362977Z",
   "generator": "pub",
   "generatorVersion": "2.13.4"
 }

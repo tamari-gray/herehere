@@ -3,6 +3,7 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
 import 'package:niira2/controllers/game_controller.dart';
 import 'package:niira2/controllers/user_controller.dart';
+import 'package:niira2/models/game.dart';
 import 'package:niira2/screens/lobby.dart';
 import 'package:niira2/screens/game_screens/playing_game_screen.dart';
 
@@ -13,12 +14,12 @@ class JoinedGame extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      if (_gameController.phase.value == gamePhase.initialising) {
-        // lobby
+      final _stage = _gameController.game.value.stage;
+      if (_stage == niiraStage.initialising) {
         return Lobby();
-      } else if (_gameController.phase.value == gamePhase.playing) {
+      } else if (_stage == niiraStage.playing) {
         return PlayingGameScreen();
-      } else if (_gameController.phase.value == gamePhase.finished) {
+      } else if (_stage == niiraStage.finished) {
         return _userController.user.value.isAdmin
             ? Container(
                 child: Center(

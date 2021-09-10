@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:niira2/controllers/game_controller.dart';
 import 'package:niira2/controllers/user_controller.dart';
+import 'package:niira2/models/game.dart';
 import 'package:niira2/services/database.dart';
 
 class SplashPage extends StatelessWidget {
@@ -45,7 +46,7 @@ class _LogInState extends State<LogIn> {
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => _gameController.phase.value != gamePhase.initialising
+      () => _gameController.game.value.stage != niiraStage.initialising
           ? Padding(
               padding: const EdgeInsets.fromLTRB(0, 150, 0, 0),
               child: Container(

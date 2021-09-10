@@ -37,7 +37,7 @@ class Lobby extends StatelessWidget {
         floatingActionButton: isAdmin
             ? FloatingActionButton.extended(
                 onPressed: () async {
-                  await Database().updateGamePhase(gamePhase.playing);
+                  await Database().playGame();
                 },
                 label: _gameController.players.any((player) => player.isTagger)
                     ? Text('Start game')

@@ -1,8 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:enum_to_string/enum_to_string.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:get/instance_manager.dart';
 import 'package:niira2/controllers/game_controller.dart';
+import 'package:niira2/models/game.dart';
 import 'package:niira2/models/player.dart';
 
-class Database {
+class Database extends GetxService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   Stream<Player> userDocStream(String userId) {
@@ -58,33 +63,26 @@ class Database {
     }
   }
 
-  Stream<gamePhase> gamePhaseStream() {
-    return _firestore.collection("beta").doc("game").snapshots().map((doc) {
-      if (doc.exists) {
-        final docData = doc.data();
-        final String phase = docData!['game_phase'].toString();
-
-        if (phase == 'gamePhase.initialising') {
-          return gamePhase.initialising;
-        } else if (phase == 'gamePhase.playing') {
-          return gamePhase.playing;
-        } else if (phase == 'gamePhase.finished') {
-          return gamePhase.finished;
+  Stream<Game> gameStream() {
+    try {
+      return _firestore.collection("beta").doc("game").snapshots().map((doc) {
+        if (doc.exists) {
+          return Game.fromDocumentSnapshot(doc);
         } else {
-          return gamePhase.initialising;
+          return Game.fromDefault();
         }
-      } else {
-        return gamePhase.initialising;
-      }
-    });
+      });
+    } catch (e) {
+      rethrow;
+    }
   }
 
-  Future<void> updateGamePhase(gamePhase phase) {
+  Future<void> playGame() {
     try {
-      return _firestore
-          .collection("beta")
-          .doc("game")
-          .update({'game_phase': phase.toString()});
+      return _firestore.collection("beta").doc("game").update({
+        'niira_stage': EnumToString.convertToString(niiraStage.playing),
+        'playing_phase': EnumToString.convertToString(playingPhase.counting)
+      });
     } catch (e) {
       print(e);
       rethrow;
@@ -92,21 +90,23 @@ class Database {
   }
 
   Stream<List<Player>> playersStream() {
-    return _firestore
-        .collection("beta")
-        .doc("game")
-        .collection("players")
-        .snapshots()
-        .map((QuerySnapshot query) {
-      List<Player> players = List.empty(growable: true);
+    try {
+      return _firestore
+          .collection("beta")
+          .doc("game")
+          .collection("players")
+          .snapshots()
+          .map((QuerySnapshot query) {
+        List<Player> players = List.empty(growable: true);
 
-      query.docs.forEach((doc) {
-        // final data = doc.data()! as Map<String, dynamic>;
-        // players.add(Player(id: doc.id, username: data['username'].toString(), ));
-        players.add(Player.fromQueryDocumentSnapshot(doc));
+        query.docs.forEach((doc) {
+          players.add(Player.fromQueryDocumentSnapshot(doc));
+        });
+        return players;
       });
-      return players;
-    });
+    } catch (e) {
+      rethrow;
+    }
   }
 
   Future<void> chooseTagger(String playerId, bool alreadyTagger) async {
@@ -143,6 +143,12 @@ class Database {
 
   Future<void> reset() async {
     try {
+      await _firestore.collection("beta").doc("game").update({
+        'find_item_time': 5,
+        'tagger_power_up_time': 3,
+        'niira_stage': EnumToString.convertToString(niiraStage.initialising),
+        'playing_phase': EnumToString.convertToString(playingPhase.counting)
+      });
       return await _firestore
           .collection("beta")
           .doc("game")
