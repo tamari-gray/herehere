@@ -81,7 +81,8 @@ class Database extends GetxService {
     try {
       return _firestore.collection("beta").doc("game").update({
         'niira_stage': EnumToString.convertToString(niiraStage.playing),
-        'playing_phase': EnumToString.convertToString(playingPhase.counting)
+        'playing_phase': EnumToString.convertToString(playingPhase.counting),
+        'start_time': DateTime.now()
       });
     } catch (e) {
       print(e);
