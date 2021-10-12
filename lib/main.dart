@@ -8,6 +8,7 @@ import 'package:niira2/controllers/game_controller.dart';
 import 'package:niira2/controllers/user_controller.dart';
 import 'package:niira2/screens/game_screens/game_screen.dart';
 import 'package:niira2/screens/splash.dart';
+// import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -52,9 +53,30 @@ class _AppState extends State<App> {
   }
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   final UserController _userController = Get.put(UserController());
+
+  // ignore: unused_field
   final GameController _gameController = Get.put(GameController());
+
+  @override
+  // void initState() {
+  //   super.initState();
+  //   print('hi');
+  //   IO.Socket socket = IO.io('http://localhost:8000');
+  //   socket.on('connect', (_) {
+  //     print('connect');
+  //     socket.emit('msg', 'test');
+  //   });
+  //   socket.on('event', (data) => print(data));
+  //   socket.on('disconnect', (_) => print('disconnect'));
+  //   socket.on('fromServer', (_) => print(_));
+  // }
 
   @override
   Widget build(BuildContext context) {
