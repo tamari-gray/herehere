@@ -28,7 +28,7 @@ class PlayingGameScreen extends StatelessWidget {
                     textConfirm: 'Bring it on frank',
                     contentPadding: EdgeInsets.all(15),
                     content: Text(
-                      '''Its hide and seek! Only the tagger(s) have your location... Find safety items around the map that will keep your location safe for 90 seconds! If you keep finding safety items, its possible to keep your location safe the whole game . Hide from the tagger(s) and be the last one found to win! ''',
+                      '''Its hide and seek! Only the tagger has your location... Find safety items around the map, they will keep your location safe for 90 seconds! Keep finding them, and you could keep your location safe the whole game. Hide from the tagger and be the last one found to win! ''',
                       textAlign: TextAlign.left,
                       style: TextStyle(
                         fontSize: 18,
