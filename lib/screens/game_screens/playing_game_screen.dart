@@ -16,8 +16,8 @@ class PlayingGameScreen extends StatelessWidget {
       final _gamePhase = _gameController.game.value.phase;
       return Scaffold(
         appBar: AppBar(
-          centerTitle: true,
-          title: Text(''),
+          centerTitle: false,
+          title: Text(_userController.user.value.username),
           actions: [
             ElevatedButton(
               onPressed: () {
@@ -73,39 +73,66 @@ class PlayingGameScreen extends StatelessWidget {
         ),
         floatingActionButton: FloatingActionButton.extended(
           onPressed: () {},
-          label: Text('pick up item'),
+          label: Text('Pick up item'),
         ),
         body: Container(
-          child: Column(
-            children: [
-              // Padding(
-              //   padding: const EdgeInsets.fromLTRB(15, 15, 0, 0),
-              //   child: OutlinedButton.icon(
-              //     style: ButtonStyle(),
-              //     onPressed: () {
-              //       if (_gamePhase == playingPhase.counting) {
-              //         // if (_userController.user.value.isTagger) {
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(15, 15, 0, 0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // OutlinedButton.icon(
+                //     style: ButtonStyle(),
+                //     onPressed: () {
+                //       // if (_gamePhase == playingPhase.counting) {
+                //       //   // if (_userController.user.value.isTagger) {
 
-              //         // }
-              //       } else if (_gamePhase == playingPhase.seek) {
-              //         Get.defaultDialog(
-              //           title: 'Seek phase:',
-              //           middleText:
-              //               'Find an item before the time runs out or the tagger will have your location during the next hide phase!',
-              //         );
-              //       } else if (_gamePhase == playingPhase.hide) {
-              //         Get.defaultDialog(
-              //           title: 'Hide phase:',
-              //           middleText:
-              //               'If you didnt find an item, the tagger has your location until the end of the hide phase!',
-              //         );
-              //       }
-              //     },
-              //     icon: Icon(Icons.help),
-              //     label: Text('Your location isnt safe'),
-              //   ),
-              // ),
-            ],
+                //       //   // }
+                //       // } else if (_gamePhase == playingPhase.seek) {
+                //       //   Get.defaultDialog(
+                //       //     title: 'Seek phase:',
+                //       //     middleText:
+                //       //         'Find an item before the time runs out or the tagger will have your location during the next hide phase!',
+                //       //   );
+                //       // } else if (_gamePhase == playingPhase.hide) {
+                //       //   Get.defaultDialog(
+                //       //     title: 'Hide phase:',
+                //       //     middleText:
+                //       //         'If you didnt find an item, the tagger has your location until the end of the hide phase!',
+                //       //   );
+                //       // }
+                //     },
+                //     icon: Icon(Icons.check),
+                //     label: Text('Your location isnt safe'),
+                //   ),
+                OutlinedButton(
+                  child: Text(
+                    'Go hide!',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  style: ButtonStyle(),
+                  onPressed: () {},
+                ),
+                if (_userController.user.value.isTagger)
+                  OutlinedButton(
+                    child: Text(
+                      'Count to 100 then tap start game',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    style: ButtonStyle(),
+                    onPressed: () {},
+                  ),
+                if (_userController.user.value.isHider)
+                  OutlinedButton(
+                    child: Text(
+                      '${_gameController.players.length} players left',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    style: ButtonStyle(),
+                    onPressed: () {},
+                  ),
+              ],
+            ),
           ),
         ),
       );
