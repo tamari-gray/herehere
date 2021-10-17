@@ -2,12 +2,6 @@
   "configVersion": 2,
   "packages": [
     {
-      "name": "args",
-      "rootUri": "file:///usr/local/Caskroom/flutter/2.2.3/flutter/.pub-cache/hosted/pub.dartlang.org/args-2.2.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
       "name": "async",
       "rootUri": "file:///usr/local/Caskroom/flutter/2.2.3/flutter/.pub-cache/hosted/pub.dartlang.org/async-2.6.1",
       "packageUri": "lib/",
@@ -58,12 +52,6 @@
     {
       "name": "collection",
       "rootUri": "file:///usr/local/Caskroom/flutter/2.2.3/flutter/.pub-cache/hosted/pub.dartlang.org/collection-1.15.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
-      "name": "crypto",
-      "rootUri": "file:///usr/local/Caskroom/flutter/2.2.3/flutter/.pub-cache/hosted/pub.dartlang.org/crypto-3.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -146,18 +134,6 @@
       "languageVersion": "2.12"
     },
     {
-      "name": "http",
-      "rootUri": "file:///usr/local/Caskroom/flutter/2.2.3/flutter/.pub-cache/hosted/pub.dartlang.org/http-0.13.3",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
-      "name": "http_parser",
-      "rootUri": "file:///usr/local/Caskroom/flutter/2.2.3/flutter/.pub-cache/hosted/pub.dartlang.org/http_parser-4.0.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
       "name": "js",
       "rootUri": "file:///usr/local/Caskroom/flutter/2.2.3/flutter/.pub-cache/hosted/pub.dartlang.org/js-0.6.3",
       "packageUri": "lib/",
@@ -166,12 +142,6 @@
     {
       "name": "json_annotation",
       "rootUri": "file:///usr/local/Caskroom/flutter/2.2.3/flutter/.pub-cache/hosted/pub.dartlang.org/json_annotation-4.0.1",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
-      "name": "logging",
-      "rootUri": "file:///usr/local/Caskroom/flutter/2.2.3/flutter/.pub-cache/hosted/pub.dartlang.org/logging-1.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -194,20 +164,8 @@
       "languageVersion": "2.12"
     },
     {
-      "name": "mime",
-      "rootUri": "file:///usr/local/Caskroom/flutter/2.2.3/flutter/.pub-cache/hosted/pub.dartlang.org/mime-1.0.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
       "name": "path",
       "rootUri": "file:///usr/local/Caskroom/flutter/2.2.3/flutter/.pub-cache/hosted/pub.dartlang.org/path-1.8.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
-      "name": "pedantic",
-      "rootUri": "file:///usr/local/Caskroom/flutter/2.2.3/flutter/.pub-cache/hosted/pub.dartlang.org/pedantic-1.11.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -218,12 +176,6 @@
       "languageVersion": "2.12"
     },
     {
-      "name": "rikulo_commons",
-      "rootUri": "file:///usr/local/Caskroom/flutter/2.2.3/flutter/.pub-cache/hosted/pub.dartlang.org/rikulo_commons-5.0.4",
-      "packageUri": "lib/",
-      "languageVersion": "2.13"
-    },
-    {
       "name": "riverpod",
       "rootUri": "file:///usr/local/Caskroom/flutter/2.2.3/flutter/.pub-cache/hosted/pub.dartlang.org/riverpod-1.0.0-dev.7",
       "packageUri": "lib/",
@@ -232,24 +184,6 @@
     {
       "name": "sky_engine",
       "rootUri": "file:///usr/local/Caskroom/flutter/2.2.3/flutter/bin/cache/pkg/sky_engine",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
-      "name": "socket_io",
-      "rootUri": "file:///usr/local/Caskroom/flutter/2.2.3/flutter/.pub-cache/hosted/pub.dartlang.org/socket_io-1.0.1",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
-      "name": "socket_io_client",
-      "rootUri": "file:///usr/local/Caskroom/flutter/2.2.3/flutter/.pub-cache/hosted/pub.dartlang.org/socket_io_client-1.0.1",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
-      "name": "socket_io_common",
-      "rootUri": "file:///usr/local/Caskroom/flutter/2.2.3/flutter/.pub-cache/hosted/pub.dartlang.org/socket_io_common-1.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -270,12 +204,6 @@
       "rootUri": "file:///usr/local/Caskroom/flutter/2.2.3/flutter/.pub-cache/hosted/pub.dartlang.org/state_notifier-0.7.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
-    },
-    {
-      "name": "stream",
-      "rootUri": "file:///usr/local/Caskroom/flutter/2.2.3/flutter/.pub-cache/hosted/pub.dartlang.org/stream-3.0.1",
-      "packageUri": "lib/",
-      "languageVersion": "2.13"
     },
     {
       "name": "stream_channel",
@@ -308,12 +236,6 @@
       "languageVersion": "2.12"
     },
     {
-      "name": "uuid",
-      "rootUri": "file:///usr/local/Caskroom/flutter/2.2.3/flutter/.pub-cache/hosted/pub.dartlang.org/uuid-3.0.4",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
       "name": "vector_math",
       "rootUri": "file:///usr/local/Caskroom/flutter/2.2.3/flutter/.pub-cache/hosted/pub.dartlang.org/vector_math-2.1.0",
       "packageUri": "lib/",
@@ -326,7 +248,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2021-09-13T06:35:38.993748Z",
+  "generated": "2021-09-10T02:38:07.362977Z",
   "generator": "pub",
   "generatorVersion": "2.13.4"
 }

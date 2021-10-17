@@ -110,7 +110,11 @@
 		</data>
 		<key>Frameworks/App.framework/App</key>
 		<data>
+<<<<<<< HEAD
 		gBh8DX0kc5+8gkjXgvUxucSwPoM=
+=======
+		C5U9aC4T/vNtUe1JPbCND29PUEk=
+>>>>>>> parent of e8c69da (P1. As a player i want to see the rules)
 		</data>
 		<key>Frameworks/App.framework/Info.plist</key>
 		<data>
@@ -118,7 +122,11 @@
 		</data>
 		<key>Frameworks/App.framework/_CodeSignature/CodeResources</key>
 		<data>
+<<<<<<< HEAD
 		ETfw3VpSCyXomuP3jSGdoj+Y8Zg=
+=======
+		SUQDExSOqu+jZ2TWuT+psEF9isQ=
+>>>>>>> parent of e8c69da (P1. As a player i want to see the rules)
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.json</key>
 		<data>
@@ -130,7 +138,7 @@
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/NOTICES</key>
 		<data>
-		bp5PHJOq9siVC7QgrQ2pv4RIhp8=
+		M9053xalXhS54YFupkklXzjALAY=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/fonts/MaterialIcons-Regular.otf</key>
 		<data>
@@ -142,7 +150,11 @@
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/kernel_blob.bin</key>
 		<data>
+<<<<<<< HEAD
 		TcYUbThaQlHZNQxevNEDWUkgjyA=
+=======
+		OUabPr3c33EJbKJn+MOYpjU4Tq8=
+>>>>>>> parent of e8c69da (P1. As a player i want to see the rules)
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
 		<data>
@@ -202,7 +214,7 @@
 		</data>
 		<key>Frameworks/Flutter.framework/Flutter</key>
 		<data>
-		lihaxhQJgWeryTf5Hy/EBtREyEk=
+		ng7sszTUPG0/1kBjox9wN1L2ngI=
 		</data>
 		<key>Frameworks/Flutter.framework/Headers/Flutter.h</key>
 		<data>
@@ -769,11 +781,19 @@
 		<dict>
 			<key>hash</key>
 			<data>
+<<<<<<< HEAD
 			gBh8DX0kc5+8gkjXgvUxucSwPoM=
 			</data>
 			<key>hash2</key>
 			<data>
 			zelDgNWImo++PjZi1LH/zSfxp+W8Ij/9XCkvZiVgZZA=
+=======
+			C5U9aC4T/vNtUe1JPbCND29PUEk=
+			</data>
+			<key>hash2</key>
+			<data>
+			bI0HsrYlQA/FcqUdJRHQfK+Ewaxi5ZPyAv8ikVLi6J0=
+>>>>>>> parent of e8c69da (P1. As a player i want to see the rules)
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/Info.plist</key>
@@ -791,11 +811,19 @@
 		<dict>
 			<key>hash</key>
 			<data>
+<<<<<<< HEAD
 			ETfw3VpSCyXomuP3jSGdoj+Y8Zg=
 			</data>
 			<key>hash2</key>
 			<data>
 			SNmr9OGiZ5x+R6FnFpJi9BsBkDDdYKIgeIgnvvr+mpA=
+=======
+			SUQDExSOqu+jZ2TWuT+psEF9isQ=
+			</data>
+			<key>hash2</key>
+			<data>
+			AlXWx//+z+R/EzF7Qy4Y7qpM2GEL69sgwx2+8bjHENQ=
+>>>>>>> parent of e8c69da (P1. As a player i want to see the rules)
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.json</key>
@@ -824,11 +852,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			bp5PHJOq9siVC7QgrQ2pv4RIhp8=
+			M9053xalXhS54YFupkklXzjALAY=
 			</data>
 			<key>hash2</key>
 			<data>
-			suIymqWIveh2/VJhUzBHegUGhXpq+nKsrxnOLCVdjUc=
+			UF4u/6rtmlZJZA9/aJIUdafkqAzJ+vzlOM55f5unQ68=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/fonts/MaterialIcons-Regular.otf</key>
@@ -857,11 +885,19 @@
 		<dict>
 			<key>hash</key>
 			<data>
+<<<<<<< HEAD
 			TcYUbThaQlHZNQxevNEDWUkgjyA=
 			</data>
 			<key>hash2</key>
 			<data>
 			bVFnXNA93ubuLXw6Ts6rfjTLoYIsekUzRXYeSZK0R/g=
+=======
+			OUabPr3c33EJbKJn+MOYpjU4Tq8=
+			</data>
+			<key>hash2</key>
+			<data>
+			hm1UOjhIVurnMe6PmX6Ffz6LKyMhRu1MqGYLSXnGeFA=
+>>>>>>> parent of e8c69da (P1. As a player i want to see the rules)
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
@@ -1022,11 +1058,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			lihaxhQJgWeryTf5Hy/EBtREyEk=
+			ng7sszTUPG0/1kBjox9wN1L2ngI=
 			</data>
 			<key>hash2</key>
 			<data>
-			/0UOiv+MEFwz7WOOY9h+bV12FmvxoVzxpNkLSncHxA8=
+			0NityMXc0Nc3nDBhnuXe+ZEjLj/yow9vqbYqSi4CRws=
 			</data>
 		</dict>
 		<key>Frameworks/Flutter.framework/Headers/Flutter.h</key>
