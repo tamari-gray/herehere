@@ -7,6 +7,7 @@ import 'package:niira2/services/database.dart';
 class Lobby extends StatelessWidget {
   final UserController _userController = Get.find();
   final GameController _gameController = Get.find();
+  final Database _database = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,7 @@ class Lobby extends StatelessWidget {
           actions: [
             ElevatedButton(
               onPressed: () async {
-                await Database().leaveGame(_userController.userId.value);
+                await _database.leaveGame(_userController.userId.value);
                 _userController.userId.value = '';
               },
               child: Text('leave game'),
@@ -26,7 +27,7 @@ class Lobby extends StatelessWidget {
             isAdmin
                 ? ElevatedButton(
                     onPressed: () async {
-                      await Database().reset();
+                      await _database.reset();
                       _userController.userId.value = '';
                     },
                     child: Text('reset'),
@@ -37,7 +38,7 @@ class Lobby extends StatelessWidget {
         floatingActionButton: isAdmin
             ? FloatingActionButton.extended(
                 onPressed: () async {
-                  await Database().playGame();
+                  await _database.playGame();
                 },
                 label: _gameController.players.any((player) => player.isTagger)
                     ? Text('Start game')
@@ -69,8 +70,8 @@ class Lobby extends StatelessWidget {
                             ? Checkbox(
                                 value: player.isTagger,
                                 onChanged: (newValue) {
-                                  Database()
-                                      .chooseTagger(player.id, player.isTagger);
+                                  _database.chooseTagger(
+                                      player.id, player.isTagger);
                                 },
                               )
                             : Container(),

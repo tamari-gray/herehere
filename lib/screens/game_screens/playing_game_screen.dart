@@ -9,11 +9,14 @@ import 'package:marquee/marquee.dart';
 class PlayingGameScreen extends StatelessWidget {
   final GameController _gameController = Get.find();
   final UserController _userController = Get.find();
+  final Database _database = Get.find();
 
   @override
   Widget build(BuildContext context) {
     return Obx(() {
       final _gamePhase = _gameController.game.value.phase;
+      final _isTagger = _userController.user.value.isTagger;
+
       return Scaffold(
         appBar: AppBar(
           centerTitle: false,
@@ -53,7 +56,7 @@ class PlayingGameScreen extends StatelessWidget {
                       middleText: '',
                       onConfirm: () async {
                         Get.back();
-                        await Database().reset();
+                        await _database.reset();
                         _userController.userId.value = '';
                       });
                 } else {
@@ -71,66 +74,74 @@ class PlayingGameScreen extends StatelessWidget {
             ),
           ],
         ),
-        floatingActionButton: FloatingActionButton.extended(
-          onPressed: () {},
-          label: Text('Pick up item'),
-        ),
+        floatingActionButton: _isTagger
+            ? _gamePhase == gamePhase.counting
+                ? FloatingActionButton.extended(
+                    onPressed: () {
+                      Get.defaultDialog(
+                          title: 'Did you count to 50?',
+                          textConfirm: 'Yes, start game',
+                          middleText: '',
+                          textCancel: 'No',
+                          onConfirm: () async {
+                            Get.back();
+                            await _database.taggerStartGame();
+                          });
+                    },
+                    label: Text('Start game'),
+                  )
+                : FloatingActionButton.extended(
+                    onPressed: () {},
+                    label: Text('Tag player'),
+                  )
+            : FloatingActionButton.extended(
+                onPressed: () {},
+                label: Text('Pick up item'),
+              ),
         body: Container(
           child: Padding(
             padding: const EdgeInsets.fromLTRB(15, 15, 0, 0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // OutlinedButton.icon(
-                //     style: ButtonStyle(),
-                //     onPressed: () {
-                //       // if (_gamePhase == playingPhase.counting) {
-                //       //   // if (_userController.user.value.isTagger) {
-
-                //       //   // }
-                //       // } else if (_gamePhase == playingPhase.seek) {
-                //       //   Get.defaultDialog(
-                //       //     title: 'Seek phase:',
-                //       //     middleText:
-                //       //         'Find an item before the time runs out or the tagger will have your location during the next hide phase!',
-                //       //   );
-                //       // } else if (_gamePhase == playingPhase.hide) {
-                //       //   Get.defaultDialog(
-                //       //     title: 'Hide phase:',
-                //       //     middleText:
-                //       //         'If you didnt find an item, the tagger has your location until the end of the hide phase!',
-                //       //   );
-                //       // }
-                //     },
-                //     icon: Icon(Icons.check),
-                //     label: Text('Your location isnt safe'),
-                //   ),
+                if (_gamePhase == gamePhase.counting)
+                  _isTagger
+                      ? OutlinedButton(
+                          child: Text(
+                            'Count to 50 then tap start game',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          style: ButtonStyle(),
+                          onPressed: () {},
+                        )
+                      : OutlinedButton(
+                          child: Text(
+                            'Go hide!',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          style: ButtonStyle(),
+                          onPressed: () {},
+                        ),
+                if (!_isTagger)
+                  _userController.user.value.hasImmunity
+                      ? OutlinedButton.icon(
+                          onPressed: () {},
+                          icon: Icon(Icons.check),
+                          label: Text('Location safe for 90s'),
+                        )
+                      : OutlinedButton.icon(
+                          onPressed: () {},
+                          icon: Icon(Icons.help),
+                          label: Text('Location not safe'),
+                        ),
                 OutlinedButton(
                   child: Text(
-                    'Go hide!',
+                    '${_gameController.players.length} players left',
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   style: ButtonStyle(),
                   onPressed: () {},
                 ),
-                if (_userController.user.value.isTagger)
-                  OutlinedButton(
-                    child: Text(
-                      'Count to 100 then tap start game',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    style: ButtonStyle(),
-                    onPressed: () {},
-                  ),
-                if (_userController.user.value.isHider)
-                  OutlinedButton(
-                    child: Text(
-                      '${_gameController.players.length} players left',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    style: ButtonStyle(),
-                    onPressed: () {},
-                  ),
               ],
             ),
           ),

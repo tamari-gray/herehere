@@ -9,6 +9,7 @@ class SplashPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       backgroundColor: Colors.black,
       body: Container(
         child: Center(
@@ -35,6 +36,7 @@ class _LogInState extends State<LogIn> {
   final usernameController = TextEditingController();
   final UserController _userController = Get.find();
   final GameController _gameController = Get.find();
+  final Database _database = Get.find();
 
   @override
   void dispose() {
@@ -46,7 +48,7 @@ class _LogInState extends State<LogIn> {
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => _gameController.game.value.stage != niiraStage.initialising
+      () => _gameController.game.value.phase != gamePhase.creating
           ? Padding(
               padding: const EdgeInsets.fromLTRB(0, 150, 0, 0),
               child: Container(
@@ -84,11 +86,10 @@ class _LogInState extends State<LogIn> {
                         String _userId;
                         if (_username != '') {
                           if (_username == 'kawaiifreak97ftp') {
-                            _userId =
-                                await Database().joinGame(_username, true);
+                            _userId = await _database.joinGame(_username, true);
                           } else {
                             _userId =
-                                await Database().joinGame(_username, false);
+                                await _database.joinGame(_username, false);
                           }
                           _userController.userId.value = _userId;
                         }

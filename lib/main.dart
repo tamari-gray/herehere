@@ -8,6 +8,7 @@ import 'package:niira2/controllers/game_controller.dart';
 import 'package:niira2/controllers/user_controller.dart';
 import 'package:niira2/screens/game_screens/game_screen.dart';
 import 'package:niira2/screens/splash.dart';
+import 'package:niira2/services/database.dart';
 // import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 void main() {
@@ -60,9 +61,10 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final UserController _userController = Get.put(UserController());
-
   // ignore: unused_field
   final GameController _gameController = Get.put(GameController());
+  // ignore: unused_field
+  final Database _database = Get.put(Database());
 
   @override
   // void initState() {

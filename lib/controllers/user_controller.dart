@@ -3,12 +3,13 @@ import 'package:niira2/models/player.dart';
 import 'package:niira2/services/database.dart';
 
 class UserController extends GetxController {
+  final Database _database = Get.put(Database());
+
   final userId = ''.obs;
-  final user = Player("", "", false, false, false, false, false).obs;
-  final db = Database();
+  final user = Player("", "", false, false, false, false).obs;
 
   void logIn(String id) {
-    if (id != '') user.bindStream(db.userDocStream(id));
+    if (id != '') user.bindStream(_database.userDocStream(id));
   }
 
   @override

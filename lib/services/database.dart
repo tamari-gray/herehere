@@ -1,9 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:enum_to_string/enum_to_string.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:get/instance_manager.dart';
-import 'package:niira2/controllers/game_controller.dart';
 import 'package:niira2/models/game.dart';
 import 'package:niira2/models/player.dart';
 
@@ -37,7 +34,6 @@ class Database extends GetxService {
         'username': username,
         'is_admin': isAdmin,
         'is_tagger': false,
-        'is_hider': false,
         'has_been_tagged': false,
         'has_immunity': false
       }).then((docref) {
@@ -67,7 +63,8 @@ class Database extends GetxService {
     try {
       return _firestore.collection("beta").doc("game").snapshots().map((doc) {
         if (doc.exists) {
-          return Game.fromDocumentSnapshot(doc);
+          final _game = Game.fromDocumentSnapshot(doc);
+          return _game;
         } else {
           return Game.fromDefault();
         }
@@ -80,8 +77,18 @@ class Database extends GetxService {
   Future<void> playGame() {
     try {
       return _firestore.collection("beta").doc("game").update({
-        'niira_stage': EnumToString.convertToString(niiraStage.playing),
-        'playing_phase': EnumToString.convertToString(playingPhase.counting)
+        'game_phase': EnumToString.convertToString(gamePhase.counting),
+      });
+    } catch (e) {
+      print(e);
+      rethrow;
+    }
+  }
+
+  Future<void> taggerStartGame() {
+    try {
+      return _firestore.collection("beta").doc("game").update({
+        'game_phase': EnumToString.convertToString(gamePhase.playing),
       });
     } catch (e) {
       print(e);
@@ -146,8 +153,7 @@ class Database extends GetxService {
       await _firestore.collection("beta").doc("game").update({
         'find_item_time': 5,
         'tagger_power_up_time': 3,
-        'niira_stage': EnumToString.convertToString(niiraStage.initialising),
-        'playing_phase': EnumToString.convertToString(playingPhase.counting)
+        'game_phase': EnumToString.convertToString(gamePhase.creating),
       });
       return await _firestore
           .collection("beta")

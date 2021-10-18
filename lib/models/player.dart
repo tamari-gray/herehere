@@ -4,7 +4,6 @@ class Player {
   String id = "";
   String username = "";
   bool isAdmin = false;
-  bool isHider = false;
   bool isTagger = false;
   bool hasBeenTagged = false;
   bool hasImmunity = false;
@@ -13,7 +12,6 @@ class Player {
     this.id,
     this.username,
     this.isAdmin,
-    this.isHider,
     this.isTagger,
     this.hasBeenTagged,
     this.hasImmunity,
@@ -23,7 +21,6 @@ class Player {
     id = "";
     username = "";
     isAdmin = false;
-    isHider = false;
     isTagger = false;
     hasBeenTagged = false;
     hasImmunity = false;
@@ -33,7 +30,6 @@ class Player {
     id = doc.id;
     username = doc["username"] ?? "";
     isAdmin = doc["is_admin"] ?? false;
-    isHider = doc["is_hider"] ?? false;
     isTagger = doc["is_tagger"] ?? false;
     hasBeenTagged = doc["has_been_tagged"] ?? false;
     hasImmunity = doc["has_immunity"] ?? false;
@@ -43,7 +39,6 @@ class Player {
     id = doc.id;
     username = doc["username"] ?? "";
     isAdmin = doc["is_admin"] ?? false;
-    isHider = doc["is_hider"] ?? false;
     isTagger = doc["is_tagger"] ?? false;
     hasBeenTagged = doc["has_been_tagged"] ?? false;
     hasImmunity = doc["has_immunity"] ?? false;

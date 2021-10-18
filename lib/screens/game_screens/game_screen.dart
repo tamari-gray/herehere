@@ -14,12 +14,12 @@ class JoinedGame extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      final _stage = _gameController.game.value.stage;
-      if (_stage == niiraStage.initialising) {
+      final _phase = _gameController.game.value.phase;
+      if (_phase == gamePhase.creating) {
         return Lobby();
-      } else if (_stage == niiraStage.playing) {
+      } else if (_phase == gamePhase.counting || _phase == gamePhase.playing) {
         return PlayingGameScreen();
-      } else if (_stage == niiraStage.finished) {
+      } else if (_phase == gamePhase.finished) {
         return _userController.user.value.isAdmin
             ? Container(
                 child: Center(
