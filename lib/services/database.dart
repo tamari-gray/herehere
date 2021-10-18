@@ -151,8 +151,6 @@ class Database extends GetxService {
   Future<void> reset() async {
     try {
       await _firestore.collection("beta").doc("game").update({
-        'find_item_time': 5,
-        'tagger_power_up_time': 3,
         'game_phase': EnumToString.convertToString(gamePhase.creating),
       });
       return await _firestore

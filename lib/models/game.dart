@@ -10,13 +10,11 @@ class Game {
   String id = "";
   DateTime startTime = DateTime.now();
   gamePhase phase = gamePhase.creating;
-  bool showTaggerIsComing = true;
 
   Game(
     this.id,
     this.startTime,
     this.phase,
-    this.showTaggerIsComing,
   );
 
   Map<String, Object?> defaultGame() => {
@@ -25,7 +23,6 @@ class Game {
 
   Game.fromDefault() {
     phase = gamePhase.creating;
-    showTaggerIsComing = true;
   }
 
   Game.fromQueryDocumentSnapshot(QueryDocumentSnapshot doc) {

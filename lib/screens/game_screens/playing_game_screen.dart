@@ -4,18 +4,42 @@ import 'package:niira2/controllers/game_controller.dart';
 import 'package:niira2/controllers/user_controller.dart';
 import 'package:niira2/models/game.dart';
 import 'package:niira2/services/database.dart';
-import 'package:marquee/marquee.dart';
 
-class PlayingGameScreen extends StatelessWidget {
+class PlayingGameScreen extends StatefulWidget {
+  @override
+  State<PlayingGameScreen> createState() => _PlayingGameScreenState();
+}
+
+class _PlayingGameScreenState extends State<PlayingGameScreen> {
   final GameController _gameController = Get.find();
   final UserController _userController = Get.find();
   final Database _database = Get.find();
+
+  bool showTaggerIsComingDialog = true;
 
   @override
   Widget build(BuildContext context) {
     return Obx(() {
       final _gamePhase = _gameController.game.value.phase;
       final _isTagger = _userController.user.value.isTagger;
+
+      if (showTaggerIsComingDialog &&
+          _gamePhase == gamePhase.playing &&
+          !_isTagger) {
+        WidgetsBinding.instance!.addPostFrameCallback(
+          (_) => Get.defaultDialog(
+            title: 'Tagger coming!',
+            middleText: 'Find safety items to keep your location safe!',
+            textConfirm: 'Ok',
+            onConfirm: () async {
+              setState(() {
+                showTaggerIsComingDialog = true;
+              });
+              Get.back();
+            },
+          ),
+        );
+      }
 
       return Scaffold(
         appBar: AppBar(
@@ -122,7 +146,7 @@ class PlayingGameScreen extends StatelessWidget {
                           style: ButtonStyle(),
                           onPressed: () {},
                         ),
-                if (!_isTagger)
+                if (!_isTagger && _gamePhase != gamePhase.counting)
                   _userController.user.value.hasImmunity
                       ? OutlinedButton.icon(
                           onPressed: () {},

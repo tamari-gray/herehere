@@ -14,15 +14,4 @@ class GameController extends GetxController {
     game.bindStream(_database.gameStream());
     players.bindStream(_database.playersStream());
   }
-
-  void showTaggerIsComingDialog() {
-    Get.defaultDialog(
-        title: 'Tagger is coming!',
-        textConfirm: 'Ok',
-        middleText: 'Find safety items to hide your location from them!',
-        onConfirm: () async {
-          Get.back();
-          game.value.showTaggerIsComing = false;
-        });
-  }
 }
