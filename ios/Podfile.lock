@@ -379,6 +379,10 @@ PODS:
     - leveldb-library (~> 1.22)
     - nanopb (~> 2.30908.0)
   - Flutter (1.0.0)
+  - flutter_compass (0.0.1):
+    - Flutter
+  - geolocator_apple (1.2.0):
+    - Flutter
   - GoogleDataTransport (9.1.0):
     - GoogleUtilities/Environment (~> 7.2)
     - nanopb (~> 2.30908.0)
@@ -418,11 +422,16 @@ PODS:
   - nanopb/decode (2.30908.0)
   - nanopb/encode (2.30908.0)
   - PromisesObjC (2.0.0)
+  - sensors_plus (0.0.1):
+    - Flutter
 
 DEPENDENCIES:
   - cloud_firestore (from `.symlinks/plugins/cloud_firestore/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
   - Flutter (from `Flutter`)
+  - flutter_compass (from `.symlinks/plugins/flutter_compass/ios`)
+  - geolocator_apple (from `.symlinks/plugins/geolocator_apple/ios`)
+  - sensors_plus (from `.symlinks/plugins/sensors_plus/ios`)
 
 SPEC REPOS:
   trunk:
@@ -447,6 +456,12 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/firebase_core/ios"
   Flutter:
     :path: Flutter
+  flutter_compass:
+    :path: ".symlinks/plugins/flutter_compass/ios"
+  geolocator_apple:
+    :path: ".symlinks/plugins/geolocator_apple/ios"
+  sensors_plus:
+    :path: ".symlinks/plugins/sensors_plus/ios"
 
 SPEC CHECKSUMS:
   abseil: 6c8eb7892aefa08d929b39f9bb108e5367e3228f
@@ -458,6 +473,8 @@ SPEC CHECKSUMS:
   FirebaseCoreDiagnostics: fe77f42da6329d6d83d21fd9d621a6b704413bfc
   FirebaseFirestore: e722ba956610c45d368d9787689e2aa41b809e68
   Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
+  flutter_compass: cbbd285cea1584c7ac9c4e0c3e1f17cbea55e855
+  geolocator_apple: b741765c55dc21950e3e106e8b3584e55cf81ce5
   GoogleDataTransport: 85fd18ff3019bb85d3f2c551d04c481dedf71fc9
   GoogleUtilities: 8de2a97a17e15b6b98e38e8770e2d129a57c0040
   "gRPC-C++": 13d8ccef97d5c3c441b7e3c529ef28ebee86fad2
@@ -465,6 +482,7 @@ SPEC CHECKSUMS:
   leveldb-library: 50c7b45cbd7bf543c81a468fe557a16ae3db8729
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
+  sensors_plus: 5717760720f7e6acd96fdbd75b7428f5ad755ec2
 
 PODFILE CHECKSUM: 109d4c06737e14e83c1d988c03ca15333cde8d21
 

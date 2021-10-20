@@ -1,7 +1,7 @@
-import 'package:location/location.dart';
+import 'package:geolocator/geolocator.dart';
 
 class SafetyItem {
-  LocationData location = LocationData.fromMap({'latitude': 0, 'longitude': 0});
+  Position location = Position.fromMap({});
   bool pickedUp = false;
-  double size = 5; // in metres
+  double size = 5; // diameter in metres
 }

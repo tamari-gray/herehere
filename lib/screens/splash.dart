@@ -1,28 +1,151 @@
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
+import 'package:loading_indicator/loading_indicator.dart';
 import 'package:niira2/controllers/game_controller.dart';
+import 'package:niira2/controllers/location_controller.dart';
 import 'package:niira2/controllers/user_controller.dart';
 import 'package:niira2/models/game.dart';
 import 'package:niira2/services/database.dart';
 
 class SplashPage extends StatelessWidget {
+  final LocationController _locationController = Get.find();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: true,
-      backgroundColor: Colors.black,
-      body: Container(
-        child: Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              SplashTitle(),
-              SplashSubtitle(),
-              LogIn(),
-            ],
+    return Obx(() {
+      return Scaffold(
+        resizeToAvoidBottomInset: true,
+        backgroundColor: Colors.black,
+        body: Container(
+          child: Center(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                SplashTitle(),
+                SplashSubtitle(),
+                _locationController.serviceEnabled.value &&
+                        (_locationController.locationPermission.value ==
+                                LocationPermission.always ||
+                            _locationController.locationPermission.value ==
+                                LocationPermission.whileInUse)
+                    ? LogIn()
+                    : Padding(
+                        padding: const EdgeInsets.fromLTRB(10, 50, 10, 0),
+                        child: LocationSettingsHandler(),
+                      ),
+              ],
+            ),
           ),
         ),
-      ),
+      );
+    });
+  }
+}
+
+class LocationSettingsHandler extends StatefulWidget {
+  @override
+  State<LocationSettingsHandler> createState() =>
+      _LocationSettingsHandlerState();
+}
+
+class _LocationSettingsHandlerState extends State<LocationSettingsHandler> {
+  final LocationController _locationController = Get.find();
+
+  @override
+  void initState() {
+    super.initState();
+    _checkLocationSettings();
+  }
+
+  void _checkLocationSettings() async {
+    _locationController.serviceEnabled.value =
+        await Geolocator.isLocationServiceEnabled();
+    _locationController.locationPermission.value =
+        await Geolocator.requestPermission();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Obx(
+      () {
+        if (_locationController.serviceEnabled.value) {
+          if (_locationController.locationPermission.value ==
+                  LocationPermission.always ||
+              _locationController.locationPermission.value ==
+                  LocationPermission.whileInUse) {
+            return Card(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  const ListTile(
+                    title: Text('Please allow location permissions'),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: <Widget>[
+                      TextButton(
+                        child: const Text('Refresh'),
+                        onPressed: () async {
+                          await Geolocator.checkPermission();
+                        },
+                      ),
+                      const SizedBox(width: 8),
+                      TextButton(
+                        child: const Text('Allow'),
+                        onPressed: () async {
+                          _locationController.locationPermission.value =
+                              await Geolocator.requestPermission();
+                        },
+                      ),
+                      const SizedBox(width: 8),
+                    ],
+                  ),
+                ],
+              ),
+            );
+          } else {
+            return Card(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  const ListTile(
+                    title: Text('Please enable location services'),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: <Widget>[
+                      TextButton(
+                        child: const Text('Refresh'),
+                        onPressed: () async {
+                          _locationController.serviceEnabled.value =
+                              await Geolocator.isLocationServiceEnabled();
+                        },
+                      ),
+                      const SizedBox(width: 8),
+                      TextButton(
+                        child: const Text('Enable'),
+                        onPressed: () async {
+                          await Geolocator.openLocationSettings();
+                        },
+                      ),
+                      const SizedBox(width: 8),
+                    ],
+                  ),
+                ],
+              ),
+            );
+          }
+        }
+        return Container(
+          child: LoadingIndicator(
+            indicatorType: Indicator.ballScaleMultiple,
+            colors: const [Colors.white],
+            strokeWidth: 2,
+            backgroundColor: Colors.black,
+            pathBackgroundColor: Colors.black,
+          ),
+        );
+      },
     );
   }
 }

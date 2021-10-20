@@ -3,7 +3,7 @@ import 'package:niira2/models/player.dart';
 import 'package:niira2/services/database.dart';
 
 class UserController extends GetxController {
-  final Database _database = Get.put(Database());
+  final Database _database = Get.find();
 
   final userId = ''.obs;
   final user = Player("", "", false, false, false, false).obs;

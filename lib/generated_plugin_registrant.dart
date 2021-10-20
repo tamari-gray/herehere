@@ -7,6 +7,8 @@
 
 import 'package:cloud_firestore_web/cloud_firestore_web.dart';
 import 'package:firebase_core_web/firebase_core_web.dart';
+import 'package:geolocator_web/geolocator_web.dart';
+import 'package:sensors_plus_web/sensors_plus_web.dart';
 
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 
@@ -14,5 +16,7 @@ import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 void registerPlugins(Registrar registrar) {
   FirebaseFirestoreWeb.registerWith(registrar);
   FirebaseCoreWeb.registerWith(registrar);
+  GeolocatorPlugin.registerWith(registrar);
+  SensorsPlugin.registerWith(registrar);
   registrar.registerMessageHandler();
 }

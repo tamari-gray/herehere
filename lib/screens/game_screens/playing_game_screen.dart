@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:niira2/controllers/game_controller.dart';
+import 'package:niira2/controllers/location_controller.dart';
 import 'package:niira2/controllers/user_controller.dart';
 import 'package:niira2/models/game.dart';
 import 'package:niira2/services/database.dart';
@@ -13,6 +14,7 @@ class PlayingGameScreen extends StatefulWidget {
 class _PlayingGameScreenState extends State<PlayingGameScreen> {
   final GameController _gameController = Get.find();
   final UserController _userController = Get.find();
+  final LocationController _locationController = Get.find();
   final Database _database = Get.find();
 
   bool showTaggerIsComingDialog = true;
@@ -166,6 +168,13 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
                   style: ButtonStyle(),
                   onPressed: () {},
                 ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 150, 0, 0),
+                  child: Center(
+                    child: Text(
+                        'lat: ${_locationController.location.value.latitude}, long: ${_locationController.location.value.longitude}'),
+                  ),
+                )
               ],
             ),
           ),

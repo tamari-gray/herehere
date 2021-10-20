@@ -5,6 +5,7 @@ import 'package:get/get_navigation/get_navigation.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
 import 'package:niira2/controllers/game_controller.dart';
+import 'package:niira2/controllers/location_controller.dart';
 import 'package:niira2/controllers/user_controller.dart';
 import 'package:niira2/screens/game_screens/game_screen.dart';
 import 'package:niira2/screens/splash.dart';
@@ -60,11 +61,16 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  /// all controllers depend on `Database`.We instatiate it here first so
+  /// controllers can use it with `GetX`.
+  // ignore: unused_field
+  final Database _database = Get.put(Database());
+
   final UserController _userController = Get.put(UserController());
   // ignore: unused_field
   final GameController _gameController = Get.put(GameController());
   // ignore: unused_field
-  final Database _database = Get.put(Database());
+  final LocationController _locationController = Get.put(LocationController());
 
   @override
   // void initState() {
