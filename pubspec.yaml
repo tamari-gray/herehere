@@ -38,6 +38,7 @@ dependencies:
   sensors_plus: ^1.2.1
   geolocator: ^7.7.0
   loading_indicator: ^3.0.2
+  cloud_functions: ^3.0.5
 
 dev_dependencies:
   flutter_test:
