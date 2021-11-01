@@ -10,10 +10,15 @@ import 'package:niira2/controllers/user_controller.dart';
 import 'package:niira2/screens/game_screens/game_screen.dart';
 import 'package:niira2/screens/splash.dart';
 import 'package:niira2/services/database.dart';
+// import ;ackage:flutter/services.dart';
 // import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  // SystemChrome.setPreferredOrientations([
+  //   DeviceOrientation.portraitUp,
+  //   DeviceOrientation.portraitDown,
+  // ]);
   runApp(ProviderScope(child: App()));
 }
 

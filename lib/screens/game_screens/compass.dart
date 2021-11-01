@@ -98,13 +98,29 @@ class _CompassState extends State<Compass> {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
             ),
-            child: Transform.rotate(
-              angle: (direction * (pi / 180) * -1),
-              child: Image.asset(
-                'assets/niira_compass_basic.png',
-                width: 150,
-                height: 150,
-              ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 25),
+                  child: Transform.rotate(
+                    angle: (direction * (pi / 180) * -1),
+                    child: Image.asset(
+                      'assets/arrow_niira_sm.png',
+                      width: 50,
+                      height: 70,
+                    ),
+                  ),
+                ),
+                Transform.rotate(
+                  angle: (direction * (pi / 180) * -1),
+                  child: Image.asset(
+                    'assets/niira_compass_basic.png',
+                    width: 150,
+                    height: 150,
+                  ),
+                ),
+              ],
             ),
           ),
         );
