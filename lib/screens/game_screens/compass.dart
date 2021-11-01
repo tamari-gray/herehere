@@ -22,7 +22,6 @@ class _CompassState extends State<Compass> {
       return Column(
         children: <Widget>[
           // _buildManualReader(),
-          // Expanded(child: _buildCompass()),
           _buildCompass(),
         ],
       );
@@ -93,7 +92,6 @@ class _CompassState extends State<Compass> {
         return Material(
           shape: CircleBorder(),
           clipBehavior: Clip.antiAlias,
-          // elevation: 0,
           child: Container(
             padding: EdgeInsets.all(16.0),
             alignment: Alignment.center,
@@ -101,10 +99,9 @@ class _CompassState extends State<Compass> {
               shape: BoxShape.circle,
             ),
             child: Transform.rotate(
-              // angle: 0,
               angle: (direction * (pi / 180) * -1),
               child: Image.asset(
-                'assets/compass.png',
+                'assets/niira_compass_basic.png',
                 width: 150,
                 height: 150,
               ),

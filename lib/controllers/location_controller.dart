@@ -7,6 +7,6 @@ class LocationController extends GetxController {
   var locationPermission = LocationPermission.denied.obs;
 
   void listenToLocation() {
-    location.bindStream(Geolocator.getPositionStream());
+    location.bindStream(Geolocator.getPositionStream(distanceFilter: 1));
   }
 }

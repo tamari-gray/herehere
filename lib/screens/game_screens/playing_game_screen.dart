@@ -44,7 +44,9 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
         );
       }
 
-      if (_gamePhase == gamePhase.counting && !_isTagger) {
+      if (showTaggerIsComingDialog &&
+          _gamePhase == gamePhase.counting &&
+          !_isTagger) {
         WidgetsBinding.instance!.addPostFrameCallback(
           (_) => Get.defaultDialog(
             title: 'Go hide!',
