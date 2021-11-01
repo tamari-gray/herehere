@@ -4,6 +4,7 @@ import 'package:niira2/controllers/game_controller.dart';
 import 'package:niira2/controllers/location_controller.dart';
 import 'package:niira2/controllers/user_controller.dart';
 import 'package:niira2/models/game.dart';
+import 'package:niira2/screens/game_screens/compass.dart';
 import 'package:niira2/services/database.dart';
 
 class PlayingGameScreen extends StatefulWidget {
@@ -35,7 +36,24 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
             textConfirm: 'Ok',
             onConfirm: () async {
               setState(() {
-                showTaggerIsComingDialog = true;
+                showTaggerIsComingDialog = false;
+              });
+              Get.back();
+            },
+          ),
+        );
+      }
+
+      if (_gamePhase == gamePhase.counting && !_isTagger) {
+        WidgetsBinding.instance!.addPostFrameCallback(
+          (_) => Get.defaultDialog(
+            title: 'Go hide!',
+            middleText:
+                'Tagger will be coming soon! find a hiding spot and wait for the safety items to spawn!',
+            textConfirm: 'Ok',
+            onConfirm: () async {
+              setState(() {
+                showTaggerIsComingDialog = false;
               });
               Get.back();
             },
@@ -171,8 +189,7 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0, 150, 0, 0),
                   child: Center(
-                    child: Text(
-                        'lat: ${_locationController.location.value.latitude}, long: ${_locationController.location.value.longitude}'),
+                    child: Compass(),
                   ),
                 )
               ],

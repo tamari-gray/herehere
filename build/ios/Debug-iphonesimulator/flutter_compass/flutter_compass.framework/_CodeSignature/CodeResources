@@ -10,7 +10,7 @@
 		</data>
 		<key>Headers/flutter_compass-Swift.h</key>
 		<data>
-		KdzMZFVLWXZvnngI8YeHZxIOTUM=
+		6F6gG/uSN7cegNHJEY31q1c5pZo=
 		</data>
 		<key>Headers/flutter_compass-umbrella.h</key>
 		<data>
@@ -18,55 +18,55 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		HgVyoIwcXNV5gwzCGPEln7x0cGY=
+		QChX+Yy16V79rsU+25WuCb/0dn8=
 		</data>
 		<key>Modules/flutter_compass.swiftmodule/Project/arm64-apple-ios-simulator.swiftsourceinfo</key>
 		<data>
-		rCZi2ODuHDTk6XF/apJdoQVoVoQ=
+		6Mv3QsxdKaEZrN/vgouV3VWAXMQ=
 		</data>
 		<key>Modules/flutter_compass.swiftmodule/Project/arm64.swiftsourceinfo</key>
 		<data>
-		rCZi2ODuHDTk6XF/apJdoQVoVoQ=
+		6Mv3QsxdKaEZrN/vgouV3VWAXMQ=
 		</data>
 		<key>Modules/flutter_compass.swiftmodule/Project/x86_64-apple-ios-simulator.swiftsourceinfo</key>
 		<data>
-		tbbyPaU6PFRSApFBEgpfxY+lDhE=
+		OWr9q3/TEs3dUBMlBfb3ksPHgVE=
 		</data>
 		<key>Modules/flutter_compass.swiftmodule/Project/x86_64.swiftsourceinfo</key>
 		<data>
-		tbbyPaU6PFRSApFBEgpfxY+lDhE=
+		OWr9q3/TEs3dUBMlBfb3ksPHgVE=
 		</data>
 		<key>Modules/flutter_compass.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		tmL6kWjZIbLu+GmGw5WrRVITCCE=
+		QMsAMG0B6+1dbwAq79T8raKIuq8=
 		</data>
 		<key>Modules/flutter_compass.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		CGGqW0/PTekqID0PBxNBTI+gzg0=
+		DBNQmvgFX0X0mJgSUmA80aFr/5Y=
 		</data>
 		<key>Modules/flutter_compass.swiftmodule/arm64.swiftdoc</key>
 		<data>
-		tmL6kWjZIbLu+GmGw5WrRVITCCE=
+		QMsAMG0B6+1dbwAq79T8raKIuq8=
 		</data>
 		<key>Modules/flutter_compass.swiftmodule/arm64.swiftmodule</key>
 		<data>
-		CGGqW0/PTekqID0PBxNBTI+gzg0=
+		DBNQmvgFX0X0mJgSUmA80aFr/5Y=
 		</data>
 		<key>Modules/flutter_compass.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		a3nWLmF2sLAIynB5ySl/0If6HbQ=
+		gOcl7jhBnSgsql6MGf7qG4XguuE=
 		</data>
 		<key>Modules/flutter_compass.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		R8d/zJvW+t7Wavelo27Fqv3SLfY=
+		WTzHtmzBStCTkYhFpdNgxYXcG1o=
 		</data>
 		<key>Modules/flutter_compass.swiftmodule/x86_64.swiftdoc</key>
 		<data>
-		a3nWLmF2sLAIynB5ySl/0If6HbQ=
+		gOcl7jhBnSgsql6MGf7qG4XguuE=
 		</data>
 		<key>Modules/flutter_compass.swiftmodule/x86_64.swiftmodule</key>
 		<data>
-		R8d/zJvW+t7Wavelo27Fqv3SLfY=
+		WTzHtmzBStCTkYhFpdNgxYXcG1o=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -86,7 +86,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			VNpqPNXUCX7HYOIBVYEtAAB62qHB074ekgyJsm0sOT4=
+			g/jWCYis8Pr2Nf+7p2HTLUZEW6EoKHdPXJB3MiqaDPI=
 			</data>
 		</dict>
 		<key>Headers/flutter_compass-umbrella.h</key>
@@ -100,84 +100,84 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			/WV0+3TRQux9gb9TPCeUg1fW3HtXfK87nZtNcGfsdvM=
+			n6CtgMuqfJbha6MvKnzbDRyS7NG3SFCrLdPzDyUwIZI=
 			</data>
 		</dict>
 		<key>Modules/flutter_compass.swiftmodule/Project/arm64.swiftsourceinfo</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			/WV0+3TRQux9gb9TPCeUg1fW3HtXfK87nZtNcGfsdvM=
+			n6CtgMuqfJbha6MvKnzbDRyS7NG3SFCrLdPzDyUwIZI=
 			</data>
 		</dict>
 		<key>Modules/flutter_compass.swiftmodule/Project/x86_64-apple-ios-simulator.swiftsourceinfo</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			mw/uhCxFHNJgN/wvesuWq2Dy4JfrYdpiZ+4/9P6NdE4=
+			knGPBXRxAh1mxmHGpcO2tNRLo8V9HkJOzlkPyk4bA4k=
 			</data>
 		</dict>
 		<key>Modules/flutter_compass.swiftmodule/Project/x86_64.swiftsourceinfo</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			mw/uhCxFHNJgN/wvesuWq2Dy4JfrYdpiZ+4/9P6NdE4=
+			knGPBXRxAh1mxmHGpcO2tNRLo8V9HkJOzlkPyk4bA4k=
 			</data>
 		</dict>
 		<key>Modules/flutter_compass.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			NUen4zUx7nobJZfYjSAOyBa2hQSV7pyc/LTNYZ1/Wnc=
+			nqqgLOB4rO+RdjCcgybOlkZD9RnwANh0s3cO+so0oQk=
 			</data>
 		</dict>
 		<key>Modules/flutter_compass.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			58Jq0G5xXGcCDsE2c0BfDRUr/5MRcHd4Mg6P7aPPZzY=
+			L334I6z8HnDsH9+yL3+d/a4kfdp05VFMEx3pYh3oObw=
 			</data>
 		</dict>
 		<key>Modules/flutter_compass.swiftmodule/arm64.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			NUen4zUx7nobJZfYjSAOyBa2hQSV7pyc/LTNYZ1/Wnc=
+			nqqgLOB4rO+RdjCcgybOlkZD9RnwANh0s3cO+so0oQk=
 			</data>
 		</dict>
 		<key>Modules/flutter_compass.swiftmodule/arm64.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			58Jq0G5xXGcCDsE2c0BfDRUr/5MRcHd4Mg6P7aPPZzY=
+			L334I6z8HnDsH9+yL3+d/a4kfdp05VFMEx3pYh3oObw=
 			</data>
 		</dict>
 		<key>Modules/flutter_compass.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			D1IaKRpvogN8wRVyJFycHhKWiWzZr5QAB/10bAU5wiI=
+			vj6NfOkhY+PVKP8yUmJqeJ3y1WdS5O55DZejHng7Xio=
 			</data>
 		</dict>
 		<key>Modules/flutter_compass.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			kJVrhvYYBJIQICrq1NI1f20bUpXrz9Bknbkqqnz7c5s=
+			DNEXfa5s04TliXZ6e35g4Nyr4HJsPG5oQ/ty6YJ7FuE=
 			</data>
 		</dict>
 		<key>Modules/flutter_compass.swiftmodule/x86_64.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			D1IaKRpvogN8wRVyJFycHhKWiWzZr5QAB/10bAU5wiI=
+			vj6NfOkhY+PVKP8yUmJqeJ3y1WdS5O55DZejHng7Xio=
 			</data>
 		</dict>
 		<key>Modules/flutter_compass.swiftmodule/x86_64.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			kJVrhvYYBJIQICrq1NI1f20bUpXrz9Bknbkqqnz7c5s=
+			DNEXfa5s04TliXZ6e35g4Nyr4HJsPG5oQ/ty6YJ7FuE=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
