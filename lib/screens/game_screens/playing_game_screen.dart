@@ -189,7 +189,7 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
                   onPressed: () {},
                 ),
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 150, 0, 0),
+                  padding: const EdgeInsets.fromLTRB(0, 100, 0, 0),
                   child: Center(
                     child: Compass(),
                   ),

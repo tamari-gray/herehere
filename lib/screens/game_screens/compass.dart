@@ -89,39 +89,53 @@ class _CompassState extends State<Compass> {
             child: Text("Device does not have sensors !"),
           );
 
-        return Material(
-          shape: CircleBorder(),
-          clipBehavior: Clip.antiAlias,
-          child: Container(
-            padding: EdgeInsets.all(16.0),
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 25),
-                  child: Transform.rotate(
-                    angle: (direction * (pi / 180) * -1),
-                    child: Image.asset(
-                      'assets/arrow_niira_sm.png',
-                      width: 50,
-                      height: 70,
-                    ),
-                  ),
-                ),
-                Transform.rotate(
+        return Container(
+          width: 500,
+          height: 300,
+          padding: EdgeInsets.all(16.0),
+          alignment: Alignment.center,
+          child: Stack(
+            fit: StackFit.expand,
+            clipBehavior: Clip.none,
+            alignment: AlignmentDirectional.center,
+            children: [
+              Positioned(
+                bottom: 210,
+                child: Transform.rotate(
                   angle: (direction * (pi / 180) * -1),
-                  child: Image.asset(
-                    'assets/niira_compass_basic.png',
-                    width: 150,
-                    height: 150,
+                  origin: Offset(0, 130),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        '50m',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 5, 0, 15),
+                        child: Image.asset(
+                          'assets/arrow_niira_sm.png',
+                          width: 50,
+                          height: 70,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-              ],
-            ),
+              ),
+              Transform.rotate(
+                angle: (direction * (pi / 180) * -1),
+                child: Image.asset(
+                  'assets/niira_compass_basic.png',
+                  fit: BoxFit.scaleDown,
+                  width: 100,
+                  height: 100,
+                ),
+              ),
+            ],
           ),
         );
       },
