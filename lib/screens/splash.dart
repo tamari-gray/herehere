@@ -16,24 +16,30 @@ class SplashPage extends StatelessWidget {
       return Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.black,
-        body: Container(
-          child: Center(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                SplashTitle(),
-                SplashSubtitle(),
-                _locationController.serviceEnabled.value &&
-                        (_locationController.locationPermission.value ==
-                                LocationPermission.always ||
-                            _locationController.locationPermission.value ==
-                                LocationPermission.whileInUse)
-                    ? LogIn()
-                    : Padding(
-                        padding: const EdgeInsets.fromLTRB(10, 50, 10, 0),
-                        child: LocationSettingsHandler(),
-                      ),
-              ],
+        body: SingleChildScrollView(
+          reverse: true,
+          padding:
+              EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+          child: Container(
+            padding: EdgeInsets.fromLTRB(0, 0, 0, 50),
+            child: Center(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  SplashTitle(),
+                  SplashSubtitle(),
+                  _locationController.serviceEnabled.value &&
+                          (_locationController.locationPermission.value ==
+                                  LocationPermission.always ||
+                              _locationController.locationPermission.value ==
+                                  LocationPermission.whileInUse)
+                      ? LogIn()
+                      : Padding(
+                          padding: const EdgeInsets.fromLTRB(10, 50, 10, 0),
+                          child: LocationSettingsHandler(),
+                        ),
+                ],
+              ),
             ),
           ),
         ),
