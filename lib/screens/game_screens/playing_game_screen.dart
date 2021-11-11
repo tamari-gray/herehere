@@ -176,7 +176,16 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
                           label: Text('Location safe for 90s'),
                         )
                       : OutlinedButton.icon(
-                          onPressed: () {},
+                          onPressed: () {
+                            Get.defaultDialog(
+                                title: 'Tagger knows where you are!',
+                                middleText:
+                                    'Use compass to find safety items, theyll keepyour location hidden from the tagger for 90 seconds!',
+                                textConfirm: 'Ok',
+                                onConfirm: () async {
+                                  Get.back();
+                                });
+                          },
                           icon: Icon(Icons.help),
                           label: Text('Location not safe'),
                         ),

@@ -35,10 +35,10 @@ dependencies:
   enum_to_string: ^2.0.1
   marquee: ^2.2.0
   flutter_compass: ^0.7.0
-  sensors_plus: ^1.2.1
   geolocator: ^7.7.0
   loading_indicator: ^3.0.2
   cloud_functions: ^3.0.5
+  vector_math: ^2.1.0
 
 dev_dependencies:
   flutter_test:

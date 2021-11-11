@@ -9,4 +9,6 @@ class LocationController extends GetxController {
   void listenToLocation() {
     location.bindStream(Geolocator.getPositionStream(distanceFilter: 1));
   }
+
+  // void bearing
 }

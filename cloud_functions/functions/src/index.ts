@@ -18,7 +18,14 @@ const itemsColl = `${gameDoc}/items`;
 const itemDoc = `${itemsColl}/{itemId}`;
 
 const boundary = {
-  center: {latitude: -39.622476, longitude: 176.830278},
+  // frimley
+  // center: {latitude: -39.622476, longitude: 176.830278},
+  
+  // otane
+  // center: {latitude: -39.895878454725036, longitude: 176.6297118718396},
+
+  // karamu
+  center: { latitude: -39.644575, longitude: 176.868368},
   radius: 50,
 };
 

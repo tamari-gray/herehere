@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:enum_to_string/enum_to_string.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:niira2/models/game.dart';
 import 'package:niira2/models/player.dart';
+import 'package:niira2/models/safety_item.dart';
 
 class Database extends GetxService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -110,6 +112,31 @@ class Database extends GetxService {
           players.add(Player.fromQueryDocumentSnapshot(doc));
         });
         return players;
+      });
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Stream<List<SafetyItem>> safetyItemStream() {
+    try {
+      return _firestore
+          .collection("beta")
+          .doc("game")
+          .collection("items")
+          .snapshots()
+          .map((QuerySnapshot query) {
+        List<SafetyItem> items = List.empty(growable: true);
+        query.docs.forEach((doc) {
+          Map<String, dynamic> data = doc.data()! as Map<String, dynamic>;
+          final lat = data["point"]["geopoint"].latitude as double;
+          final long = data["point"]["geopoint"].longitude as double;
+          final pickedUp = data["item_picked_up"] ?? false;
+          // final itemPosition = Position.fromMap({lat, long});
+          // print(lat);
+          items.add(SafetyItem(doc.id, lat, long, pickedUp));
+        });
+        return items;
       });
     } catch (e) {
       rethrow;

@@ -18,7 +18,7 @@
 		</data>
 		<key>flutter_assets/NOTICES.Z</key>
 		<data>
-		9J4TXxx6HRg0FTS7calNKP7Fn2w=
+		hjprkesJg0gV61nFHjSDCH8rduY=
 		</data>
 		<key>flutter_assets/assets/arrow_niira_sm.png</key>
 		<data>
@@ -32,21 +32,9 @@
 		<data>
 		33xe6rFwPlxRnZOgZWsODADpUI4=
 		</data>
-		<key>flutter_assets/isolate_snapshot_data</key>
-		<data>
-		j58ZaJgxEhtmGJxhHo73d32iYFI=
-		</data>
-		<key>flutter_assets/kernel_blob.bin</key>
-		<data>
-		KkNOIPEJLe+DgRjrRtSchV3D2DE=
-		</data>
 		<key>flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
 		<data>
 		P7bb/oR3EhwqCIH1M6LyTuBIWYU=
-		</data>
-		<key>flutter_assets/vm_snapshot_data</key>
-		<data>
-		GSdeSSVKlMZc4dGp6K8FmNf4taU=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -77,11 +65,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			9J4TXxx6HRg0FTS7calNKP7Fn2w=
+			hjprkesJg0gV61nFHjSDCH8rduY=
 			</data>
 			<key>hash2</key>
 			<data>
-			2I4c/NTCKkoXjXLYB5NNRPSi8Pd2BIGtQQSAhcE/95k=
+			QO6Tv/HbaUM2wooFDjCfZtXqdYHibSWVFDT1vxJQ7bg=
 			</data>
 		</dict>
 		<key>flutter_assets/assets/arrow_niira_sm.png</key>
@@ -117,28 +105,6 @@
 			0E0I/gLatnGI9y4elyWPSg2LWYJSPgLt6hMvgJD5+rQ=
 			</data>
 		</dict>
-		<key>flutter_assets/isolate_snapshot_data</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			j58ZaJgxEhtmGJxhHo73d32iYFI=
-			</data>
-			<key>hash2</key>
-			<data>
-			O2mgX/4QpiIaR3Relq6EGshnOo+RCjbxxYoqeo+kJuY=
-			</data>
-		</dict>
-		<key>flutter_assets/kernel_blob.bin</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			KkNOIPEJLe+DgRjrRtSchV3D2DE=
-			</data>
-			<key>hash2</key>
-			<data>
-			FaSrAWuxGVOFAhH35rNpL9Oou0zvnlPqSEfgSMkYWJ0=
-			</data>
-		</dict>
 		<key>flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
 		<dict>
 			<key>hash</key>
@@ -148,17 +114,6 @@
 			<key>hash2</key>
 			<data>
 			x6NX+tjyECiQtyzbbjyY8U2zoZ7GDbJtE+T+k/dzgI0=
-			</data>
-		</dict>
-		<key>flutter_assets/vm_snapshot_data</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			GSdeSSVKlMZc4dGp6K8FmNf4taU=
-			</data>
-			<key>hash2</key>
-			<data>
-			w1vt9GEbbsxDdWG+Cns8O0OA28qaaHi/gkQ1bDZezNk=
 			</data>
 		</dict>
 	</dict>

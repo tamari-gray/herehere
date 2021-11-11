@@ -1,17 +1,23 @@
 import 'package:get/get.dart';
 import 'package:niira2/models/game.dart';
 import 'package:niira2/models/player.dart';
+import 'package:niira2/models/safety_item.dart';
 import 'package:niira2/services/database.dart';
 
 class GameController extends GetxController {
   final Database _database = Get.find();
   final game = Game.fromDefault().obs;
   final players = List<Player>.empty().obs;
+  final items = List<SafetyItem>.empty().obs;
 
   @override
   void onInit() {
     super.onInit();
     game.bindStream(_database.gameStream());
     players.bindStream(_database.playersStream());
+    items.bindStream(_database.safetyItemStream());
+
+    // might have to do if doesnt work with empty firestore stream
+    // ever()
   }
 }
