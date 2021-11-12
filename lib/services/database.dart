@@ -132,8 +132,7 @@ class Database extends GetxService {
           final lat = data["point"]["geopoint"].latitude as double;
           final long = data["point"]["geopoint"].longitude as double;
           final pickedUp = data["item_picked_up"] ?? false;
-          // final itemPosition = Position.fromMap({lat, long});
-          // print(lat);
+
           items.add(SafetyItem(doc.id, lat, long, pickedUp));
         });
         return items;

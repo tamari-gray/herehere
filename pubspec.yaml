@@ -59,6 +59,8 @@ flutter:
   assets:
     - assets/niira_compass_basic.png
     - assets/arrow_niira_sm.png
+    - assets/arrow_niira_sm.png
+    - assets/crystal_.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:niira2/controllers/game_controller.dart';
 import 'package:niira2/controllers/location_controller.dart';
@@ -149,6 +150,7 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
             padding: const EdgeInsets.fromLTRB(15, 15, 0, 0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 if (_gamePhase == gamePhase.counting)
                   _isTagger
@@ -197,12 +199,24 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
                   style: ButtonStyle(),
                   onPressed: () {},
                 ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 100, 0, 0),
-                  child: Center(
-                    child: Compass(),
-                  ),
-                )
+                _gameController.items.any((item) {
+                  final _playerLocation = _locationController.location;
+
+                  final int _distance = Geolocator.distanceBetween(
+                    _playerLocation.value.latitude,
+                    _playerLocation.value.longitude,
+                    item.latitude,
+                    item.longitude,
+                  ).floor();
+
+                  if (_distance <= 10.5) {
+                    return true;
+                  } else {
+                    return false;
+                  }
+                })
+                    ? FoundSafetyItem()
+                    : Compass(),
               ],
             ),
           ),

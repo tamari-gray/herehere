@@ -73,9 +73,9 @@ class _MyAppState extends State<MyApp> {
 
   final UserController _userController = Get.put(UserController());
   // ignore: unused_field
-  final GameController _gameController = Get.put(GameController());
-  // ignore: unused_field
   final LocationController _locationController = Get.put(LocationController());
+  // ignore: unused_field
+  final GameController _gameController = Get.put(GameController());
 
   @override
   // void initState() {

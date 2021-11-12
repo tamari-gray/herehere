@@ -21,13 +21,18 @@ class Compass extends StatefulWidget {
 class _CompassState extends State<Compass> {
   @override
   Widget build(BuildContext context) {
-    return Builder(builder: (context) {
-      return Column(
-        children: <Widget>[
-          _buildCompass(),
-        ],
-      );
-    });
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(0, 100, 0, 0),
+      child: Center(
+        child: Builder(builder: (context) {
+          return Column(
+            children: <Widget>[
+              _buildCompass(),
+            ],
+          );
+        }),
+      ),
+    );
   }
 
   Widget _buildCompass() {
@@ -87,9 +92,8 @@ class _CompassState extends State<Compass> {
                     _playerLocation.value.longitude,
                   );
 
-                  // print('bearing between: $_bearing');
-                  // print(
-                  //     'lat ${_playerLocation.value.latitude}, ln ${_playerLocation.value.longitude}');
+                  print(
+                      'lat ${_playerLocation.value.latitude}, ln ${_playerLocation.value.longitude}');
 
                   final int _distance = Geolocator.distanceBetween(
                     _playerLocation.value.latitude,
@@ -136,6 +140,46 @@ class _CompassState extends State<Compass> {
   }
 }
 
+class FoundSafetyItem extends StatelessWidget {
+  const FoundSafetyItem({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(15, 50, 0, 0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'SAFETY ITEM FOUND',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 26,
+              ),
+            ),
+            Text(
+              'Pick me up!',
+              style: TextStyle(
+                fontSize: 20,
+              ),
+            ),
+            Image.asset(
+              'assets/crystal_.png',
+              fit: BoxFit.scaleDown,
+              // width: 100,
+              // height: 100,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 class NorthArrow extends StatelessWidget {
   const NorthArrow({
     Key? key,
@@ -149,8 +193,8 @@ class NorthArrow extends StatelessWidget {
       child: Image.asset(
         'assets/niira_compass_basic.png',
         fit: BoxFit.scaleDown,
-        width: 100,
-        height: 100,
+        width: 75,
+        height: 75,
       ),
     );
   }
