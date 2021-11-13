@@ -59,9 +59,6 @@ class _CompassState extends State<Compass> {
         }
 
         double? deviceHeading = snapshot.data!.heading;
-        final deviceHEadingInRadians = (deviceHeading! * (pi / 180) * 1);
-        print(
-            'north bearing: $deviceHeading, in radians: $deviceHEadingInRadians');
 
         // if deviceHeading is null, then device does not support this sensor
         // show error message
@@ -92,8 +89,8 @@ class _CompassState extends State<Compass> {
                     _playerLocation.value.longitude,
                   );
 
-                  print(
-                      'lat ${_playerLocation.value.latitude}, ln ${_playerLocation.value.longitude}');
+                  // print(
+                  //     'lat ${_playerLocation.value.latitude}, ln ${_playerLocation.value.longitude}');
 
                   final int _distance = Geolocator.distanceBetween(
                     _playerLocation.value.latitude,
@@ -213,7 +210,6 @@ class ItemArrow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final angleInRadians = (angle! * (pi / 360) * -2);
-    print('hi $angle, $angleInRadians');
     return Positioned(
       bottom: 210,
       child: Transform.rotate(

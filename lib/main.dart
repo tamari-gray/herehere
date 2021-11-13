@@ -78,20 +78,6 @@ class _MyAppState extends State<MyApp> {
   final GameController _gameController = Get.put(GameController());
 
   @override
-  // void initState() {
-  //   super.initState();
-  //   print('hi');
-  //   IO.Socket socket = IO.io('http://localhost:8000');
-  //   socket.on('connect', (_) {
-  //     print('connect');
-  //     socket.emit('msg', 'test');
-  //   });
-  //   socket.on('event', (data) => print(data));
-  //   socket.on('disconnect', (_) => print('disconnect'));
-  //   socket.on('fromServer', (_) => print(_));
-  // }
-
-  @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'Niira 2',

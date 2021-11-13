@@ -15,9 +15,6 @@ class GameController extends GetxController {
     super.onInit();
     game.bindStream(_database.gameStream());
     players.bindStream(_database.playersStream());
-    items.bindStream(_database.safetyItemStream());
-
-    // might have to do if doesnt work with empty firestore stream
-    // ever()
+    items.bindStream(_database.availableSafetyItemStream());
   }
 }

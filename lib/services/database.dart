@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:enum_to_string/enum_to_string.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:niira2/models/game.dart';
 import 'package:niira2/models/player.dart';
@@ -118,12 +117,13 @@ class Database extends GetxService {
     }
   }
 
-  Stream<List<SafetyItem>> safetyItemStream() {
+  Stream<List<SafetyItem>> availableSafetyItemStream() {
     try {
       return _firestore
           .collection("beta")
           .doc("game")
           .collection("items")
+          .where('item_picked_up', isEqualTo: false)
           .snapshots()
           .map((QuerySnapshot query) {
         List<SafetyItem> items = List.empty(growable: true);
@@ -171,6 +171,29 @@ class Database extends GetxService {
         print(e);
         rethrow;
       }
+    }
+  }
+
+  Future<void> pickUpItem(SafetyItem _item, String playerId) async {
+    try {
+      await _firestore
+          .collection("beta")
+          .doc("game")
+          .collection("items")
+          .doc(_item.id)
+          .update({
+        'item_picked_up': true,
+      });
+      await _firestore
+          .collection("beta")
+          .doc("game")
+          .collection("players")
+          .doc(playerId)
+          .collection("items")
+          .add({"time": DateTime.now()});
+    } catch (e) {
+      print(e);
+      rethrow;
     }
   }
 
