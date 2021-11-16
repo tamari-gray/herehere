@@ -5,6 +5,7 @@ import 'package:niira2/controllers/game_controller.dart';
 import 'package:niira2/controllers/location_controller.dart';
 import 'package:niira2/controllers/user_controller.dart';
 import 'package:niira2/models/game.dart';
+import 'package:niira2/models/safety_item.dart';
 import 'package:niira2/screens/game_screens/compass.dart';
 import 'package:niira2/services/database.dart';
 
@@ -20,6 +21,8 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
   final Database _database = Get.find();
 
   bool showTaggerIsComingDialog = true;
+  bool pickingUpItem = false;
+  SafetyItem foundItem = SafetyItem.fromDefault();
 
   @override
   Widget build(BuildContext context) {
@@ -142,7 +145,24 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
                     label: Text('Tag player'),
                   )
             : FloatingActionButton.extended(
-                onPressed: () {},
+                onPressed: () async {
+                  setState(() {
+                    pickingUpItem = true;
+                  });
+                  final item = getFoundSafetyItem();
+                  final playerId = _userController.user.value.id;
+                  await _database.pickUpItem(item, playerId);
+                  setState(() {
+                    pickingUpItem = false;
+                  });
+                  Get.defaultDialog(
+                    title: 'Item picked up!',
+                    textConfirm: 'Ok',
+                    onConfirm: () => Get.back(),
+                    middleText:
+                        'Your location will be hidden from the tagger for 90 seconds',
+                  );
+                },
                 label: Text('Pick up item'),
               ),
         body: Container(
@@ -170,58 +190,147 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
                           style: ButtonStyle(),
                           onPressed: () {},
                         ),
-                if (!_isTagger && _gamePhase != gamePhase.counting)
-                  _userController.user.value.hasImmunity
-                      ? OutlinedButton.icon(
-                          onPressed: () {},
-                          icon: Icon(Icons.check),
-                          label: Text('Location safe for 90s'),
-                        )
-                      : OutlinedButton.icon(
-                          onPressed: () {
-                            Get.defaultDialog(
-                                title: 'Tagger knows where you are!',
-                                middleText:
-                                    'Use compass to find safety items, theyll keepyour location hidden from the tagger for 90 seconds!',
-                                textConfirm: 'Ok',
-                                onConfirm: () async {
-                                  Get.back();
-                                });
-                          },
-                          icon: Icon(Icons.help),
-                          label: Text('Location not safe'),
-                        ),
-                OutlinedButton(
-                  child: Text(
-                    '${_gameController.players.length} players left',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  style: ButtonStyle(),
-                  onPressed: () {},
-                ),
-                _gameController.items.any((item) {
-                  final _playerLocation = _locationController.location;
-
-                  final int _distance = Geolocator.distanceBetween(
-                    _playerLocation.value.latitude,
-                    _playerLocation.value.longitude,
-                    item.latitude,
-                    item.longitude,
-                  ).floor();
-
-                  if (_distance <= 10.5) {
-                    return true;
-                  } else {
-                    return false;
-                  }
-                })
-                    ? FoundSafetyItem()
-                    : Compass(),
+                if (!_isTagger && _gamePhase == gamePhase.playing)
+                  _userController.locationHiddenTimer.value > 1
+                      ? LocationHiddenBanner(userController: _userController)
+                      : LocationNotSafeBanner(),
+                PlayersRemaining(gameController: _gameController),
+                pickingUpItem
+                    ? PickingUpItem()
+                    : checkIfFoundItem()
+                        ? FoundSafetyItem()
+                        : Compass(),
               ],
             ),
           ),
         ),
       );
     });
+  }
+
+  SafetyItem getFoundSafetyItem() {
+    return _gameController.items.firstWhere((item) {
+      final _playerLocation = _locationController.location;
+
+      final int _distance = Geolocator.distanceBetween(
+        _playerLocation.value.latitude,
+        _playerLocation.value.longitude,
+        item.latitude,
+        item.longitude,
+      ).floor();
+
+      if (_distance <= 20.5) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+  }
+
+  bool checkIfFoundItem() {
+    return _gameController.items.any((item) {
+      final _playerLocation = _locationController.location;
+      print(_playerLocation);
+
+      final int _distance = Geolocator.distanceBetween(
+        _playerLocation.value.latitude,
+        _playerLocation.value.longitude,
+        item.latitude,
+        item.longitude,
+      ).floor();
+
+      if (_distance <= 20.5) {
+        print(item.pickedUp);
+        return true;
+      } else {
+        return false;
+      }
+    });
+  }
+}
+
+class LocationHiddenBanner extends StatelessWidget {
+  const LocationHiddenBanner({
+    Key? key,
+    required UserController userController,
+  })  : _userController = userController,
+        super(key: key);
+
+  final UserController _userController;
+
+  @override
+  Widget build(BuildContext context) {
+    return OutlinedButton.icon(
+      onPressed: () {},
+      icon: Icon(Icons.check),
+      label: Text(
+          'Location safe for ${_userController.locationHiddenTimer.value}s'),
+    );
+  }
+}
+
+class LocationNotSafeBanner extends StatelessWidget {
+  const LocationNotSafeBanner({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return OutlinedButton.icon(
+      onPressed: () {
+        Get.defaultDialog(
+            title: 'Tagger knows where you are!',
+            middleText:
+                'Use compass to find safety items, theyll keepyour location hidden from the tagger for 90 seconds!',
+            textConfirm: 'Ok',
+            onConfirm: () async {
+              Get.back();
+            });
+      },
+      icon: Icon(Icons.help),
+      label: Text('Location not safe'),
+    );
+  }
+}
+
+class PlayersRemaining extends StatelessWidget {
+  const PlayersRemaining({
+    Key? key,
+    required GameController gameController,
+  })  : _gameController = gameController,
+        super(key: key);
+
+  final GameController _gameController;
+
+  @override
+  Widget build(BuildContext context) {
+    return OutlinedButton(
+      child: Text(
+        '${_gameController.players.length} players left',
+        style: TextStyle(fontWeight: FontWeight.bold),
+      ),
+      style: ButtonStyle(),
+      onPressed: () {},
+    );
+  }
+}
+
+class PickingUpItem extends StatelessWidget {
+  const PickingUpItem({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Center(
+        child: Padding(
+            padding: const EdgeInsets.fromLTRB(0, 150, 0, 0),
+            child: Text(
+              'Picking Up item...',
+              style: TextStyle(fontSize: 22),
+            )),
+      ),
+    );
   }
 }

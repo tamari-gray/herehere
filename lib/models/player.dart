@@ -6,7 +6,6 @@ class Player {
   bool isAdmin = false;
   bool isTagger = false;
   bool hasBeenTagged = false;
-  bool hasImmunity = false;
 
   Player(
     this.id,
@@ -14,7 +13,6 @@ class Player {
     this.isAdmin,
     this.isTagger,
     this.hasBeenTagged,
-    this.hasImmunity,
   );
 
   Player.fromDefault() {
@@ -23,7 +21,6 @@ class Player {
     isAdmin = false;
     isTagger = false;
     hasBeenTagged = false;
-    hasImmunity = false;
   }
 
   Player.fromQueryDocumentSnapshot(QueryDocumentSnapshot doc) {
@@ -32,7 +29,6 @@ class Player {
     isAdmin = doc["is_admin"] ?? false;
     isTagger = doc["is_tagger"] ?? false;
     hasBeenTagged = doc["has_been_tagged"] ?? false;
-    hasImmunity = doc["has_immunity"] ?? false;
   }
 
   Player.fromDocumentSnapshot(DocumentSnapshot doc) {
@@ -41,6 +37,5 @@ class Player {
     isAdmin = doc["is_admin"] ?? false;
     isTagger = doc["is_tagger"] ?? false;
     hasBeenTagged = doc["has_been_tagged"] ?? false;
-    hasImmunity = doc["has_immunity"] ?? false;
   }
 }

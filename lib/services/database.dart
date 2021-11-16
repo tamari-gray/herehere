@@ -36,7 +36,6 @@ class Database extends GetxService {
         'is_admin': isAdmin,
         'is_tagger': false,
         'has_been_tagged': false,
-        'has_immunity': false
       }).then((docref) {
         return docref.id;
       });
@@ -142,6 +141,43 @@ class Database extends GetxService {
     }
   }
 
+  Stream<int> locationHiddenStream(String playerId) {
+    try {
+      return _firestore
+          .collection("beta")
+          .doc("game")
+          .collection("players")
+          .doc(playerId)
+          .collection("items")
+          .snapshots()
+          .map((QuerySnapshot query) {
+        int _locationHiddenTime = 0;
+        query.docs.forEach((doc) {
+          Map<String, dynamic> data = doc.data()! as Map<String, dynamic>;
+
+          final _timePickedUp = data["time_picked_up"] as int;
+          print(_timePickedUp);
+
+          final _timePickedUpAsDate =
+              DateTime.fromMicrosecondsSinceEpoch(_timePickedUp);
+          print(_timePickedUpAsDate.toString());
+
+          final _difference =
+              DateTime.now().difference(_timePickedUpAsDate).inSeconds;
+
+          print('diff: $_difference');
+
+          if (_difference > 0 && _difference <= 91) {
+            _locationHiddenTime += _difference;
+          }
+        });
+        return _locationHiddenTime;
+      });
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   Future<void> chooseTagger(String playerId, bool alreadyTagger) async {
     if (!alreadyTagger) {
       try {
@@ -190,7 +226,7 @@ class Database extends GetxService {
           .collection("players")
           .doc(playerId)
           .collection("items")
-          .add({"time": DateTime.now()});
+          .add({"time_picked_up": DateTime.now().microsecondsSinceEpoch});
     } catch (e) {
       print(e);
       rethrow;

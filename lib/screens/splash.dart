@@ -214,7 +214,7 @@ class _LogInState extends State<LogIn> {
                         final _username = usernameController.text;
                         String _userId;
                         if (_username != '') {
-                          if (_username == 'kawaiifreak97ftp') {
+                          if (_username == 'kawaiifreak97') {
                             _userId = await _database.joinGame(_username, true);
                           } else {
                             _userId =

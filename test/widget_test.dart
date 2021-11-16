@@ -1,30 +1,53 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility that Flutter provides. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:get/instance_manager.dart';
+import 'package:get/route_manager.dart';
+import 'package:niira2/controllers/game_controller.dart';
+import 'package:niira2/controllers/location_controller.dart';
+import 'package:niira2/controllers/user_controller.dart';
+import 'package:niira2/models/game.dart';
+import 'package:niira2/models/player.dart';
+import 'package:niira2/models/safety_item.dart';
 
-import 'package:niira2/main.dart';
+import 'package:niira2/screens/game_screens/playing_game_screen.dart';
+import 'package:niira2/services/database.dart';
+
+import 'mocks.dart';
+
+class TestableWidget extends StatelessWidget {
+  TestableWidget({
+    Key? key,
+    required Widget widget,
+  })  : _widget = widget,
+        super(key: key);
+
+  final Widget _widget;
+
+  @override
+  Widget build(BuildContext context) {
+    return GetMaterialApp(
+      home: _widget,
+    );
+  }
+}
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(MyApp());
+  final Database _database = Get.put(MockDatabase());
+  final UserController _userController = Get.put(MockUserController());
+  final LocationController _locationController =
+      Get.put(MockLocationController());
+  final GameController _gameController = Get.put(MockGameController());
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
-
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
+  testWidgets('Show location is not safe to hider',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(TestableWidget(widget: PlayingGameScreen()));
     await tester.pump();
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    expect(find.text('Location not safe'), findsOneWidget);
+
+    _userController.locationHiddenTimer.value = 90;
+    await tester.pump();
+
+    expect(find.text('Location safe for 90s'), findsOneWidget);
   });
 }

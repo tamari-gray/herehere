@@ -19,7 +19,7 @@ void main() {
   //   DeviceOrientation.portraitUp,
   //   DeviceOrientation.portraitDown,
   // ]);
-  runApp(ProviderScope(child: App()));
+  runApp(App());
 }
 
 class App extends StatefulWidget {

@@ -10,4 +10,11 @@ class SafetyItem {
     this.longitude,
     this.pickedUp,
   );
+
+  SafetyItem.fromDefault() {
+    id = '';
+    latitude = 0;
+    longitude = 0;
+    pickedUp = false;
+  }
 }
