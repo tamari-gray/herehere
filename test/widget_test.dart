@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/instance_manager.dart';
 import 'package:get/route_manager.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:niira2/controllers/game_controller.dart';
 import 'package:niira2/controllers/location_controller.dart';
 import 'package:niira2/controllers/user_controller.dart';
@@ -44,6 +46,22 @@ void main() {
     await tester.pump();
 
     expect(find.text('Location not safe'), findsOneWidget);
+
+    _userController.locationHiddenTimer.value = 90;
+    await tester.pump();
+
+    expect(find.text('Location safe for 90s'), findsOneWidget);
+  });
+
+  testWidgets('set live location in firestore if hider and game.playing',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(TestableWidget(widget: PlayingGameScreen()));
+    _gameController.game.value.phase = gamePhase.playing;
+    await tester.pump();
+    await tester.pump();
+
+    verify(() => _locationController.updateLocationInDb(any()))
+        .called(greaterThan(1));
 
     _userController.locationHiddenTimer.value = 90;
     await tester.pump();

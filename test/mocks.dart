@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
@@ -15,8 +17,16 @@ class MockDatabase extends GetxService with Mock implements Database {}
 class MockUserController extends GetxController
     with Mock
     implements UserController {
-  final userId = ''.obs;
-  final user = Player("tam", "kawaiifreak97", true, false, false).obs;
+  final userId = 'tam'.obs;
+  final user = Player(
+    "tam",
+    "kawaiifreak97",
+    true,
+    false,
+    false,
+    false,
+    Position.fromMap({'latitude': 1.0, 'longitude': 0.0}),
+  ).obs;
   final safetyItemTime = 90.obs;
   var locationHiddenTimer = 0.obs;
 }
@@ -24,7 +34,7 @@ class MockUserController extends GetxController
 class MockLocationController extends GetxController
     with Mock
     implements LocationController {
-  final location = Position.fromMap({'latitude': 0.0, 'longitude': 0.0}).obs;
+  final location = Position.fromMap({'latitude': 1.0, 'longitude': 0.0}).obs;
   var serviceEnabled = false.obs;
   var locationPermission = LocationPermission.denied.obs;
 }

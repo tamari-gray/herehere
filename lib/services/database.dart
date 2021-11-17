@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:enum_to_string/enum_to_string.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:niira2/models/game.dart';
 import 'package:niira2/models/player.dart';
@@ -36,6 +37,7 @@ class Database extends GetxService {
         'is_admin': isAdmin,
         'is_tagger': false,
         'has_been_tagged': false,
+        'location_hidden': false,
       }).then((docref) {
         return docref.id;
       });
@@ -165,8 +167,6 @@ class Database extends GetxService {
           final _difference =
               DateTime.now().difference(_timePickedUpAsDate).inSeconds;
 
-          print('diff: $_difference');
-
           if (_difference > 0 && _difference <= 91) {
             _locationHiddenTime += _difference;
           }
@@ -227,6 +227,22 @@ class Database extends GetxService {
           .doc(playerId)
           .collection("items")
           .add({"time_picked_up": DateTime.now().microsecondsSinceEpoch});
+    } catch (e) {
+      print(e);
+      rethrow;
+    }
+  }
+
+  Future<void> updateUserLocation(String hiderId, Position location) async {
+    try {
+      return await _firestore
+          .collection("beta")
+          .doc("game")
+          .collection("players")
+          .doc(hiderId)
+          .update({
+        'location': location,
+      });
     } catch (e) {
       print(e);
       rethrow;

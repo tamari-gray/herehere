@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
@@ -29,6 +30,12 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
     return Obx(() {
       final _gamePhase = _gameController.game.value.phase;
       final _isTagger = _userController.user.value.isTagger;
+
+      // put live location in firestore if hider
+      if (_gamePhase == gamePhase.playing && !_isTagger) {
+        final _userId = _userController.userId.value;
+        _locationController.updateLocationInDb(_userId);
+      }
 
       if (showTaggerIsComingDialog &&
           _gamePhase == gamePhase.playing &&

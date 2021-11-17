@@ -8,7 +8,7 @@ class UserController extends GetxController {
   final Database _database = Get.find();
 
   final userId = ''.obs;
-  final user = Player("", "", false, false, false).obs;
+  final user = Player.fromDefault().obs;
   final safetyItemTime = 0.obs;
   var locationHiddenTimer = 0.obs;
 

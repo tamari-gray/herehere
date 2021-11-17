@@ -5,8 +5,11 @@ import 'package:flutter_compass/flutter_compass.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
+import 'package:get/state_manager.dart';
 import 'package:niira2/controllers/game_controller.dart';
 import 'package:niira2/controllers/location_controller.dart';
+import 'package:niira2/controllers/user_controller.dart';
+import 'package:niira2/models/player.dart';
 import 'package:niira2/models/safety_item.dart';
 
 class Compass extends StatefulWidget {
@@ -36,9 +39,6 @@ class _CompassState extends State<Compass> {
   }
 
   Widget _buildCompass() {
-    final GameController _gameController = Get.find();
-    final LocationController _locationController = Get.find();
-
     return StreamBuilder<CompassEvent>(
       stream: FlutterCompass.events,
       builder: (context, snapshot) {
@@ -60,8 +60,6 @@ class _CompassState extends State<Compass> {
 
         double? deviceHeading = snapshot.data!.heading;
 
-        // if deviceHeading is null, then device does not support this sensor
-        // show error message
         if (deviceHeading == null)
           return Center(
             child: Text(
@@ -79,61 +77,97 @@ class _CompassState extends State<Compass> {
               clipBehavior: Clip.none,
               alignment: AlignmentDirectional.center,
               children: [
-                ..._gameController.items.map((SafetyItem _item) {
-                  final _playerLocation = _locationController.location;
-
-                  final double _bearing = Geolocator.bearingBetween(
-                    _item.latitude,
-                    _item.longitude,
-                    _playerLocation.value.latitude,
-                    _playerLocation.value.longitude,
-                  );
-
-                  // print(
-                  //     'lat ${_playerLocation.value.latitude}, ln ${_playerLocation.value.longitude}');
-
-                  final int _distance = Geolocator.distanceBetween(
-                    _playerLocation.value.latitude,
-                    _playerLocation.value.longitude,
-                    _item.latitude,
-                    _item.longitude,
-                  ).floor();
-
-                  if (_bearing < 180) {
-                    final deltaAngle = (deviceHeading - _bearing) + 180;
-                    if (deltaAngle < 0) {
-                      return ItemArrow(
-                        angle: deltaAngle + 360.0,
-                        distance: _distance,
-                      );
-                    } else {
-                      return ItemArrow(
-                        angle: deltaAngle,
-                        distance: _distance,
-                      );
-                    }
-                  } else {
-                    final angle = (deviceHeading - _bearing);
-                    if (angle < 0) {
-                      return ItemArrow(
-                        angle: angle + 360.0,
-                        distance: _distance,
-                      );
-                    } else {
-                      return ItemArrow(
-                        angle: angle,
-                        distance: _distance,
-                      );
-                    }
-                  }
-                }).toList(),
-                NorthArrow(bearing: deviceHeading),
+                ...helperArrows(deviceHeading),
+                NorthArrow(bearing: 0),
               ],
             );
           }),
         );
       },
     );
+  }
+
+  List<ItemArrow> helperArrows(double deviceHeading) {
+    final GameController _gameController = Get.find();
+    final LocationController _locationController = Get.find();
+    final UserController _userController = Get.find();
+
+    final _playerLocation = _locationController.location;
+
+    if (_userController.user.value.isTagger) {
+      final _unsafeHiders =
+          _gameController.players.where((_player) => !_player.locationHidden);
+
+      return _unsafeHiders.map((Player _hider) {
+        final double _bearing = Geolocator.bearingBetween(
+          _hider.location.latitude,
+          _hider.location.longitude,
+          _playerLocation.value.latitude,
+          _playerLocation.value.longitude,
+        );
+
+        final int _distance = Geolocator.distanceBetween(
+          _playerLocation.value.latitude,
+          _playerLocation.value.longitude,
+          _hider.location.latitude,
+          _hider.location.longitude,
+        ).floor();
+
+        return calcBearing(_bearing, deviceHeading, _distance);
+      }).toList();
+    } else {
+      // ignore: invalid_use_of_protected_member
+      return _gameController.items.value.map((SafetyItem _item) {
+        final double _bearing = Geolocator.bearingBetween(
+          _item.latitude,
+          _item.longitude,
+          _playerLocation.value.latitude,
+          _playerLocation.value.longitude,
+        );
+
+        // print(
+        //     'lat ${_playerLocation.value.latitude}, ln ${_playerLocation.value.longitude}');
+
+        final int _distance = Geolocator.distanceBetween(
+          _playerLocation.value.latitude,
+          _playerLocation.value.longitude,
+          _item.latitude,
+          _item.longitude,
+        ).floor();
+
+        return calcBearing(_bearing, deviceHeading, _distance);
+      }).toList();
+    }
+  }
+
+  ItemArrow calcBearing(double _bearing, double deviceHeading, int _distance) {
+    if (_bearing < 180) {
+      final deltaAngle = (deviceHeading - _bearing) + 180;
+      if (deltaAngle < 0) {
+        return ItemArrow(
+          angle: deltaAngle + 360.0,
+          distance: _distance,
+        );
+      } else {
+        return ItemArrow(
+          angle: deltaAngle,
+          distance: _distance,
+        );
+      }
+    } else {
+      final angle = (deviceHeading - _bearing);
+      if (angle < 0) {
+        return ItemArrow(
+          angle: angle + 360.0,
+          distance: _distance,
+        );
+      } else {
+        return ItemArrow(
+          angle: angle,
+          distance: _distance,
+        );
+      }
+    }
   }
 }
 
@@ -186,7 +220,8 @@ class NorthArrow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Transform.rotate(
-      angle: (bearing! * (pi / 360) * -2),
+      angle: 0,
+      // angle: (bearing! * (pi / 360) * -2),
       child: Image.asset(
         'assets/niira_compass_basic.png',
         fit: BoxFit.scaleDown,
