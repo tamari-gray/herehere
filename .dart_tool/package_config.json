@@ -206,6 +206,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "fake_cloud_firestore",
+      "rootUri": "file:///usr/local/Caskroom/flutter/2.5.3/flutter/.pub-cache/hosted/pub.dartlang.org/fake_cloud_firestore-1.1.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "file",
       "rootUri": "file:///usr/local/Caskroom/flutter/2.5.3/flutter/.pub-cache/hosted/pub.dartlang.org/file-6.1.2",
       "packageUri": "lib/",
@@ -440,10 +446,22 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "quiver",
+      "rootUri": "file:///usr/local/Caskroom/flutter/2.5.3/flutter/.pub-cache/hosted/pub.dartlang.org/quiver-3.0.1+1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "riverpod",
       "rootUri": "file:///usr/local/Caskroom/flutter/2.5.3/flutter/.pub-cache/hosted/pub.dartlang.org/riverpod-1.0.0-dev.10",
       "packageUri": "lib/",
       "languageVersion": "2.13"
+    },
+    {
+      "name": "rxdart",
+      "rootUri": "file:///usr/local/Caskroom/flutter/2.5.3/flutter/.pub-cache/hosted/pub.dartlang.org/rxdart-0.27.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
     },
     {
       "name": "shelf",
@@ -602,7 +620,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2021-11-16T10:49:00.753024Z",
+  "generated": "2021-11-17T03:09:12.335465Z",
   "generator": "pub",
   "generatorVersion": "2.14.4"
 }
