@@ -9,14 +9,29 @@ import 'package:niira2/models/safety_item.dart';
 class Database extends GetxService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
+  DocumentReference<Map<String, dynamic>> gameRef() =>
+      _firestore.collection("beta").doc("game");
+
+  CollectionReference<Map<String, dynamic>> itemsRef() =>
+      gameRef().collection("items");
+
+  CollectionReference<Map<String, dynamic>> playersRef() =>
+      gameRef().collection("players");
+
+  DocumentReference<Map<String, dynamic>> playerRef(String id) =>
+      playersRef().doc(id);
+
+  newPlayer(String _username, bool _isAdmin) => {
+        'dateCreated': Timestamp.now(),
+        'username': _username,
+        'is_admin': _isAdmin,
+        'is_tagger': false,
+        'has_been_tagged': false,
+        'location_hidden': false,
+      };
+
   Stream<Player> userDocStream(String userId) {
-    return _firestore
-        .collection("beta")
-        .doc("game")
-        .collection("players")
-        .doc(userId)
-        .snapshots()
-        .map((doc) {
+    return playerRef(userId).snapshots().map((doc) {
       if (doc.exists) {
         return Player.fromDocumentSnapshot(doc);
       } else {
@@ -27,18 +42,9 @@ class Database extends GetxService {
 
   Future<String> joinGame(String username, bool isAdmin) async {
     try {
-      return await _firestore
-          .collection("beta")
-          .doc("game")
-          .collection("players")
-          .add({
-        'dateCreated': Timestamp.now(),
-        'username': username,
-        'is_admin': isAdmin,
-        'is_tagger': false,
-        'has_been_tagged': false,
-        'location_hidden': false,
-      }).then((docref) {
+      return await playersRef()
+          .add(newPlayer(username, isAdmin))
+          .then((docref) {
         return docref.id;
       });
     } catch (e) {
@@ -49,12 +55,7 @@ class Database extends GetxService {
 
   Future<void> leaveGame(String id) async {
     try {
-      return await _firestore
-          .collection("beta")
-          .doc("game")
-          .collection("players")
-          .doc(id)
-          .delete();
+      return await playerRef(id).delete();
     } catch (e) {
       print(e);
       rethrow;
@@ -63,7 +64,7 @@ class Database extends GetxService {
 
   Stream<Game> gameStream() {
     try {
-      return _firestore.collection("beta").doc("game").snapshots().map((doc) {
+      return gameRef().snapshots().map((doc) {
         if (doc.exists) {
           final _game = Game.fromDocumentSnapshot(doc);
           return _game;
@@ -78,7 +79,7 @@ class Database extends GetxService {
 
   Future<void> playGame() {
     try {
-      return _firestore.collection("beta").doc("game").update({
+      return gameRef().update({
         'game_phase': EnumToString.convertToString(gamePhase.counting),
       });
     } catch (e) {
@@ -89,7 +90,7 @@ class Database extends GetxService {
 
   Future<void> taggerStartGame() {
     try {
-      return _firestore.collection("beta").doc("game").update({
+      return gameRef().update({
         'game_phase': EnumToString.convertToString(gamePhase.playing),
       });
     } catch (e) {
@@ -100,17 +101,10 @@ class Database extends GetxService {
 
   Stream<List<Player>> playersStream() {
     try {
-      return _firestore
-          .collection("beta")
-          .doc("game")
-          .collection("players")
-          .snapshots()
-          .map((QuerySnapshot query) {
+      return playersRef().snapshots().map((QuerySnapshot query) {
         List<Player> players = List.empty(growable: true);
-
-        query.docs.forEach((doc) {
-          players.add(Player.fromQueryDocumentSnapshot(doc));
-        });
+        query.docs.forEach(
+            (doc) => players.add(Player.fromQueryDocumentSnapshot(doc)));
         return players;
       });
     } catch (e) {
@@ -120,10 +114,7 @@ class Database extends GetxService {
 
   Stream<List<SafetyItem>> availableSafetyItemStream() {
     try {
-      return _firestore
-          .collection("beta")
-          .doc("game")
-          .collection("items")
+      return itemsRef()
           .where('item_picked_up', isEqualTo: false)
           .snapshots()
           .map((QuerySnapshot query) {
@@ -145,11 +136,7 @@ class Database extends GetxService {
 
   Stream<int> locationHiddenStream(String playerId) {
     try {
-      return _firestore
-          .collection("beta")
-          .doc("game")
-          .collection("players")
-          .doc(playerId)
+      return playerRef(playerId)
           .collection("items")
           .snapshots()
           .map((QuerySnapshot query) {
@@ -178,31 +165,17 @@ class Database extends GetxService {
     }
   }
 
-  Future<void> chooseTagger(String playerId, bool alreadyTagger) async {
+  Future<void> chooseTagger(String _playerId, bool alreadyTagger) async {
     if (!alreadyTagger) {
       try {
-        return await _firestore
-            .collection("beta")
-            .doc("game")
-            .collection("players")
-            .doc(playerId)
-            .update({
-          'is_tagger': true,
-        });
+        return await playerRef(_playerId).update({'is_tagger': true});
       } catch (e) {
         print(e);
         rethrow;
       }
     } else {
       try {
-        return await _firestore
-            .collection("beta")
-            .doc("game")
-            .collection("players")
-            .doc(playerId)
-            .update({
-          'is_tagger': false,
-        });
+        return await playerRef(_playerId).update({'is_tagger': false});
       } catch (e) {
         print(e);
         rethrow;
@@ -210,21 +183,10 @@ class Database extends GetxService {
     }
   }
 
-  Future<void> pickUpItem(SafetyItem _item, String playerId) async {
+  Future<void> pickUpItem(SafetyItem _item, String _playerId) async {
     try {
-      await _firestore
-          .collection("beta")
-          .doc("game")
-          .collection("items")
-          .doc(_item.id)
-          .update({
-        'item_picked_up': true,
-      });
-      await _firestore
-          .collection("beta")
-          .doc("game")
-          .collection("players")
-          .doc(playerId)
+      await itemsRef().doc(_item.id).update({'item_picked_up': true});
+      await playerRef(_playerId)
           .collection("items")
           .add({"time_picked_up": DateTime.now().microsecondsSinceEpoch});
     } catch (e) {
@@ -233,16 +195,18 @@ class Database extends GetxService {
     }
   }
 
-  Future<void> updateUserLocation(String hiderId, Position location) async {
+  Future<void> tagHider(String _hiderId) async {
     try {
-      return await _firestore
-          .collection("beta")
-          .doc("game")
-          .collection("players")
-          .doc(hiderId)
-          .update({
-        'location': location,
-      });
+      await playerRef(_hiderId).update({'has_been_tagged': true});
+    } catch (e) {
+      print(e);
+      rethrow;
+    }
+  }
+
+  Future<void> updateUserLocation(String _hiderId, Position location) async {
+    try {
+      return await playerRef(_hiderId).update({'location': location});
     } catch (e) {
       print(e);
       rethrow;
@@ -251,24 +215,11 @@ class Database extends GetxService {
 
   Future<void> reset() async {
     try {
-      await _firestore.collection("beta").doc("game").update({
+      await gameRef().update({
         'game_phase': EnumToString.convertToString(gamePhase.creating),
       });
-      return await _firestore
-          .collection("beta")
-          .doc("game")
-          .collection("players")
-          .get()
-          .then((snap) {
-        snap.docs.forEach((doc) async {
-          await _firestore
-              .collection("beta")
-              .doc("game")
-              .collection("players")
-              .doc(doc.id)
-              .delete();
-        });
-      });
+      return playersRef().get().then(
+          (snap) => snap.docs.forEach((doc) async => await leaveGame(doc.id)));
     } catch (e) {
       print(e);
       rethrow;
