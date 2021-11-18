@@ -6,6 +6,7 @@ import 'package:niira2/controllers/game_controller.dart';
 import 'package:niira2/controllers/location_controller.dart';
 import 'package:niira2/controllers/user_controller.dart';
 import 'package:niira2/models/game.dart';
+import 'package:niira2/models/player.dart';
 import 'package:niira2/models/safety_item.dart';
 import 'package:niira2/screens/game_screens/compass.dart';
 import 'package:niira2/services/database.dart';
@@ -24,6 +25,8 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
   bool showTaggerIsComingDialog = true;
   bool pickingUpItem = false;
   SafetyItem foundItem = SafetyItem.fromDefault();
+
+  bool taggingPlayer = false;
 
   @override
   Widget build(BuildContext context) {
@@ -148,7 +151,23 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
                     label: Text('Start game'),
                   )
                 : FloatingActionButton.extended(
-                    onPressed: () {},
+                    onPressed: () async {
+                      setState(() {
+                        taggingPlayer = true;
+                      });
+                      final _hider = getTaggedPlayer();
+                      await _database.tagHider(_hider.id);
+                      setState(() {
+                        taggingPlayer = false;
+                      });
+                      Get.defaultDialog(
+                        title: 'Tagged ${_hider.username}!',
+                        textConfirm: 'Ok',
+                        onConfirm: () => Get.back(),
+                        middleText:
+                            '${_gameController.players.length} players left',
+                      );
+                    },
                     label: Text('Tag player'),
                   )
             : FloatingActionButton.extended(
@@ -202,17 +221,64 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
                       ? LocationHiddenBanner(userController: _userController)
                       : LocationNotSafeBanner(),
                 PlayersRemaining(gameController: _gameController),
-                pickingUpItem
-                    ? PickingUpItem()
-                    : checkIfFoundItem()
-                        ? FoundSafetyItem()
-                        : Compass(),
+                _isTagger
+                    ? taggingPlayer
+                        ? TaggingPlayer()
+                        : checkIfFoundPlayer()
+                    : pickingUpItem
+                        ? PickingUpItem()
+                        : checkIfFoundItem()
+                            ? FoundSafetyItem()
+                            : Compass(),
               ],
             ),
           ),
         ),
       );
     });
+  }
+
+  Player getTaggedPlayer() {
+    return _gameController.players.firstWhere((_player) {
+      final _playerLocation = _locationController.location;
+
+      final int _distance = Geolocator.distanceBetween(
+        _playerLocation.value.latitude,
+        _playerLocation.value.longitude,
+        _player.location.latitude,
+        _player.location.longitude,
+      ).floor();
+
+      if (_distance <= 10.5) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+  }
+
+  Widget checkIfFoundPlayer() {
+    final Player foundPlayer = _gameController.players.firstWhere((_player) {
+      final _playerLocation = _locationController.location;
+
+      final int _distance = Geolocator.distanceBetween(
+        _playerLocation.value.latitude,
+        _playerLocation.value.longitude,
+        _player.location.latitude,
+        _player.location.longitude,
+      ).floor();
+
+      if (_distance <= 10.5) {
+        return true;
+      } else {
+        return false;
+      }
+    }, orElse: () => Player.fromDefault());
+    if (foundPlayer.username == "") {
+      return Compass();
+    } else {
+      return FoundPlayer(player: foundPlayer);
+    }
   }
 
   SafetyItem getFoundSafetyItem() {
@@ -226,7 +292,7 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
         item.longitude,
       ).floor();
 
-      if (_distance <= 20.5) {
+      if (_distance <= 10.5) {
         return true;
       } else {
         return false;
@@ -246,7 +312,7 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
         item.longitude,
       ).floor();
 
-      if (_distance <= 20.5) {
+      if (_distance <= 10.5) {
         print(item.pickedUp);
         return true;
       } else {
@@ -335,6 +401,26 @@ class PickingUpItem extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(0, 150, 0, 0),
             child: Text(
               'Picking Up item...',
+              style: TextStyle(fontSize: 22),
+            )),
+      ),
+    );
+  }
+}
+
+class TaggingPlayer extends StatelessWidget {
+  const TaggingPlayer({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Center(
+        child: Padding(
+            padding: const EdgeInsets.fromLTRB(0, 150, 0, 0),
+            child: Text(
+              'Tagging player...',
               style: TextStyle(fontSize: 22),
             )),
       ),

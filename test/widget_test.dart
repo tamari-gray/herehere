@@ -68,4 +68,20 @@ void main() {
 
     expect(find.text('Location safe for 90s'), findsOneWidget);
   });
+  testWidgets('Tag player shows tagging player text, then tagged player dialog',
+      (WidgetTester tester) async {
+    _userController.user.value.isTagger = true;
+    _gameController.game.value.phase = gamePhase.playing;
+    when(() => _database.tagHider(any())).thenAnswer((_) async => 'id');
+
+    await tester.pumpWidget(TestableWidget(widget: PlayingGameScreen()));
+    await tester.pump();
+    await tester.pump();
+
+    await tester.tap(find.text('Tag player'));
+    await tester.pump();
+    await tester.pump();
+
+    expect(find.text('test_hider FOUND'), findsOneWidget);
+  });
 }

@@ -211,6 +211,46 @@ class FoundSafetyItem extends StatelessWidget {
   }
 }
 
+class FoundPlayer extends StatelessWidget {
+  const FoundPlayer({Key? key, required Player player}) : _player = player;
+
+  final Player _player;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(15, 50, 0, 0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              '${_player.username} FOUND',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 26,
+              ),
+            ),
+            Text(
+              'Pick me up!',
+              style: TextStyle(
+                fontSize: 20,
+              ),
+            ),
+            Image.asset(
+              'assets/crystal_.png',
+              fit: BoxFit.scaleDown,
+              // width: 100,
+              // height: 100,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 class NorthArrow extends StatelessWidget {
   const NorthArrow({
     Key? key,

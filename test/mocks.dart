@@ -12,6 +12,11 @@ import 'package:niira2/models/player.dart';
 import 'package:niira2/models/safety_item.dart';
 import 'package:niira2/services/database.dart';
 
+Player mockTagger = Player('tagger_123', 'test_tagger', false, true, false,
+    false, Position.fromMap({'latitude': 1.0, 'longitude': 0.0}));
+Player mockHider = Player('hider_678', 'test_hider', false, false, false, false,
+    Position.fromMap({'latitude': 1.0, 'longitude': 0.0}));
+
 class MockDatabase extends GetxService with Mock implements Database {}
 
 class MockUserController extends GetxController
@@ -43,6 +48,6 @@ class MockGameController extends GetxController
     with Mock
     implements GameController {
   final game = Game("id", DateTime.now(), gamePhase.playing).obs;
-  final players = List<Player>.empty().obs;
+  final players = [mockHider, mockHider].obs;
   final items = List<SafetyItem>.empty().obs;
 }
