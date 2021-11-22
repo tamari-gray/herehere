@@ -75,7 +75,6 @@ void main() {
       (WidgetTester tester) async {
     _userController.user.value.isTagger = true;
     _gameController.game.value.phase = gamePhase.playing;
-    // final
     when(() => _database.tagHiders(any()))
         .thenAnswer((_) async => [Player.fromDefault()]);
 
