@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:get/instance_manager.dart';
 import 'package:get/route_manager.dart';
 import 'package:mocktail/mocktail.dart';
@@ -9,9 +8,8 @@ import 'package:niira2/controllers/location_controller.dart';
 import 'package:niira2/controllers/user_controller.dart';
 import 'package:niira2/models/game.dart';
 import 'package:niira2/models/player.dart';
-import 'package:niira2/models/safety_item.dart';
 
-import 'package:niira2/screens/game_screens/playing_game_screen.dart';
+import 'package:niira2/screens/game_screens/playing_game/playing_game_screen.dart';
 import 'package:niira2/services/database.dart';
 
 import 'mocks.dart';
@@ -39,6 +37,11 @@ void main() {
   final LocationController _locationController =
       Get.put(MockLocationController());
   final GameController _gameController = Get.put(MockGameController());
+
+  when(() => _gameController.playersRemaining()).thenReturn(4);
+  when(() => _gameController.getFoundSafetyItems())
+      .thenReturn(mockFoundSafetyItems);
+  when(() => _gameController.getFoundHiders()).thenReturn(mockfoundHiders);
 
   testWidgets('Show location is not safe to hider',
       (WidgetTester tester) async {
@@ -72,7 +75,9 @@ void main() {
       (WidgetTester tester) async {
     _userController.user.value.isTagger = true;
     _gameController.game.value.phase = gamePhase.playing;
-    when(() => _database.tagHider(any())).thenAnswer((_) async => 'id');
+    // final
+    when(() => _database.tagHiders(any()))
+        .thenAnswer((_) async => [Player.fromDefault()]);
 
     await tester.pumpWidget(TestableWidget(widget: PlayingGameScreen()));
     await tester.pump();
@@ -82,6 +87,6 @@ void main() {
     await tester.pump();
     await tester.pump();
 
-    expect(find.text('test_hider FOUND'), findsOneWidget);
+    expect(find.text('Tagged test_hider,test_hider!'), findsOneWidget);
   });
 }

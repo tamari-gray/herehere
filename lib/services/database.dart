@@ -21,13 +21,14 @@ class Database extends GetxService {
   DocumentReference<Map<String, dynamic>> playerRef(String id) =>
       playersRef().doc(id);
 
-  newPlayer(String _username, bool _isAdmin) => {
+  newPlayer(String _username, bool _isAdmin, GeoPoint _location) => {
         'dateCreated': Timestamp.now(),
         'username': _username,
         'is_admin': _isAdmin,
         'is_tagger': false,
         'has_been_tagged': false,
         'location_hidden': false,
+        'location': _location
       };
 
   Stream<Player> userDocStream(String userId) {
@@ -40,10 +41,14 @@ class Database extends GetxService {
     });
   }
 
-  Future<String> joinGame(String username, bool isAdmin) async {
+  Future<String> joinGame(
+    String username,
+    bool isAdmin,
+    GeoPoint location,
+  ) async {
     try {
       return await playersRef()
-          .add(newPlayer(username, isAdmin))
+          .add(newPlayer(username, isAdmin, location))
           .then((docref) {
         return docref.id;
       });
@@ -92,6 +97,7 @@ class Database extends GetxService {
     try {
       return gameRef().update({
         'game_phase': EnumToString.convertToString(gamePhase.playing),
+        'start_time': DateTime.now().millisecondsSinceEpoch
       });
     } catch (e) {
       print(e);
@@ -195,9 +201,10 @@ class Database extends GetxService {
     }
   }
 
-  Future<void> tagHider(String _hiderId) async {
+  Future<void> tagHiders(List<Player> _hiders) async {
     try {
-      await playerRef(_hiderId).update({'has_been_tagged': true});
+      _hiders.forEach((_hider) async =>
+          await playerRef(_hider.id).update({'has_been_tagged': true}));
     } catch (e) {
       print(e);
       rethrow;

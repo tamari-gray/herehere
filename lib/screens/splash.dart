@@ -4,9 +4,7 @@ import 'package:get/get.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 import 'package:niira2/controllers/game_controller.dart';
 import 'package:niira2/controllers/location_controller.dart';
-import 'package:niira2/controllers/user_controller.dart';
 import 'package:niira2/models/game.dart';
-import 'package:niira2/services/database.dart';
 
 class SplashPage extends StatelessWidget {
   final LocationController _locationController = Get.find();
@@ -163,9 +161,7 @@ class LogIn extends StatefulWidget {
 
 class _LogInState extends State<LogIn> {
   final usernameController = TextEditingController();
-  final UserController _userController = Get.find();
   final GameController _gameController = Get.find();
-  final Database _database = Get.find();
 
   @override
   void dispose() {
@@ -212,21 +208,15 @@ class _LogInState extends State<LogIn> {
                     OutlinedButton(
                       onPressed: () async {
                         final _username = usernameController.text;
-                        String _userId;
                         if (_username != '') {
-                          if (_username == 'kawaiifreak97') {
-                            _userId = await _database.joinGame(_username, true);
-                          } else {
-                            _userId =
-                                await _database.joinGame(_username, false);
-                          }
-                          _userController.userId.value = _userId;
+                          _username == 'reset game now'
+                              ? await _gameController.resetGame()
+                              : await _gameController.joinGame(_username);
                         }
                       },
                       child: Text(
                         'Play',
                         style: TextStyle(
-                          // color: Color.fromRGBO(247, 152, 0, 1),
                           color: const Color(0xff82fab8),
                         ),
                       ),
@@ -280,7 +270,7 @@ class SplashTitle extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.fromLTRB(0, 200, 0, 0),
       child: Text(
-        'Niira2',
+        'Niira',
         style: TextStyle(
           fontFamily: 'Roboto',
           fontSize: 96,

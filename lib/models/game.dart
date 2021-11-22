@@ -30,6 +30,7 @@ class Game {
     phase = EnumToString.fromString(
             gamePhase.values, doc["game_phase"].toString()) ??
         gamePhase.creating;
+    startTime = DateTime.fromMillisecondsSinceEpoch(doc['start_time']);
   }
 
   Game.fromDocumentSnapshot(DocumentSnapshot doc) {

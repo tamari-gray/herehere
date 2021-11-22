@@ -1,5 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
@@ -16,6 +14,9 @@ Player mockTagger = Player('tagger_123', 'test_tagger', false, true, false,
     false, Position.fromMap({'latitude': 1.0, 'longitude': 0.0}));
 Player mockHider = Player('hider_678', 'test_hider', false, false, false, false,
     Position.fromMap({'latitude': 1.0, 'longitude': 0.0}));
+List<SafetyItem> mockFoundSafetyItems =
+    [SafetyItem.fromDefault(), SafetyItem.fromDefault()].obs;
+List<Player> mockfoundHiders = [mockHider, mockHider].obs;
 
 class MockDatabase extends GetxService with Mock implements Database {}
 

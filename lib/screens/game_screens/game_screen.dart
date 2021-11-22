@@ -6,7 +6,8 @@ import 'package:niira2/controllers/location_controller.dart';
 import 'package:niira2/controllers/user_controller.dart';
 import 'package:niira2/models/game.dart';
 import 'package:niira2/screens/lobby.dart';
-import 'package:niira2/screens/game_screens/playing_game_screen.dart';
+import 'package:niira2/screens/game_screens/playing_game/playing_game_screen.dart';
+import 'package:niira2/utilities/placing.dart';
 
 class JoinedGame extends StatefulWidget {
   @override
@@ -30,20 +31,10 @@ class _JoinedGameState extends State<JoinedGame> {
       final _phase = _gameController.game.value.phase;
       if (_phase == gamePhase.creating) {
         return Lobby();
-      } else if (_phase == gamePhase.counting || _phase == gamePhase.playing) {
+      } else if (_phase == gamePhase.counting ||
+          _phase == gamePhase.playing &&
+              !_userController.user.value.hasBeenTagged) {
         return PlayingGameScreen();
-      } else if (_phase == gamePhase.finished) {
-        return _userController.user.value.isAdmin
-            ? Container(
-                child: Center(
-                  child: Text('player finished game screen'),
-                ),
-              )
-            : Container(
-                child: Center(
-                  child: Text('Admin finished game screen'),
-                ),
-              );
       } else {
         return Container(
           child: Center(
@@ -52,6 +43,27 @@ class _JoinedGameState extends State<JoinedGame> {
         );
       }
     });
+  }
+}
+
+class FinishedGameScreen extends StatelessWidget {
+  const FinishedGameScreen({
+    Key? key,
+    required int placing,
+  })  : _placing = placing,
+        super(key: key);
+
+  final int _placing;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Container(
+        child: Center(
+          child: Text('You came ${placing(_placing)}'),
+        ),
+      ),
+    );
   }
 }
 
