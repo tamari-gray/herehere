@@ -162,11 +162,13 @@ class LogIn extends StatefulWidget {
 class _LogInState extends State<LogIn> {
   final usernameController = TextEditingController();
   final GameController _gameController = Get.find();
+  bool _joiningGame = false;
 
   @override
   void dispose() {
     // Clean up the text controller when the widget is disposed.
     usernameController.dispose();
+    _joiningGame = false;
     super.dispose();
   }
 
@@ -207,16 +209,23 @@ class _LogInState extends State<LogIn> {
                     ),
                     OutlinedButton(
                       onPressed: () async {
-                        final _username = usernameController.text;
-                        if (_username != '' &&
-                            !_gameController.joiningGame.value) {
-                          _username == 'reset game now'
-                              ? await _gameController.resetGame()
-                              : await _gameController.joinGame(_username);
+                        if (!_joiningGame) {
+                          setState(() {
+                            _joiningGame = true;
+                          });
+                          final _username = usernameController.text;
+                          if (_username != '') {
+                            _username == 'reset game now'
+                                ? await _gameController.resetGame()
+                                : await _gameController.joinGame(_username);
+                          }
+                          setState(() {
+                            _joiningGame = false;
+                          });
                         }
                       },
                       child: Text(
-                        _gameController.joiningGame.value ? 'Joining' : 'Play',
+                        _joiningGame ? 'Joining' : 'Play',
                         style: TextStyle(
                           color: const Color(0xff82fab8),
                         ),

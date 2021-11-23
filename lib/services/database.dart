@@ -67,6 +67,15 @@ class Database extends GetxService {
     }
   }
 
+  Future<void> deleteItem(String id) async {
+    try {
+      return await itemsRef().doc(id).delete();
+    } catch (e) {
+      print(e);
+      rethrow;
+    }
+  }
+
   Stream<Game> gameStream() {
     try {
       return gameRef().snapshots().map((doc) {
@@ -140,31 +149,19 @@ class Database extends GetxService {
     }
   }
 
-  Stream<int> locationHiddenStream(String playerId) {
+  Stream<List<DateTime>> pickedUpItemsStream(String playerId) {
     try {
       return playerRef(playerId)
           .collection("items")
           .snapshots()
           .map((QuerySnapshot query) {
-        int _locationHiddenTime = 0;
-        query.docs.forEach((doc) {
-          Map<String, dynamic> data = doc.data()! as Map<String, dynamic>;
-
-          final _timePickedUp = data["time_picked_up"] as int;
-          print(_timePickedUp);
-
+        return query.docs.map((doc) {
+          final data = doc.data()! as Map<String, dynamic>;
+          final _time = data["time_picked_up"] as int;
           final _timePickedUpAsDate =
-              DateTime.fromMicrosecondsSinceEpoch(_timePickedUp);
-          print(_timePickedUpAsDate.toString());
-
-          final _difference =
-              DateTime.now().difference(_timePickedUpAsDate).inSeconds;
-
-          if (_difference > 0 && _difference <= 91) {
-            _locationHiddenTime += _difference;
-          }
-        });
-        return _locationHiddenTime;
+              DateTime.fromMicrosecondsSinceEpoch(_time);
+          return _timePickedUpAsDate;
+        }).toList();
       });
     } catch (e) {
       rethrow;
@@ -189,10 +186,20 @@ class Database extends GetxService {
     }
   }
 
+  Future<void> hiderItemsExpire(String _playerId) async {
+    try {
+      await playerRef(_playerId).update({'location_hidden': false});
+    } catch (e) {
+      print(e);
+      rethrow;
+    }
+  }
+
   Future<void> pickUpItems(List<SafetyItem> _items, String _playerId) async {
     try {
       _items.forEach((_item) async {
         await itemsRef().doc(_item.id).update({'item_picked_up': true});
+        await playerRef(_playerId).update({'location_hidden': true});
         await playerRef(_playerId)
             .collection("items")
             .add({"time_picked_up": DateTime.now().microsecondsSinceEpoch});
@@ -227,8 +234,10 @@ class Database extends GetxService {
       await gameRef().update({
         'game_phase': EnumToString.convertToString(gamePhase.creating),
       });
-      return playersRef().get().then(
+      await playersRef().get().then(
           (snap) => snap.docs.forEach((doc) async => await leaveGame(doc.id)));
+      return itemsRef().get().then(
+          (snap) => snap.docs.forEach((doc) async => await deleteItem(doc.id)));
     } catch (e) {
       print(e);
       rethrow;

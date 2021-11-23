@@ -18,7 +18,6 @@ class GameController extends GetxController {
   final items = List<SafetyItem>.empty().obs;
   var taggingPlayer = false.obs;
   var pickingUpItem = false.obs;
-  var joiningGame = false.obs;
 
   @override
   void onInit() {
@@ -31,21 +30,20 @@ class GameController extends GetxController {
   int timeToTagAllHiders() =>
       DateTime.now().difference(game.value.startTime).inMinutes;
 
-  int playersRemaining() =>
+  int hidersRemaining() =>
       players.where((p) => !p.hasBeenTagged && !p.isTagger).length;
 
   int allHiders() => players.where((p) => !p.isTagger).length;
 
   Future<void> joinGame(String _username) async {
-    joiningGame = true.obs;
     final GeoPoint _locationAsGeopoint =
         await _locationController.getLocationAsGeopoint();
     if (_username == 'kawaiifreak97') {
       await _userController.joinGame(_username, true, _locationAsGeopoint);
-    } else {
-      await _userController.joinGame(_username, false, _locationAsGeopoint);
+    } else if (_username == 'kawaiiplusone') {
+      await _userController.joinGamePlusOne(
+          'kawaiifreak97', false, _locationAsGeopoint);
     }
-    joiningGame = false.obs;
   }
 
   List<Player> getFoundHiders() => players
@@ -62,7 +60,7 @@ class GameController extends GetxController {
           ))
       .toList();
 
-  Future<dynamic> tagPlayer() async {
+  Future<dynamic> tagPlayers() async {
     taggingPlayer = true.obs;
     final _hiders = getFoundHiders();
     if (_hiders.isEmpty) {
@@ -71,11 +69,11 @@ class GameController extends GetxController {
     } else {
       await _database.tagHiders(_hiders);
       taggingPlayer = false.obs;
-      justTaggedHidersDialog(_hiders);
+      if (hidersRemaining() != _hiders.length) justTaggedHidersDialog(_hiders);
     }
   }
 
-  Future<dynamic> pickUpItem() async {
+  Future<dynamic> pickUpItems() async {
     pickingUpItem = true.obs;
     final _userId = _userController.userId.value;
     final _items = getFoundSafetyItems();

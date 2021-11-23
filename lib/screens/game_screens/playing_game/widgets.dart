@@ -4,21 +4,17 @@ import 'package:niira2/controllers/game_controller.dart';
 import 'package:niira2/controllers/user_controller.dart';
 
 class LocationHiddenBanner extends StatelessWidget {
-  const LocationHiddenBanner({
-    Key? key,
-    required UserController userController,
-  })  : _userController = userController,
-        super(key: key);
-
-  final UserController _userController;
+  final UserController _userController = Get.find();
 
   @override
   Widget build(BuildContext context) {
     return OutlinedButton.icon(
       onPressed: () {},
       icon: Icon(Icons.check),
-      label: Text(
-          'Location safe for ${_userController.locationHiddenTimer.value}s'),
+      label: Obx(() {
+        return Text(
+            'Location safe for ${_userController.locationHiddenTimer.value}s');
+      }),
     );
   }
 }
@@ -59,9 +55,11 @@ class PlayersRemaining extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OutlinedButton(
-      child: Text(
-        '${_gameController.players.length} players left',
-        style: TextStyle(fontWeight: FontWeight.bold),
+      child: Obx(
+        () => Text(
+          '${_gameController.hidersRemaining()} hiders left',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
       ),
       style: ButtonStyle(),
       onPressed: () {},

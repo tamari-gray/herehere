@@ -8,7 +8,6 @@ import 'package:niira2/controllers/location_controller.dart';
 import 'package:niira2/controllers/user_controller.dart';
 import 'package:niira2/models/game.dart';
 import 'package:niira2/models/player.dart';
-import 'package:niira2/models/safety_item.dart';
 
 import 'package:niira2/screens/game_screens/playing_game/playing_game_screen.dart';
 import 'package:niira2/services/database.dart';
@@ -41,7 +40,7 @@ void main() {
 
   _gameController.game.value.phase = gamePhase.playing;
 
-  when(() => _gameController.playersRemaining()).thenReturn(4);
+  when(() => _gameController.hidersRemaining()).thenReturn(4);
   when(() => _gameController.getFoundSafetyItems())
       .thenReturn(mockFoundSafetyItems);
   when(() => _gameController.getFoundHiders()).thenReturn(mockfoundHiders);
@@ -101,6 +100,6 @@ void main() {
 
     await tester.tap(find.text('Pick up item'));
     await tester.pump();
-    verify(() => _gameController.pickUpItem()).called(greaterThan(1));
+    verify(() => _gameController.pickUpItems()).called(greaterThan(1));
   });
 }

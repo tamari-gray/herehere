@@ -90,9 +90,12 @@ async function generateNewItems() {
 
   // get 50% of remainingHiders rounded down = numberofitems
   const amountOfItems = (50 / 100) * numberOfHidersLeft;
-  const amountOfItemsRoundedDown = Math.floor(amountOfItems);
+  var amountOfItemsRoundedDown = Math.floor(amountOfItems);
   console.log(`amount of items: ${amountOfItems}, rounded down: ${amountOfItemsRoundedDown}`);
-
+  
+  if (amountOfItems == 0.5) {
+  amountOfItemsRoundedDown = 1
+  } 
 
   // generate random positions for items
   for (let index = 0; index < amountOfItemsRoundedDown; index++) {

@@ -10,13 +10,15 @@ class UserController extends GetxController {
 
   var userId = ''.obs;
   final user = Player.fromDefault().obs;
-  final safetyItemTime = 0.obs;
   var locationHiddenTimer = 0.obs;
+  final pickedUpItemsTimes = <DateTime>[].obs;
+
+  Timer _timer = Timer(Duration(seconds: 0), () => 0);
 
   void logIn(String id) {
     if (id != '') {
       user.bindStream(_database.userDocStream(id));
-      safetyItemTime.bindStream(_database.locationHiddenStream(id));
+      pickedUpItemsTimes.bindStream(_database.pickedUpItemsStream(id));
     }
   }
 
@@ -25,13 +27,35 @@ class UserController extends GetxController {
     userId.value = await _database.joinGame(_username, true, _location);
   }
 
-  void calcLocationSafetyTime() {
-    locationHiddenTimer = safetyItemTime;
-    Timer.periodic(Duration(seconds: 1), (timer) {
-      if (locationHiddenTimer.value == 0) {
-        timer.cancel();
+  Future<void> joinGamePlusOne(
+      String _username, bool isAdmin, GeoPoint _location) async {
+    await _database.joinGame('yeet it', false, _location);
+    userId.value = await _database.joinGame(_username, true, _location);
+  }
+
+  void calcLocationSafetyTime() async {
+    if (_timer.isActive) _timer.cancel();
+
+    var _timerTime = 0;
+
+    pickedUpItemsTimes.forEach((itemTime) {
+      final _difference = DateTime.now().difference(itemTime).inSeconds;
+
+      if (_difference <= 90) {
+        final _newTime = 90 - _difference;
+        _timerTime = _timerTime + _newTime;
       }
-      locationHiddenTimer.value--;
+    });
+
+    locationHiddenTimer.value = _timerTime;
+
+    _timer = Timer.periodic(Duration(seconds: 1), (timer) async {
+      if (locationHiddenTimer.value == 0) {
+        await _database.hiderItemsExpire(userId.value);
+        _timer.cancel();
+      } else {
+        locationHiddenTimer.value = locationHiddenTimer.value - 1;
+      }
     });
   }
 
@@ -39,10 +63,10 @@ class UserController extends GetxController {
   void onInit() {
     super.onInit();
     ever(userId, (_) => logIn(userId.value));
-    ever(safetyItemTime, (_) => calcLocationSafetyTime());
+    ever(pickedUpItemsTimes, (_) => calcLocationSafetyTime());
   }
 
-  void resetUser() => userId = "".obs;
+  void resetUser() => userId.value = "";
 
   Future<void> leaveGame() async {
     await _database.leaveGame(userId.value);

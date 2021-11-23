@@ -33,7 +33,7 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
       final _gamePhase = _gameController.game.value.phase;
       final _isTagger = _userController.user.value.isTagger;
 
-      final playersRemaining = _gameController.playersRemaining();
+      final playersRemaining = _gameController.hidersRemaining();
       final _taggingPlayer = _gameController.taggingPlayer.value;
       final _pickingUpItem = _gameController.pickingUpItem.value;
 
@@ -109,13 +109,13 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
                   )
                 : FloatingActionButton.extended(
                     onPressed: () async => !_gameController.taggingPlayer.value
-                        ? await _gameController.tagPlayer()
+                        ? await _gameController.tagPlayers()
                         : null,
                     label: Text('Tag player'),
                   )
             : FloatingActionButton.extended(
                 onPressed: () async => !_gameController.pickingUpItem.value
-                    ? await _gameController.pickUpItem()
+                    ? await _gameController.pickUpItems()
                     : null,
                 label: Text('Pick up item'),
               ),
@@ -146,7 +146,7 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
                         ),
                 if (!_isTagger && _gamePhase == gamePhase.playing)
                   _userController.locationHiddenTimer.value > 1
-                      ? LocationHiddenBanner(userController: _userController)
+                      ? LocationHiddenBanner()
                       : LocationNotSafeBanner(),
                 PlayersRemaining(gameController: _gameController),
                 _gamePhase == gamePhase.counting
@@ -253,6 +253,17 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
         Get.back();
       },
     );
+  }
+
+  Future<dynamic> resetGameDialog() async {
+    return Get.defaultDialog(
+        title: 'Reset game',
+        textConfirm: 'reset ',
+        middleText: '',
+        onConfirm: () async {
+          Get.back();
+          await _gameController.resetGame();
+        });
   }
 
   Future<dynamic> leaveGameDialog() async {
