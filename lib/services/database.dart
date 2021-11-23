@@ -189,12 +189,14 @@ class Database extends GetxService {
     }
   }
 
-  Future<void> pickUpItem(SafetyItem _item, String _playerId) async {
+  Future<void> pickUpItems(List<SafetyItem> _items, String _playerId) async {
     try {
-      await itemsRef().doc(_item.id).update({'item_picked_up': true});
-      await playerRef(_playerId)
-          .collection("items")
-          .add({"time_picked_up": DateTime.now().microsecondsSinceEpoch});
+      _items.forEach((_item) async {
+        await itemsRef().doc(_item.id).update({'item_picked_up': true});
+        await playerRef(_playerId)
+            .collection("items")
+            .add({"time_picked_up": DateTime.now().microsecondsSinceEpoch});
+      });
     } catch (e) {
       print(e);
       rethrow;

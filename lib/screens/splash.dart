@@ -208,14 +208,15 @@ class _LogInState extends State<LogIn> {
                     OutlinedButton(
                       onPressed: () async {
                         final _username = usernameController.text;
-                        if (_username != '') {
+                        if (_username != '' &&
+                            !_gameController.joiningGame.value) {
                           _username == 'reset game now'
                               ? await _gameController.resetGame()
                               : await _gameController.joinGame(_username);
                         }
                       },
                       child: Text(
-                        'Play',
+                        _gameController.joiningGame.value ? 'Joining' : 'Play',
                         style: TextStyle(
                           color: const Color(0xff82fab8),
                         ),

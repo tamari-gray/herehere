@@ -4,7 +4,6 @@ import 'package:niira2/controllers/game_controller.dart';
 import 'package:niira2/controllers/location_controller.dart';
 import 'package:niira2/controllers/user_controller.dart';
 import 'package:niira2/models/game.dart';
-import 'package:niira2/models/player.dart';
 import 'package:niira2/models/safety_item.dart';
 import 'package:niira2/screens/game_screens/playing_game/compass.dart';
 import 'package:niira2/screens/game_screens/playing_game/widgets.dart';
@@ -23,10 +22,7 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
   final Database _database = Get.find();
 
   bool showTaggerIsComingDialog = true;
-  bool pickingUpItem = false;
   SafetyItem foundItem = SafetyItem.fromDefault();
-
-  bool taggingPlayer = false;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +32,10 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
 
       final _gamePhase = _gameController.game.value.phase;
       final _isTagger = _userController.user.value.isTagger;
+
       final playersRemaining = _gameController.playersRemaining();
+      final _taggingPlayer = _gameController.taggingPlayer.value;
+      final _pickingUpItem = _gameController.pickingUpItem.value;
 
       // put live location in firestore if hider
       if (_gamePhase == gamePhase.playing && !_isTagger) {
@@ -66,9 +65,8 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
       }
 
       if (_isTagger && playersRemaining == 0) {
-        final allHiders = _gameController.players.length;
         WidgetsBinding.instance!.addPostFrameCallback(
-          (_) => taggerFinishedGameDialog(allHiders),
+          (_) => taggerFinishedGameDialog(),
         );
       }
 
@@ -105,55 +103,20 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
         floatingActionButton: _isTagger
             ? _gamePhase == gamePhase.counting
                 ? FloatingActionButton.extended(
-                    onPressed: () {
-                      checkIfTaggerFinishedCountingDialog();
-                    },
+                    onPressed: () async =>
+                        await checkIfTaggerFinishedCountingDialog(),
                     label: Text('Start game'),
                   )
                 : FloatingActionButton.extended(
-                    onPressed: () async {
-                      setState(() {
-                        taggingPlayer = true;
-                      });
-                      final List<Player> _hiders =
-                          _gameController.getFoundHiders();
-                      if (_hiders.isEmpty) {
-                        setState(() {
-                          taggingPlayer = false;
-                        });
-                        noPlayersFoundDialog();
-                      } else {
-                        await _database.tagHiders(_hiders);
-                        setState(() {
-                          taggingPlayer = false;
-                        });
-                        justTaggedHidersDialog(_hiders);
-                      }
-                    },
+                    onPressed: () async => !_gameController.taggingPlayer.value
+                        ? await _gameController.tagPlayer()
+                        : null,
                     label: Text('Tag player'),
                   )
             : FloatingActionButton.extended(
-                onPressed: () async {
-                  setState(() {
-                    pickingUpItem = true;
-                  });
-                  final _items = _gameController.getFoundSafetyItems();
-
-                  if (_items.isEmpty) {
-                    setState(() {
-                      pickingUpItem = false;
-                    });
-                    noItemsFoundDialog();
-                  } else {
-                    for (var _item in _items) {
-                      await _database.pickUpItem(_item, _userId);
-                    }
-                    setState(() {
-                      pickingUpItem = false;
-                    });
-                    itemPickedUpDialog();
-                  }
-                },
+                onPressed: () async => !_gameController.pickingUpItem.value
+                    ? await _gameController.pickUpItem()
+                    : null,
                 label: Text('Pick up item'),
               ),
         body: Container(
@@ -189,12 +152,12 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
                 _gamePhase == gamePhase.counting
                     ? Compass()
                     : _isTagger
-                        ? taggingPlayer
+                        ? _taggingPlayer
                             ? TaggingPlayer()
                             : _gameController.getFoundHiders().isEmpty
                                 ? Compass()
                                 : FoundHiders()
-                        : pickingUpItem
+                        : _pickingUpItem
                             ? PickingUpItem()
                             : _gameController.getFoundSafetyItems().isEmpty
                                 ? Compass()
@@ -205,25 +168,6 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
         ),
       );
     });
-  }
-
-  void noItemsFoundDialog() {
-    Get.defaultDialog(
-      title: 'No items found ',
-      textConfirm: 'Ok',
-      onConfirm: () => Get.back(),
-      middleText: 'Keep looking!',
-    );
-  }
-
-  void itemPickedUpDialog() {
-    Get.defaultDialog(
-      title: 'Item picked up!',
-      textConfirm: 'Ok',
-      onConfirm: () => Get.back(),
-      middleText:
-          'Your location will be hidden from the tagger for 90 ${_userController.locationHiddenTimer.value < 0 ? 'more ' : ''} seconds',
-    );
   }
 
   Future<dynamic> checkIfTaggerFinishedCountingDialog() async {
@@ -257,11 +201,11 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
         });
   }
 
-  Future<dynamic> taggerFinishedGameDialog(int allHiders) async {
+  Future<dynamic> taggerFinishedGameDialog() async {
     return Get.defaultDialog(
       title: 'Game finished!',
       middleText:
-          'Good job! you tagged $allHiders in ${_gameController.timeToTagAllHiders()} minutes. Thanks for the game :) ',
+          'Good job! you tagged ${_gameController.allHiders()} players in ${_gameController.timeToTagAllHiders()} minutes. Thanks for the game :) ',
       textConfirm: 'Continue',
       onConfirm: () async {
         Get.back();
@@ -320,26 +264,5 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
           Get.back();
           await _userController.leaveGame();
         });
-  }
-
-  Future<dynamic> noPlayersFoundDialog() {
-    return Get.defaultDialog(
-      title: 'No players found',
-      textConfirm: 'Ok',
-      onConfirm: () => Get.back(),
-      middleText: 'keep trying!',
-    );
-  }
-
-  Future<dynamic> justTaggedHidersDialog(List<Player> _hiders) {
-    final _hidersUsernames = _hiders.map((e) => e.username).join(",");
-    return Get.defaultDialog(
-      title: _hiders.length > 1
-          ? 'Tagged $_hidersUsernames!'
-          : 'Tagged ${_hiders.map((e) => e.username).join(",")}!',
-      textConfirm: 'Ok',
-      onConfirm: () => Get.back(),
-      middleText: '${_gameController.players.length} players left',
-    );
   }
 }

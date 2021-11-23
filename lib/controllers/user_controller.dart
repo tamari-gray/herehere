@@ -20,19 +20,18 @@ class UserController extends GetxController {
     }
   }
 
-  void joinGame(String _username, bool isAdmin, GeoPoint _location) async {
+  Future<void> joinGame(
+      String _username, bool isAdmin, GeoPoint _location) async {
     userId.value = await _database.joinGame(_username, true, _location);
   }
 
   void calcLocationSafetyTime() {
     locationHiddenTimer = safetyItemTime;
     Timer.periodic(Duration(seconds: 1), (timer) {
-      // ignore: unrelated_type_equality_checks
-      if (locationHiddenTimer == 0) {
+      if (locationHiddenTimer.value == 0) {
         timer.cancel();
       }
-      // ignore: unnecessary_statements
-      locationHiddenTimer--;
+      locationHiddenTimer.value--;
     });
   }
 

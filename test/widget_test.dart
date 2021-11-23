@@ -8,6 +8,7 @@ import 'package:niira2/controllers/location_controller.dart';
 import 'package:niira2/controllers/user_controller.dart';
 import 'package:niira2/models/game.dart';
 import 'package:niira2/models/player.dart';
+import 'package:niira2/models/safety_item.dart';
 
 import 'package:niira2/screens/game_screens/playing_game/playing_game_screen.dart';
 import 'package:niira2/services/database.dart';
@@ -38,6 +39,8 @@ void main() {
       Get.put(MockLocationController());
   final GameController _gameController = Get.put(MockGameController());
 
+  _gameController.game.value.phase = gamePhase.playing;
+
   when(() => _gameController.playersRemaining()).thenReturn(4);
   when(() => _gameController.getFoundSafetyItems())
       .thenReturn(mockFoundSafetyItems);
@@ -59,7 +62,6 @@ void main() {
   testWidgets('set live location in firestore if hider and game.playing',
       (WidgetTester tester) async {
     await tester.pumpWidget(TestableWidget(widget: PlayingGameScreen()));
-    _gameController.game.value.phase = gamePhase.playing;
     await tester.pump();
     await tester.pump();
 
@@ -74,7 +76,6 @@ void main() {
   testWidgets('Tag player shows tagging player text, then tagged player dialog',
       (WidgetTester tester) async {
     _userController.user.value.isTagger = true;
-    _gameController.game.value.phase = gamePhase.playing;
     when(() => _database.tagHiders(any()))
         .thenAnswer((_) async => [Player.fromDefault()]);
 
@@ -87,5 +88,19 @@ void main() {
     await tester.pump();
 
     expect(find.text('Tagged test_hider,test_hider!'), findsOneWidget);
+  });
+
+  testWidgets('Hider finds and picks up 2 items in same loaction',
+      (WidgetTester tester) async {
+    _userController.user.value.isTagger = false;
+    _gameController.taggingPlayer.value = false;
+
+    await tester.pumpWidget(TestableWidget(widget: PlayingGameScreen()));
+    await tester.pump();
+    await tester.pump();
+
+    await tester.tap(find.text('Pick up item'));
+    await tester.pump();
+    verify(() => _gameController.pickUpItem()).called(greaterThan(1));
   });
 }

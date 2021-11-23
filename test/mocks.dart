@@ -51,4 +51,11 @@ class MockGameController extends GetxController
   final game = Game("id", DateTime.now(), gamePhase.playing).obs;
   final players = [mockHider, mockHider].obs;
   final items = List<SafetyItem>.empty().obs;
+  var taggingPlayer = false.obs;
+  var pickingUpItem = false.obs;
+
+  // @override
+  // Future pickUpItem() {
+  //   return Future.delayed(Duration(milliseconds: 0));
+  // }
 }
