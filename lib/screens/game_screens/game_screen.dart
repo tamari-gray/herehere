@@ -7,7 +7,6 @@ import 'package:niira2/controllers/user_controller.dart';
 import 'package:niira2/models/game.dart';
 import 'package:niira2/screens/lobby.dart';
 import 'package:niira2/screens/game_screens/playing_game/playing_game_screen.dart';
-import 'package:niira2/utilities/placing.dart';
 
 class JoinedGame extends StatefulWidget {
   @override
@@ -46,27 +45,6 @@ class _JoinedGameState extends State<JoinedGame> {
   }
 }
 
-class FinishedGameScreen extends StatelessWidget {
-  const FinishedGameScreen({
-    Key? key,
-    required int placing,
-  })  : _placing = placing,
-        super(key: key);
-
-  final int _placing;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        child: Center(
-          child: Text('You came ${placing(_placing)}'),
-        ),
-      ),
-    );
-  }
-}
-
 class PlayerWaitingForGameToStart extends StatelessWidget {
   final UserController _userController = Get.find();
 
@@ -75,7 +53,6 @@ class PlayerWaitingForGameToStart extends StatelessWidget {
     return Scaffold(
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          _userController.user.value.isAdmin = false;
           _userController.user.value.isAdmin = false;
         },
         label: Text('log out'),

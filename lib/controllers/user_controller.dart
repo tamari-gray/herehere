@@ -69,7 +69,8 @@ class UserController extends GetxController {
   void resetUser() => userId.value = "";
 
   Future<void> leaveGame() async {
-    await _database.leaveGame(userId.value);
+    final _userId = userId.value;
     resetUser();
+    await _database.leaveGame(_userId);
   }
 }

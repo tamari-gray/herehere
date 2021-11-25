@@ -44,7 +44,8 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
 
       if (showTaggerIsComingDialog &&
           _gamePhase == gamePhase.playing &&
-          !_isTagger) {
+          !_isTagger &&
+          _userId != '') {
         WidgetsBinding.instance!.addPostFrameCallback(
           (_) => taggerComingDialog(),
         );
@@ -77,15 +78,11 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
           actions: [
             _isAdmin
                 ? ElevatedButton(
-                    onPressed: () async {
-                      await _gameController.resetGame();
-                    },
+                    onPressed: () async => await resetGameDialog(),
                     child: Text('reset'),
                   )
                 : ElevatedButton(
-                    onPressed: () {
-                      howToPlayDialog();
-                    },
+                    onPressed: () async => await howToPlayDialog(),
                     child: Text('How to play'),
                   ),
             Padding(
@@ -93,9 +90,8 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
               child: Container(),
             ),
             IconButton(
-              onPressed: () async {
-                await leaveGameDialog();
-              },
+              onPressed: () async =>
+                  _isTagger ? await resetGameDialog() : await leaveGameDialog(),
               icon: Icon(Icons.logout),
             ),
           ],
@@ -257,9 +253,9 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
 
   Future<dynamic> resetGameDialog() async {
     return Get.defaultDialog(
-        title: 'Reset game',
-        textConfirm: 'reset ',
-        middleText: '',
+        title: 'Leaving will reset the game',
+        textConfirm: 'leave',
+        middleText: 'or tap outside box to cancel',
         onConfirm: () async {
           Get.back();
           await _gameController.resetGame();

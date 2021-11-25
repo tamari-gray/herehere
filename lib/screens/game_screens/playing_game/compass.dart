@@ -90,8 +90,12 @@ class Compass extends StatelessWidget {
     final _playerLocation = _locationController.location;
 
     if (_userController.user.value.isTagger) {
-      final _unsafeHiders =
-          _gameController.players.where((_player) => !_player.locationHidden);
+      final _unsafeHiders = _gameController.players.where(
+        (_player) =>
+            !_player.locationHidden &&
+            !_player.isTagger &&
+            !_player.hasBeenTagged,
+      );
 
       return _unsafeHiders.map((Player _hider) {
         final double _bearing = Geolocator.bearingBetween(
@@ -111,17 +115,13 @@ class Compass extends StatelessWidget {
         return calcBearing(_bearing, deviceHeading, _distance);
       }).toList();
     } else {
-      // ignore: invalid_use_of_protected_member
-      return _gameController.items.value.map((SafetyItem _item) {
+      return _gameController.items.map((SafetyItem _item) {
         final double _bearing = Geolocator.bearingBetween(
           _item.latitude,
           _item.longitude,
           _playerLocation.value.latitude,
           _playerLocation.value.longitude,
         );
-
-        // print(
-        //     'lat ${_playerLocation.value.latitude}, ln ${_playerLocation.value.longitude}');
 
         final int _distance = Geolocator.distanceBetween(
           _playerLocation.value.latitude,
