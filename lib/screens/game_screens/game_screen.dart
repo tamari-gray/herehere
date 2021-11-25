@@ -14,7 +14,6 @@ class JoinedGame extends StatefulWidget {
 }
 
 class _JoinedGameState extends State<JoinedGame> {
-  final UserController _userController = Get.find();
   final GameController _gameController = Get.find();
   final LocationController _locationController = Get.find();
 
@@ -30,9 +29,7 @@ class _JoinedGameState extends State<JoinedGame> {
       final _phase = _gameController.game.value.phase;
       if (_phase == gamePhase.creating) {
         return Lobby();
-      } else if (_phase == gamePhase.counting ||
-          _phase == gamePhase.playing &&
-              !_userController.user.value.hasBeenTagged) {
+      } else if (_phase == gamePhase.counting || _phase == gamePhase.playing) {
         return PlayingGameScreen();
       } else {
         return Container(
@@ -42,26 +39,5 @@ class _JoinedGameState extends State<JoinedGame> {
         );
       }
     });
-  }
-}
-
-class PlayerWaitingForGameToStart extends StatelessWidget {
-  final UserController _userController = Get.find();
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          _userController.user.value.isAdmin = false;
-        },
-        label: Text('log out'),
-      ),
-      body: Container(
-        child: Center(
-          child: Text('Player in lobby'),
-        ),
-      ),
-    );
   }
 }

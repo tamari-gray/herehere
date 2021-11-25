@@ -87,7 +87,7 @@ class Compass extends StatelessWidget {
     final LocationController _locationController = Get.find();
     final UserController _userController = Get.find();
 
-    final _playerLocation = _locationController.location;
+    final _playerLocation = _locationController.location.value;
 
     if (_userController.user.value.isTagger) {
       final _unsafeHiders = _gameController.players.where(
@@ -101,31 +101,31 @@ class Compass extends StatelessWidget {
         final double _bearing = Geolocator.bearingBetween(
           _hider.location.latitude,
           _hider.location.longitude,
-          _playerLocation.value.latitude,
-          _playerLocation.value.longitude,
+          _playerLocation.latitude,
+          _playerLocation.longitude,
         );
 
         final int _distance = Geolocator.distanceBetween(
-          _playerLocation.value.latitude,
-          _playerLocation.value.longitude,
+          _playerLocation.latitude,
+          _playerLocation.longitude,
           _hider.location.latitude,
           _hider.location.longitude,
         ).floor();
 
         return calcBearing(_bearing, deviceHeading, _distance);
-      }).toList();
+      }).toList(); 
     } else {
       return _gameController.items.map((SafetyItem _item) {
         final double _bearing = Geolocator.bearingBetween(
           _item.latitude,
           _item.longitude,
-          _playerLocation.value.latitude,
-          _playerLocation.value.longitude,
+          _playerLocation.latitude,
+          _playerLocation.longitude,
         );
 
         final int _distance = Geolocator.distanceBetween(
-          _playerLocation.value.latitude,
-          _playerLocation.value.longitude,
+          _playerLocation.latitude,
+          _playerLocation.longitude,
           _item.latitude,
           _item.longitude,
         ).floor();

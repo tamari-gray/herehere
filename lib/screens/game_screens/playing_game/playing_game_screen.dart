@@ -33,7 +33,7 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
       final _gamePhase = _gameController.game.value.phase;
       final _isTagger = _userController.user.value.isTagger;
 
-      final playersRemaining = _gameController.hidersRemaining();
+      final _hidersRemaining = _gameController.hidersRemaining();
       final _taggingPlayer = _gameController.taggingPlayer.value;
       final _pickingUpItem = _gameController.pickingUpItem.value;
 
@@ -61,11 +61,11 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
 
       if (_userController.user.value.hasBeenTagged) {
         WidgetsBinding.instance!.addPostFrameCallback(
-          (_) => hiderFinishedGameDialog(playersRemaining),
+          (_) => hiderFinishedGameDialog(_hidersRemaining),
         );
       }
 
-      if (_isTagger && playersRemaining == 0) {
+      if (_isTagger && _hidersRemaining == 0) {
         WidgetsBinding.instance!.addPostFrameCallback(
           (_) => taggerFinishedGameDialog(),
         );

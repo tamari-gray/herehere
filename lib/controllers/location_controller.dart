@@ -44,6 +44,6 @@ class LocationController extends GetxController {
       _itemOrHider.latitude,
       _itemOrHider.longitude,
     ).floor();
-    return _distance <= 10.5 ? true : false;
+    return _distance <= 2.5 ? true : false;
   }
 }

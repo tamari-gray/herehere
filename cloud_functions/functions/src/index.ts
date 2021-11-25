@@ -20,13 +20,22 @@ const itemDoc = `${itemsColl}/{itemId}`;
 const boundary = {
   // frimley
   // center: {latitude: -39.622476, longitude: 176.830278},
+  // radius: 50,
+
   
   // otane
   // center: {latitude: -39.895878454725036, longitude: 176.6297118718396},
+  // radius: 50,
+
+
+  // willowpark middle of front lawn 
+  center: { latitude: -39.6385565402019,  longitude: 176.86144794537276},
+  radius: 5,
+
 
   // karamu
-  center: { latitude: -39.644575, longitude: 176.868368},
-  radius: 50,
+  // center: { latitude: -39.644575, longitude: 176.868368},
+  // radius: 50,
 };
 
 interface safetyItem {
