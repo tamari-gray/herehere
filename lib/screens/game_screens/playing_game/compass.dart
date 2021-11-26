@@ -97,7 +97,7 @@ class Compass extends StatelessWidget {
             !_player.hasBeenTagged,
       );
 
-      return _unsafeHiders.map((Player _hider) {
+      final _hidersWithDistanceAndBearing = _unsafeHiders.map((Player _hider) {
         final double _bearing = Geolocator.bearingBetween(
           _hider.location.latitude,
           _hider.location.longitude,
@@ -113,9 +113,14 @@ class Compass extends StatelessWidget {
         ).floor();
 
         return calcBearing(_bearing, deviceHeading, _distance);
-      }).toList(); 
+      }).toList();
+
+      _hidersWithDistanceAndBearing
+          .sort((a, b) => b.distance!.compareTo(a.distance!));
+
+      return _hidersWithDistanceAndBearing;
     } else {
-      return _gameController.items.map((SafetyItem _item) {
+      final _itemsWithData = _gameController.items.map((SafetyItem _item) {
         final double _bearing = Geolocator.bearingBetween(
           _item.latitude,
           _item.longitude,
@@ -132,6 +137,10 @@ class Compass extends StatelessWidget {
 
         return calcBearing(_bearing, deviceHeading, _distance);
       }).toList();
+
+      _itemsWithData.sort((a, b) => b.distance!.compareTo(a.distance!));
+
+      return _itemsWithData;
     }
   }
 
@@ -291,10 +300,15 @@ class ItemArrow extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              '${distance!} m',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
+            Card(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  '${distance!} m',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
             ),
             Padding(
