@@ -5,7 +5,8 @@ import 'package:niira2/controllers/location_controller.dart';
 import 'package:niira2/controllers/user_controller.dart';
 import 'package:niira2/models/game.dart';
 import 'package:niira2/models/safety_item.dart';
-import 'package:niira2/screens/game_screens/playing_game/compass.dart';
+import 'package:niira2/screens/game_screens/playing_game/compass_for_hider.dart';
+import 'package:niira2/screens/game_screens/playing_game/compass_for_tagger.dart';
 import 'package:niira2/screens/game_screens/playing_game/widgets.dart';
 import 'package:niira2/services/database.dart';
 import 'package:niira2/utilities/placing.dart';
@@ -33,9 +34,14 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
       final _gamePhase = _gameController.game.value.phase;
       final _isTagger = _userController.user.value.isTagger;
 
-      final _hidersRemaining = _gameController.hidersRemaining();
       final _taggingPlayer = _gameController.taggingPlayer.value;
       final _pickingUpItem = _gameController.pickingUpItem.value;
+
+      final _userLocation = _locationController.location.value;
+
+      final _hidersRemaining = _gameController.players
+          .where((p) => !p.hasBeenTagged && !p.isTagger)
+          .toList();
 
       // put live location in firestore if hider
       if (_gamePhase == gamePhase.playing && !_isTagger) {
@@ -61,11 +67,11 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
 
       if (_userController.user.value.hasBeenTagged) {
         WidgetsBinding.instance!.addPostFrameCallback(
-          (_) => hiderFinishedGameDialog(_hidersRemaining),
+          (_) => hiderFinishedGameDialog(_hidersRemaining.length),
         );
       }
 
-      if (_isTagger && _hidersRemaining == 0) {
+      if (_isTagger && _hidersRemaining.length == 0) {
         WidgetsBinding.instance!.addPostFrameCallback(
           (_) => taggerFinishedGameDialog(),
         );
@@ -109,12 +115,14 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
                         : null,
                     label: Text('Tag player'),
                   )
-            : FloatingActionButton.extended(
-                onPressed: () async => !_gameController.pickingUpItem.value
-                    ? await _gameController.pickUpItems()
-                    : null,
-                label: Text('Pick up item'),
-              ),
+            : _gamePhase == gamePhase.counting
+                ? Container()
+                : FloatingActionButton.extended(
+                    onPressed: () async => !_gameController.pickingUpItem.value
+                        ? await _gameController.pickUpItems()
+                        : null,
+                    label: Text('Pick up item'),
+                  ),
         body: Container(
           child: Padding(
             padding: const EdgeInsets.fromLTRB(15, 15, 0, 0),
@@ -144,20 +152,14 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
                   _userController.locationHiddenTimer.value > 1
                       ? LocationHiddenBanner()
                       : LocationNotSafeBanner(),
-                PlayersRemaining(gameController: _gameController),
-                _gamePhase == gamePhase.counting
-                    ? Compass()
-                    : _isTagger
-                        ? _taggingPlayer
-                            ? TaggingPlayer()
-                            : _gameController.getFoundHiders().isEmpty
-                                ? Compass()
-                                : FoundHiders()
-                        : _pickingUpItem
-                            ? PickingUpItem()
-                            : _gameController.getFoundSafetyItems().isEmpty
-                                ? Compass()
-                                : FoundSafetyItems(),
+                HidersRemaining(),
+                _isTagger
+                    ? _taggingPlayer
+                        ? TaggingPlayer()
+                        : CompassForTagger()
+                    : _pickingUpItem
+                        ? PickingUpItem()
+                        : CompassForHider()
               ],
             ),
           ),
@@ -205,6 +207,7 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
       textConfirm: 'Continue',
       onConfirm: () async {
         Get.back();
+        // await _userController.leaveGame();
         await _gameController.resetGame();
       },
     );

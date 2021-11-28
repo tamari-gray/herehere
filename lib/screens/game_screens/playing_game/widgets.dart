@@ -43,21 +43,15 @@ class LocationNotSafeBanner extends StatelessWidget {
   }
 }
 
-class PlayersRemaining extends StatelessWidget {
-  const PlayersRemaining({
-    Key? key,
-    required GameController gameController,
-  })  : _gameController = gameController,
-        super(key: key);
-
-  final GameController _gameController;
+class HidersRemaining extends StatelessWidget {
+  final GameController _gameController = Get.find();
 
   @override
   Widget build(BuildContext context) {
     return OutlinedButton(
       child: Obx(
         () => Text(
-          '${_gameController.hidersRemaining()} hiders left',
+          '${_gameController.hidersRemaining().length} hiders left',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
       ),

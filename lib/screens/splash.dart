@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
@@ -162,20 +163,23 @@ class LogIn extends StatefulWidget {
 class _LogInState extends State<LogIn> {
   final usernameController = TextEditingController();
   final GameController _gameController = Get.find();
+  final LocationController _locationController = Get.find();
   bool _joiningGame = false;
+  bool _gettingLocation = false;
 
   @override
   void dispose() {
     // Clean up the text controller when the widget is disposed.
     usernameController.dispose();
     _joiningGame = false;
+    _gettingLocation = false;
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () => _gameController.game.value.phase != gamePhase.creating
+    return Obx(() {
+      return _gameController.game.value.phase != gamePhase.creating
           ? Padding(
               padding: const EdgeInsets.fromLTRB(0, 150, 0, 0),
               child: Container(
@@ -190,52 +194,68 @@ class _LogInState extends State<LogIn> {
           : Padding(
               padding: const EdgeInsets.fromLTRB(50, 75, 50, 0),
               child: Container(
-                child: Row(
-                  children: <Widget>[
-                    Expanded(
-                      child: TextField(
-                        cursorColor: const Color(0xff82fab8),
-                        style: TextStyle(color: Colors.white),
-                        autofocus: true,
-                        decoration: InputDecoration(
-                          labelText: 'Enter username',
-                          labelStyle: TextStyle(
+                  child: Column(
+                children: [
+                  Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: TextField(
+                          cursorColor: const Color(0xff82fab8),
+                          style: TextStyle(color: Colors.white),
+                          autofocus: true,
+                          decoration: InputDecoration(
+                            labelText: 'Enter username',
+                            labelStyle: TextStyle(
+                              color: const Color(0xff82fab8),
+                            ),
+                            border: InputBorder.none,
+                          ),
+                          controller: usernameController,
+                        ),
+                      ),
+                      OutlinedButton(
+                        onPressed: () async {
+                          if (!_joiningGame) {
+                            setState(() {
+                              _joiningGame = true;
+                              _gettingLocation = true;
+                            });
+                            final GeoPoint _locationAsGeopoint =
+                                await _locationController
+                                    .getLocationAsGeopoint();
+                            setState(() {
+                              _gettingLocation = false;
+                            });
+                            final _username = usernameController.text;
+                            if (_username != '') {
+                              _username == 'reset game now'
+                                  ? await _gameController.resetGame()
+                                  : await _gameController.joinGame(
+                                      _username, _locationAsGeopoint);
+                            }
+                            setState(() {
+                              _joiningGame = false;
+                            });
+                          }
+                        },
+                        child: Text(
+                          _joiningGame ? 'Joining game...' : 'Play',
+                          style: TextStyle(
                             color: const Color(0xff82fab8),
                           ),
-                          border: InputBorder.none,
                         ),
-                        controller: usernameController,
                       ),
-                    ),
-                    OutlinedButton(
-                      onPressed: () async {
-                        if (!_joiningGame) {
-                          setState(() {
-                            _joiningGame = true;
-                          });
-                          final _username = usernameController.text;
-                          if (_username != '') {
-                            _username == 'reset game now'
-                                ? await _gameController.resetGame()
-                                : await _gameController.joinGame(_username);
-                          }
-                          setState(() {
-                            _joiningGame = false;
-                          });
-                        }
-                      },
+                    ],
+                  ),
+                  if (_gettingLocation)
+                    Center(
                       child: Text(
-                        _joiningGame ? 'Joining' : 'Play',
-                        style: TextStyle(
-                          color: const Color(0xff82fab8),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-    );
+                          'Please wait while we are getting your location...'),
+                    )
+                ],
+              )),
+            );
+    });
   }
 }
 

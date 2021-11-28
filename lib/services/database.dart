@@ -138,9 +138,10 @@ class Database extends GetxService {
           Map<String, dynamic> data = doc.data()! as Map<String, dynamic>;
           final lat = data["point"]["geopoint"].latitude as double;
           final long = data["point"]["geopoint"].longitude as double;
-          final pickedUp = data["item_picked_up"] ?? false;
+          final location =
+              Position.fromMap({'latitude': lat, 'longitude': long});
 
-          items.add(SafetyItem(doc.id, lat, long, pickedUp));
+          items.add(SafetyItem(doc.id, location));
         });
         return items;
       });

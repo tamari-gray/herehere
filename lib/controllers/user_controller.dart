@@ -51,8 +51,12 @@ class UserController extends GetxController {
 
     _timer = Timer.periodic(Duration(seconds: 1), (timer) async {
       if (locationHiddenTimer.value == 0) {
-        await _database.hiderItemsExpire(userId.value);
-        _timer.cancel();
+        if (userId.value == "") {
+          _timer.cancel();
+        } else {
+          await _database.hiderItemsExpire(userId.value);
+          _timer.cancel();
+        }
       } else {
         locationHiddenTimer.value = locationHiddenTimer.value - 1;
       }

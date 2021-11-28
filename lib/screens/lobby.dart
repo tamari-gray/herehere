@@ -27,6 +27,7 @@ class Lobby extends StatelessWidget {
             isAdmin
                 ? ElevatedButton(
                     onPressed: () async {
+                      // resetGameDialog();
                       await _database.reset();
                       _userController.userId.value = '';
                     },

@@ -9,6 +9,7 @@ class Player {
   bool hasBeenTagged = false;
   bool locationHidden = false;
   Position location = Position.fromMap({'latitude': 1.0, 'longitude': 0.0});
+
   Player(
     this.id,
     this.username,
@@ -54,4 +55,25 @@ class Player {
       'longitude': doc["location"].longitude,
     });
   }
+}
+
+class Hider extends Player {
+  Hider(
+    String id,
+    String username,
+    bool isAdmin,
+    bool isTagger,
+    bool hasBeenTagged,
+    bool locationHidden,
+    Position location,
+    this.angleFromUser,
+    this.distanceFromUser,
+  ) : super(id, username, isAdmin, isTagger, hasBeenTagged, locationHidden,
+            location);
+  int distanceFromUser;
+  double angleFromUser;
+
+  // Hider.fromPlayer(int _dist, double _angle) {
+  //   distanceFromUser = _dist;
+  // }
 }

@@ -14,8 +14,13 @@ class GameController extends GetxController {
   final LocationController _locationController = Get.find();
 
   final game = Game.fromDefault().obs;
+
   final players = List<Player>.empty().obs;
   final items = List<SafetyItem>.empty().obs;
+
+  var foundHiders = List<Player>.empty().obs;
+  var foundItems = List<SafetyItem>.empty().obs;
+
   var taggingPlayer = false.obs;
   var pickingUpItem = false.obs;
 
@@ -30,60 +35,81 @@ class GameController extends GetxController {
   int timeToTagAllHiders() =>
       DateTime.now().difference(game.value.startTime).inMinutes;
 
-  int hidersRemaining() =>
-      players.where((p) => !p.hasBeenTagged && !p.isTagger).length;
+  List<Player> hidersRemaining() =>
+      players.where((p) => !p.hasBeenTagged && !p.isTagger).toList();
 
   int allHiders() => players.where((p) => !p.isTagger).length;
 
-  Future<void> joinGame(String _username) async {
-    final GeoPoint _locationAsGeopoint =
-        await _locationController.getLocationAsGeopoint();
+  List<Hider> hidersWithAngleAndDistance(
+      Position _userLocation, double _userBearing, List<Player> _hiders) {
+    return _hiders.map((_hider) {
+      final _angle = _locationController.angleFromUser(_hider.location);
+      final _distance = _locationController.distanceFromUser(_hider.location);
+      return Hider(
+        _hider.id,
+        _hider.username,
+        _hider.isAdmin,
+        _hider.isTagger,
+        _hider.hasBeenTagged,
+        _hider.locationHidden,
+        _hider.location,
+        _angle,
+        _distance,
+      );
+    }).toList();
+  }
+
+  List<SafetyItem> itemsWithAngleAndDistance(
+      Position _userLocation, double _userBearing, List<SafetyItem> _items) {
+    return _items.map((_item) {
+      final _angle = _locationController.angleFromUser(_item.location);
+      final _distance = _locationController.distanceFromUser(_item.location);
+      final _newItem = SafetyItem(
+        _item.id,
+        _item.location,
+      );
+      _newItem.angleFromUser = _angle;
+      _newItem.distance = _distance;
+      return _newItem;
+    }).toList();
+  }
+
+  Future<void> joinGame(String _username, GeoPoint _locationAsGeopoint) async {
+    _locationController.listenToPLayerBearing();
+
     if (_username == 'kawaiifreak97') {
       await _userController.joinGame(_username, true, _locationAsGeopoint);
     } else if (_username == 'kawaiiplusone') {
       await _userController.joinGamePlusOne(
-          'kawaiifreak97', false, _locationAsGeopoint);
+          'kawaiifreak97', true, _locationAsGeopoint);
+    } else {
+      _userController.joinGame(_username, false, _locationAsGeopoint);
     }
   }
 
-  List<Player> getFoundHiders() => players
-      .where((_player) => !_player.isTagger)
-      .where((_hider) => _locationController.distanceBetween(_hider.location))
-      .toList();
-
-  List<SafetyItem> getFoundSafetyItems() => items
-      .where((_item) => _locationController.distanceBetween(
-            Position.fromMap({
-              'latitude': _item.latitude,
-              'longitude': _item.longitude,
-            }),
-          ))
-      .toList();
-
   Future<dynamic> tagPlayers() async {
     taggingPlayer = true.obs;
-    final _hiders = getFoundHiders();
-    if (_hiders.isEmpty) {
+    if (foundHiders.isEmpty) {
       taggingPlayer = false.obs;
       return noPlayersFoundDialog();
     } else {
-      await _database.tagHiders(_hiders);
+      await _database.tagHiders(foundHiders);
       taggingPlayer = false.obs;
-      if (hidersRemaining() != _hiders.length) justTaggedHidersDialog(_hiders);
+      if (hidersRemaining().length != foundHiders.length)
+        justTaggedHidersDialog(foundHiders);
     }
   }
 
   Future<dynamic> pickUpItems() async {
     pickingUpItem = true.obs;
     final _userId = _userController.userId.value;
-    final _items = getFoundSafetyItems();
-    if (_items.isEmpty) {
+    if (foundItems.isEmpty) {
       pickingUpItem = false.obs;
       return noItemsFoundDialog();
     } else {
-      await _database.pickUpItems(_items, _userId);
+      await _database.pickUpItems(foundItems, _userId);
       pickingUpItem = false.obs;
-      itemsPickedUpDialog(_items.length);
+      itemsPickedUpDialog(foundItems.length);
     }
   }
 
