@@ -28,12 +28,16 @@ class CompassForTagger extends StatelessWidget {
             .where((p) => !p.hasBeenTagged && !p.isTagger)
             .toList();
 
+        final _unsafeHiders =
+            _hidersRemaining.where((h) => !h.locationHidden).toList();
+
         final _hidersWithDistanceAndAngle =
             _gameController.hidersWithAngleAndDistance(
           _userLocation,
           _userBearing,
-          _hidersRemaining,
+          _unsafeHiders,
         );
+
         final _foundHiders = _hidersWithDistanceAndAngle
             .where(
               (_hider) =>
