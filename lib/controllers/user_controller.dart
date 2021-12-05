@@ -24,7 +24,7 @@ class UserController extends GetxController {
 
   Future<void> joinGame(
       String _username, bool isAdmin, GeoPoint _location) async {
-    userId.value = await _database.joinGame(_username, true, _location);
+    userId.value = await _database.joinGame(_username, isAdmin, _location);
   }
 
   Future<void> joinGamePlusOne(

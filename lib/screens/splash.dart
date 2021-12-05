@@ -165,14 +165,27 @@ class _LogInState extends State<LogIn> {
   final GameController _gameController = Get.find();
   final LocationController _locationController = Get.find();
   bool _joiningGame = false;
-  bool _gettingLocation = false;
+  GeoPoint _location = GeoPoint(0, 0);
+
+  @override
+  void initState() {
+    getLocation();
+    super.initState();
+  }
+
+  getLocation() async {
+    final GeoPoint _locationAsGeopoint =
+        await _locationController.getLocationAsGeopoint();
+    setState(() {
+      _location = _locationAsGeopoint;
+    });
+  }
 
   @override
   void dispose() {
     // Clean up the text controller when the widget is disposed.
     usernameController.dispose();
     _joiningGame = false;
-    _gettingLocation = false;
     super.dispose();
   }
 
@@ -191,70 +204,72 @@ class _LogInState extends State<LogIn> {
                 ),
               ),
             )
-          : Padding(
-              padding: const EdgeInsets.fromLTRB(50, 75, 50, 0),
-              child: Container(
-                  child: Column(
-                children: [
-                  Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: TextField(
-                          cursorColor: const Color(0xff82fab8),
-                          style: TextStyle(color: Colors.white),
-                          autofocus: true,
-                          decoration: InputDecoration(
-                            labelText: 'Enter username',
-                            labelStyle: TextStyle(
-                              color: const Color(0xff82fab8),
-                            ),
-                            border: InputBorder.none,
-                          ),
-                          controller: usernameController,
-                        ),
+          : _location == GeoPoint(0, 0)
+              ? Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 150, 0, 0),
+                  child: Container(
+                    child: Center(
+                      child: Text(
+                        'Please wait while we get your location...',
+                        style: TextStyle(color: Colors.white),
                       ),
-                      OutlinedButton(
-                        onPressed: () async {
-                          if (!_joiningGame) {
-                            setState(() {
-                              _joiningGame = true;
-                              _gettingLocation = true;
-                            });
-                            final GeoPoint _locationAsGeopoint =
-                                await _locationController
-                                    .getLocationAsGeopoint();
-                            setState(() {
-                              _gettingLocation = false;
-                            });
-                            final _username = usernameController.text;
-                            if (_username != '') {
-                              _username == 'reset game now'
-                                  ? await _gameController.resetGame()
-                                  : await _gameController.joinGame(
-                                      _username, _locationAsGeopoint);
-                            }
-                            setState(() {
-                              _joiningGame = false;
-                            });
-                          }
-                        },
-                        child: Text(
-                          _joiningGame ? 'Joining game...' : 'Play',
-                          style: TextStyle(
-                            color: const Color(0xff82fab8),
+                    ),
+                  ),
+                )
+              : Padding(
+                  padding: const EdgeInsets.fromLTRB(50, 75, 50, 0),
+                  child: Container(
+                      child: Column(
+                    children: [
+                      Row(
+                        children: <Widget>[
+                          Expanded(
+                            child: TextField(
+                              cursorColor: const Color(0xff82fab8),
+                              style: TextStyle(color: Colors.white),
+                              autofocus: true,
+                              decoration: InputDecoration(
+                                labelText: 'Enter username',
+                                labelStyle: TextStyle(
+                                  color: const Color(0xff82fab8),
+                                ),
+                                border: InputBorder.none,
+                              ),
+                              controller: usernameController,
+                            ),
                           ),
-                        ),
+                          OutlinedButton(
+                            onPressed: () async {
+                              if (!_joiningGame) {
+                                setState(() {
+                                  _joiningGame = true;
+                                });
+                                final _username = usernameController.text;
+                                if (_username != '') {
+                                  _username == 'reset game now'
+                                      ? await _gameController.resetGame()
+                                      : await _gameController.joinGame(
+                                          _username,
+                                          _location,
+                                        );
+                                }
+                                setState(() {
+                                  _joiningGame = false;
+                                });
+                              }
+                            },
+                            child: Text(
+                              _joiningGame ? 'Joining game...' : 'Play',
+                              style: TextStyle(
+                                color: const Color(0xff82fab8),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ],
-                  ),
-                  if (_gettingLocation)
-                    Center(
-                      child: Text(
-                          'Please wait while we are getting your location...'),
-                    )
-                ],
-              )),
-            );
+                  )),
+                );
     });
   }
 }
