@@ -3,17 +3,17 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>833322515004-j8oe9u1nr4htjns7cnfolln8ec5ass6n.apps.googleusercontent.com</string>
+	<string>833322515004-qi9l4sstak68r55pu3qp0q7p34ocq6qt.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.833322515004-j8oe9u1nr4htjns7cnfolln8ec5ass6n</string>
+	<string>com.googleusercontent.apps.833322515004-qi9l4sstak68r55pu3qp0q7p34ocq6qt</string>
 	<key>API_KEY</key>
-	<string>AIzaSyA5B6FB2ot_psFn9J9BvJb7SI3CLgWaHwU</string>
+	<string>AIzaSyDBXf6sdwkq9urBS4lwhceEBZGObdj93Tc</string>
 	<key>GCM_SENDER_ID</key>
 	<string>833322515004</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.kawaiifreaks.niira2</string>
+	<string>com.tamafreaks.canyasheme</string>
 	<key>PROJECT_ID</key>
 	<string>niira2</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:833322515004:ios:312c386ad3fac4c9896139</string>
+	<string>1:833322515004:ios:64355b99afbec4e0896139</string>
 </dict>
 </plist>

@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:833322515004:android:a628acade306ded2896139",
+        "mobilesdk_app_id": "1:833322515004:android:53a583aefb2e7079896139",
         "android_client_info": {
-          "package_name": "com.kawaiifreaks.niira2"
+          "package_name": "com.tamafreaks.canyasheme"
         }
       },
       "oauth_client": [
@@ -20,7 +20,7 @@
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC-3C1ZgYuahgyqXW6TT1feFnb_vP5kkY8"
+          "current_key": "AIzaSyAjc2WCKQRRpL4Lnn0ArJCu83Qpkrx9NiY"
         }
       ],
       "services": {

@@ -14,6 +14,12 @@
       "languageVersion": "2.14"
     },
     {
+      "name": "archive",
+      "rootUri": "file:///Users/aimac/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/archive-3.1.6",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "args",
       "rootUri": "file:///Users/aimac/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/args-2.3.0",
       "packageUri": "lib/",
@@ -254,6 +260,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "flutter_launcher_icons",
+      "rootUri": "file:///Users/aimac/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_launcher_icons-0.9.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "flutter_riverpod",
       "rootUri": "file:///Users/aimac/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_riverpod-1.0.0-dev.11",
       "packageUri": "lib/",
@@ -334,6 +346,12 @@
     {
       "name": "http_parser",
       "rootUri": "file:///Users/aimac/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/http_parser-4.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "image",
+      "rootUri": "file:///Users/aimac/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/image-3.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -420,6 +438,12 @@
       "rootUri": "file:///Users/aimac/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/pedantic-1.11.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
+    },
+    {
+      "name": "petitparser",
+      "rootUri": "file:///Users/aimac/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/petitparser-4.4.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.14"
     },
     {
       "name": "plugin_platform_interface",
@@ -608,6 +632,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "xml",
+      "rootUri": "file:///Users/aimac/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/xml-5.3.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.14"
+    },
+    {
       "name": "yaml",
       "rootUri": "file:///Users/aimac/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/yaml-3.1.0",
       "packageUri": "lib/",
@@ -620,7 +650,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2021-11-29T05:24:02.807105Z",
+  "generated": "2021-12-06T10:28:24.804357Z",
   "generator": "pub",
   "generatorVersion": "2.14.4"
 }
