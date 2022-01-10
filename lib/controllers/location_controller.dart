@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_compass/flutter_compass.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
-import 'package:niira2/services/database.dart';
+import 'package:cysm/services/database.dart';
 
 class LocationController extends GetxController {
   final Database _database = Get.find();

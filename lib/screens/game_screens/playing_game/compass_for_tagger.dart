@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
 import 'package:get/state_manager.dart';
-import 'package:niira2/controllers/game_controller.dart';
-import 'package:niira2/controllers/location_controller.dart';
-import 'package:niira2/models/game.dart';
-import 'package:niira2/models/player.dart';
+import 'package:cysm/controllers/game_controller.dart';
+import 'package:cysm/controllers/location_controller.dart';
+import 'package:cysm/models/game.dart';
+import 'package:cysm/models/player.dart';
 
 class CompassForTagger extends StatelessWidget {
   final GameController _gameController = Get.find();

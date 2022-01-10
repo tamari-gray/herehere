@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
-import 'package:niira2/controllers/game_controller.dart';
-import 'package:niira2/controllers/location_controller.dart';
-import 'package:niira2/controllers/user_controller.dart';
-import 'package:niira2/models/game.dart';
-import 'package:niira2/screens/lobby.dart';
-import 'package:niira2/screens/game_screens/playing_game/playing_game_screen.dart';
+import 'package:cysm/controllers/game_controller.dart';
+import 'package:cysm/controllers/location_controller.dart';
+import 'package:cysm/controllers/user_controller.dart';
+import 'package:cysm/models/game.dart';
+import 'package:cysm/screens/lobby.dart';
+import 'package:cysm/screens/game_screens/playing_game/playing_game_screen.dart';
 
 class JoinedGame extends StatefulWidget {
   @override

@@ -2,13 +2,13 @@ import 'package:geolocator/geolocator.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:niira2/controllers/game_controller.dart';
-import 'package:niira2/controllers/location_controller.dart';
-import 'package:niira2/controllers/user_controller.dart';
-import 'package:niira2/models/game.dart';
-import 'package:niira2/models/player.dart';
-import 'package:niira2/models/safety_item.dart';
-import 'package:niira2/services/database.dart';
+import 'package:cysm/controllers/game_controller.dart';
+import 'package:cysm/controllers/location_controller.dart';
+import 'package:cysm/controllers/user_controller.dart';
+import 'package:cysm/models/game.dart';
+import 'package:cysm/models/player.dart';
+import 'package:cysm/models/safety_item.dart';
+import 'package:cysm/services/database.dart';
 
 Player mockTagger = Player('tagger_123', 'test_tagger', false, true, false,
     false, Position.fromMap({'latitude': 1.0, 'longitude': 0.0}));

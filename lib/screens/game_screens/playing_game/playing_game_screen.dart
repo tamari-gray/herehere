@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:niira2/controllers/game_controller.dart';
-import 'package:niira2/controllers/location_controller.dart';
-import 'package:niira2/controllers/user_controller.dart';
-import 'package:niira2/models/game.dart';
-import 'package:niira2/models/safety_item.dart';
-import 'package:niira2/screens/game_screens/playing_game/compass_for_hider.dart';
-import 'package:niira2/screens/game_screens/playing_game/compass_for_tagger.dart';
-import 'package:niira2/screens/game_screens/playing_game/widgets.dart';
-import 'package:niira2/services/database.dart';
-import 'package:niira2/utilities/placing.dart';
+import 'package:cysm/controllers/game_controller.dart';
+import 'package:cysm/controllers/location_controller.dart';
+import 'package:cysm/controllers/user_controller.dart';
+import 'package:cysm/models/game.dart';
+import 'package:cysm/models/safety_item.dart';
+import 'package:cysm/screens/game_screens/playing_game/compass_for_hider.dart';
+import 'package:cysm/screens/game_screens/playing_game/compass_for_tagger.dart';
+import 'package:cysm/screens/game_screens/playing_game/widgets.dart';
+import 'package:cysm/services/database.dart';
+import 'package:cysm/utilities/placing.dart';
 
 class PlayingGameScreen extends StatefulWidget {
   @override
@@ -184,7 +184,7 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
     return Get.defaultDialog(
         titleStyle: TextStyle(fontSize: 28),
         titlePadding: EdgeInsets.fromLTRB(0, 20, 0, 0),
-        title: 'How to play Niira2',
+        title: 'How to play cysm',
         textConfirm: 'Bring it on frank',
         contentPadding: EdgeInsets.all(15),
         content: Text(

@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get/get.dart';
-import 'package:niira2/controllers/user_controller.dart';
+import 'package:cysm/controllers/user_controller.dart';
 
 import 'mocks.dart';
 

@@ -3,21 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
-import 'package:niira2/controllers/game_controller.dart';
-import 'package:niira2/controllers/location_controller.dart';
-import 'package:niira2/controllers/user_controller.dart';
-import 'package:niira2/screens/game_screens/game_screen.dart';
-import 'package:niira2/screens/splash.dart';
-import 'package:niira2/services/database.dart';
-// import ;ackage:flutter/services.dart';
-// import 'package:socket_io_client/socket_io_client.dart' as IO;
+import 'package:cysm/controllers/game_controller.dart';
+import 'package:cysm/controllers/location_controller.dart';
+import 'package:cysm/controllers/user_controller.dart';
+import 'package:cysm/screens/game_screens/game_screen.dart';
+import 'package:cysm/screens/splash.dart';
+import 'package:cysm/services/database.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  // SystemChrome.setPreferredOrientations([
-  //   DeviceOrientation.portraitUp,
-  //   DeviceOrientation.portraitDown,
-  // ]);
   runApp(App());
 }
 

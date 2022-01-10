@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
-import 'package:niira2/models/player.dart';
-import 'package:niira2/services/database.dart';
+import 'package:cysm/models/player.dart';
+import 'package:cysm/services/database.dart';
 
 class UserController extends GetxController {
   final Database _database = Get.find();

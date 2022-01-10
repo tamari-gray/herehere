@@ -2,9 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:enum_to_string/enum_to_string.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:niira2/models/game.dart';
-import 'package:niira2/models/player.dart';
-import 'package:niira2/models/safety_item.dart';
+import 'package:cysm/models/game.dart';
+import 'package:cysm/models/player.dart';
+import 'package:cysm/models/safety_item.dart';
 
 class Database extends GetxService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;

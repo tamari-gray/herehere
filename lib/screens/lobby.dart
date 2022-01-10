@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:niira2/controllers/game_controller.dart';
-import 'package:niira2/controllers/user_controller.dart';
-import 'package:niira2/services/database.dart';
+import 'package:cysm/controllers/game_controller.dart';
+import 'package:cysm/controllers/user_controller.dart';
+import 'package:cysm/services/database.dart';
 
 class Lobby extends StatelessWidget {
   final UserController _userController = Get.find();
