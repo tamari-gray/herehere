@@ -290,10 +290,10 @@ class SplashSubtitle extends StatelessWidget {
         ),
         children: [
           TextSpan(
-            text: 'Hyper ',
+            text: 'Super ',
           ),
           TextSpan(
-            text: 'hide and go seek',
+            text: 'spotlight',
             style: TextStyle(
               color: const Color(0xfffefefe),
             ),
@@ -315,10 +315,10 @@ class SplashTitle extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.fromLTRB(0, 200, 0, 0),
       child: Text(
-        'Niira',
+        'Herehere',
         style: TextStyle(
           fontFamily: 'Roboto',
-          fontSize: 96,
+          fontSize: 64,
           color: const Color(0xffface4d),
           letterSpacing: 8.553599853515625,
           fontWeight: FontWeight.w500,

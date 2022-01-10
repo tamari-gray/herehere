@@ -1,0 +1,349 @@
+BCSymbolMap Version: 2.0
+Apple clang version 13.0.0 (clang-1300.0.29.3)
+/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS15.0.sdk
+iPhoneOS15.0.sdk
+/Users/aimac/Library/Developer/Xcode/DerivedData/Runner-cubdsoscwpyycsbqcpxnttqsgbxj/Build/Intermediates.noindex/ArchiveIntermediates/Runner/IntermediateBuildFilesPath/Pods.build/Release-iphoneos/geolocator_apple.build/DerivedSources/geolocator_apple_vers.c
+/Users/aimac/Documents/Dev/niira2/ios/Pods
++[AuthorizationStatusMapper toDartIndex:]
+__OBJC_$_CLASS_METHODS_AuthorizationStatusMapper
+__OBJC_METACLASS_RO_$_AuthorizationStatusMapper
+__OBJC_CLASS_RO_$_AuthorizationStatusMapper
+/Users/aimac/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/geolocator_apple-1.2.2/ios/Classes/Utils/AuthorizationStatusMapper.m
+Developer/flutter/.pub-cache/hosted/pub.dartlang.org/geolocator_apple-1.2.2/ios/Classes/Utils/AuthorizationStatusMapper.m
+/Users/aimac
+/Users/aimac/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/geolocator_apple-1.2.2/ios/Classes/Constants/ErrorCodes.m
+-[GeolocationHandler getLastKnownPosition]
+-[GeolocationHandler requestPosition:errorHandler:]
+-[GeolocationHandler startListeningWithDesiredAccuracy:distanceFilter:resultHandler:errorHandler:]
+-[GeolocationHandler startUpdatingLocationWithDesiredAccuracy:distanceFilter:]
+-[GeolocationHandler stopListening]
+-[GeolocationHandler locationManager]
+-[GeolocationHandler locationManager:didUpdateLocations:]
+-[GeolocationHandler locationManager:didFailWithError:]
++[GeolocationHandler shouldEnableBackgroundLocationUpdates]
+-[GeolocationHandler setLocationManager:]
+-[GeolocationHandler errorHandler]
+-[GeolocationHandler setErrorHandler:]
+-[GeolocationHandler resultHandler]
+-[GeolocationHandler setResultHandler:]
+-[GeolocationHandler .cxx_destruct]
+_OBJC_SELECTOR_REFERENCES_
+_OBJC_SELECTOR_REFERENCES_.2
+_OBJC_SELECTOR_REFERENCES_.4
+_OBJC_SELECTOR_REFERENCES_.6
+_OBJC_SELECTOR_REFERENCES_.8
+_OBJC_SELECTOR_REFERENCES_.10
+_OBJC_SELECTOR_REFERENCES_.12
+_OBJC_SELECTOR_REFERENCES_.14
+_OBJC_CLASSLIST_REFERENCES_$_
+_OBJC_SELECTOR_REFERENCES_.16
+_OBJC_SELECTOR_REFERENCES_.18
+_OBJC_SELECTOR_REFERENCES_.20
+_OBJC_SELECTOR_REFERENCES_.22
+_OBJC_CLASSLIST_REFERENCES_$_.23
+_OBJC_SELECTOR_REFERENCES_.25
+_OBJC_SELECTOR_REFERENCES_.27
+_OBJC_SELECTOR_REFERENCES_.29
+_OBJC_SELECTOR_REFERENCES_.31
+_OBJC_SELECTOR_REFERENCES_.33
+_OBJC_SELECTOR_REFERENCES_.35
+_OBJC_SELECTOR_REFERENCES_.37
+_OBJC_SELECTOR_REFERENCES_.39
+_OBJC_SELECTOR_REFERENCES_.41
+_OBJC_SELECTOR_REFERENCES_.43
+_OBJC_CLASSLIST_REFERENCES_$_.44
+_OBJC_SELECTOR_REFERENCES_.46
+_OBJC_SELECTOR_REFERENCES_.50
+_OBJC_SELECTOR_REFERENCES_.54
+__OBJC_$_CLASS_METHODS_GeolocationHandler
+__OBJC_$_PROTOCOL_INSTANCE_METHODS_NSObject
+__OBJC_$_PROTOCOL_INSTANCE_METHODS_OPT_NSObject
+__OBJC_$_PROP_LIST_NSObject
+__OBJC_$_PROTOCOL_METHOD_TYPES_NSObject
+__OBJC_PROTOCOL_$_NSObject
+__OBJC_LABEL_PROTOCOL_$_NSObject
+__OBJC_$_PROTOCOL_REFS_CLLocationManagerDelegate
+__OBJC_$_PROTOCOL_INSTANCE_METHODS_OPT_CLLocationManagerDelegate
+__OBJC_$_PROTOCOL_METHOD_TYPES_CLLocationManagerDelegate
+__OBJC_PROTOCOL_$_CLLocationManagerDelegate
+__OBJC_LABEL_PROTOCOL_$_CLLocationManagerDelegate
+__OBJC_CLASS_PROTOCOLS_$_GeolocationHandler
+__OBJC_METACLASS_RO_$_GeolocationHandler
+__OBJC_$_INSTANCE_METHODS_GeolocationHandler
+_OBJC_IVAR_$_GeolocationHandler._locationManager
+_OBJC_IVAR_$_GeolocationHandler._errorHandler
+_OBJC_IVAR_$_GeolocationHandler._resultHandler
+__OBJC_$_INSTANCE_VARIABLES_GeolocationHandler
+__OBJC_$_PROP_LIST_GeolocationHandler
+__OBJC_CLASS_RO_$_GeolocationHandler
+/Users/aimac/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/geolocator_apple-1.2.2/ios/Classes/Handlers/GeolocationHandler.m
+Developer/flutter/.pub-cache/hosted/pub.dartlang.org/geolocator_apple-1.2.2/ios/Classes/Handlers/GeolocationHandler.m
+__OBJC_METACLASS_RO_$_PodsDummy_geolocator_apple
+__OBJC_CLASS_RO_$_PodsDummy_geolocator_apple
+/Users/aimac/Documents/Dev/niira2/ios/Pods/Target Support Files/geolocator_apple/geolocator_apple-dummy.m
++[GeolocatorPlugin registerWithRegistrar:]
+-[GeolocatorPlugin handleMethodCall:result:]
+-[GeolocatorPlugin onRequestPermission:]
+___40-[GeolocatorPlugin onRequestPermission:]_block_invoke
+___copy_helper_block_e8_32b
+___destroy_helper_block_e8_32s
+___40-[GeolocatorPlugin onRequestPermission:]_block_invoke.80
+-[GeolocatorPlugin onGetLastKnownPosition:]
+___43-[GeolocatorPlugin onGetLastKnownPosition:]_block_invoke
+___copy_helper_block_e8_32b40w
+___destroy_helper_block_e8_32s40w
+___43-[GeolocatorPlugin onGetLastKnownPosition:]_block_invoke.97
+-[GeolocatorPlugin onGetCurrentPositionWithArguments:result:]
+___61-[GeolocatorPlugin onGetCurrentPositionWithArguments:result:]_block_invoke
+___61-[GeolocatorPlugin onGetCurrentPositionWithArguments:result:]_block_invoke_2
+___copy_helper_block_e8_32s40b
+___destroy_helper_block_e8_32s40s
+___61-[GeolocatorPlugin onGetCurrentPositionWithArguments:result:]_block_invoke.102
+___61-[GeolocatorPlugin onGetCurrentPositionWithArguments:result:]_block_invoke.105
+-[GeolocatorPlugin openSettings:]
+___33-[GeolocatorPlugin openSettings:]_block_invoke
+-[GeolocatorPlugin geolocationHandler]
+-[GeolocatorPlugin permissionHandler]
+-[GeolocatorPlugin setGeolocationHandler:]
+-[GeolocatorPlugin setPermissionHandler:]
+-[GeolocatorPlugin locationAccuracyHandler]
+-[GeolocatorPlugin setLocationAccuracyHandler:]
+-[GeolocatorPlugin .cxx_destruct]
+_OBJC_CLASSLIST_REFERENCES_$_.3
+_OBJC_SELECTOR_REFERENCES_.7
+_OBJC_CLASSLIST_REFERENCES_$_.10
+_OBJC_CLASSLIST_REFERENCES_$_.13
+_OBJC_SELECTOR_REFERENCES_.15
+_OBJC_SELECTOR_REFERENCES_.17
+_OBJC_SELECTOR_REFERENCES_.19
+_OBJC_CLASSLIST_REFERENCES_$_.20
+_OBJC_CLASSLIST_REFERENCES_$_.21
+_OBJC_SELECTOR_REFERENCES_.23
+_OBJC_CLASSLIST_REFERENCES_$_.32
+_OBJC_SELECTOR_REFERENCES_.34
+_OBJC_CLASSLIST_REFERENCES_$_.35
+_OBJC_SELECTOR_REFERENCES_.45
+_OBJC_CLASSLIST_REFERENCES_$_.46
+_OBJC_SELECTOR_REFERENCES_.48
+_OBJC_SELECTOR_REFERENCES_.52
+_OBJC_SELECTOR_REFERENCES_.56
+_OBJC_SELECTOR_REFERENCES_.58
+_OBJC_SELECTOR_REFERENCES_.62
+_OBJC_SELECTOR_REFERENCES_.64
+_OBJC_SELECTOR_REFERENCES_.70
+_OBJC_SELECTOR_REFERENCES_.72
+_OBJC_SELECTOR_REFERENCES_.76
+___block_descriptor_40_e8_32bs_e8_v12?0i8l
+_OBJC_CLASSLIST_REFERENCES_$_.81
+_OBJC_SELECTOR_REFERENCES_.83
+___block_descriptor_40_e8_32bs_e31_v24?0"NSString"8"NSString"16l
+_OBJC_SELECTOR_REFERENCES_.86
+_OBJC_CLASSLIST_REFERENCES_$_.87
+_OBJC_SELECTOR_REFERENCES_.89
+_OBJC_SELECTOR_REFERENCES_.93
+_OBJC_CLASSLIST_REFERENCES_$_.94
+_OBJC_SELECTOR_REFERENCES_.96
+___block_descriptor_48_e8_32bs40w_e8_v12?0i8l
+_OBJC_CLASSLIST_REFERENCES_$_.98
+_OBJC_SELECTOR_REFERENCES_.100
+___block_descriptor_48_e8_32s40bs_e20_v16?0"CLLocation"8l
+___block_descriptor_48_e8_32s40bs_e31_v24?0"NSString"8"NSString"16l
+_OBJC_SELECTOR_REFERENCES_.104
+_OBJC_CLASSLIST_REFERENCES_$_.106
+_OBJC_SELECTOR_REFERENCES_.108
+_OBJC_CLASSLIST_REFERENCES_$_.109
+_OBJC_SELECTOR_REFERENCES_.111
+_OBJC_CLASSLIST_REFERENCES_$_.112
+_OBJC_SELECTOR_REFERENCES_.114
+___block_descriptor_40_e8_32bs_e8_v12?0B8l
+_OBJC_SELECTOR_REFERENCES_.117
+_OBJC_SELECTOR_REFERENCES_.119
+_OBJC_CLASSLIST_REFERENCES_$_.120
+__OBJC_$_CLASS_METHODS_GeolocatorPlugin
+__OBJC_$_PROTOCOL_REFS_UNUserNotificationCenterDelegate
+__OBJC_$_PROTOCOL_INSTANCE_METHODS_OPT_UNUserNotificationCenterDelegate
+__OBJC_$_PROTOCOL_METHOD_TYPES_UNUserNotificationCenterDelegate
+__OBJC_PROTOCOL_$_UNUserNotificationCenterDelegate
+__OBJC_LABEL_PROTOCOL_$_UNUserNotificationCenterDelegate
+__OBJC_$_PROTOCOL_REFS_FlutterApplicationLifeCycleDelegate
+__OBJC_$_PROTOCOL_INSTANCE_METHODS_OPT_FlutterApplicationLifeCycleDelegate
+__OBJC_$_PROTOCOL_METHOD_TYPES_FlutterApplicationLifeCycleDelegate
+__OBJC_PROTOCOL_$_FlutterApplicationLifeCycleDelegate
+__OBJC_LABEL_PROTOCOL_$_FlutterApplicationLifeCycleDelegate
+__OBJC_$_PROTOCOL_REFS_FlutterPlugin
+__OBJC_$_PROTOCOL_CLASS_METHODS_FlutterPlugin
+__OBJC_$_PROTOCOL_INSTANCE_METHODS_OPT_FlutterPlugin
+__OBJC_$_PROTOCOL_CLASS_METHODS_OPT_FlutterPlugin
+__OBJC_$_PROTOCOL_METHOD_TYPES_FlutterPlugin
+__OBJC_PROTOCOL_$_FlutterPlugin
+__OBJC_LABEL_PROTOCOL_$_FlutterPlugin
+__OBJC_CLASS_PROTOCOLS_$_GeolocatorPlugin
+__OBJC_METACLASS_RO_$_GeolocatorPlugin
+__OBJC_$_INSTANCE_METHODS_GeolocatorPlugin
+_OBJC_IVAR_$_GeolocatorPlugin._geolocationHandler
+_OBJC_IVAR_$_GeolocatorPlugin._permissionHandler
+_OBJC_IVAR_$_GeolocatorPlugin._locationAccuracyHandler
+__OBJC_$_INSTANCE_VARIABLES_GeolocatorPlugin
+__OBJC_$_PROP_LIST_GeolocatorPlugin
+__OBJC_CLASS_RO_$_GeolocatorPlugin
+/Users/aimac/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/geolocator_apple-1.2.2/ios/Classes/GeolocatorPlugin.m
+Developer/flutter/.pub-cache/hosted/pub.dartlang.org/geolocator_apple-1.2.2/ios/Classes/GeolocatorPlugin.m
+__33-[GeolocatorPlugin openSettings:]_block_invoke
+__61-[GeolocatorPlugin onGetCurrentPositionWithArguments:result:]_block_invoke.105
+__61-[GeolocatorPlugin onGetCurrentPositionWithArguments:result:]_block_invoke.102
+__destroy_helper_block_e8_32s40s
+__copy_helper_block_e8_32s40b
+__61-[GeolocatorPlugin onGetCurrentPositionWithArguments:result:]_block_invoke_2
+__61-[GeolocatorPlugin onGetCurrentPositionWithArguments:result:]_block_invoke
+__43-[GeolocatorPlugin onGetLastKnownPosition:]_block_invoke.97
+__destroy_helper_block_e8_32s40w
+__copy_helper_block_e8_32b40w
+__43-[GeolocatorPlugin onGetLastKnownPosition:]_block_invoke
+__40-[GeolocatorPlugin onRequestPermission:]_block_invoke.80
+__destroy_helper_block_e8_32s
+__copy_helper_block_e8_32b
+__40-[GeolocatorPlugin onRequestPermission:]_block_invoke
+-[LocationAccuracyHandler init]
+-[LocationAccuracyHandler getLocationAccuracyWithResult:]
+-[LocationAccuracyHandler requestTemporaryFullAccuracyWithResult:purposeKey:]
+___77-[LocationAccuracyHandler requestTemporaryFullAccuracyWithResult:purposeKey:]_block_invoke
+-[LocationAccuracyHandler locationManager]
+-[LocationAccuracyHandler setLocationManager:]
+-[LocationAccuracyHandler .cxx_destruct]
+_OBJC_CLASSLIST_REFERENCES_$_.7
+_OBJC_SELECTOR_REFERENCES_.9
+_OBJC_CLASSLIST_REFERENCES_$_.15
+___block_descriptor_48_e8_32s40bs_e17_v16?0"NSError"8l
+__OBJC_METACLASS_RO_$_LocationAccuracyHandler
+__OBJC_$_INSTANCE_METHODS_LocationAccuracyHandler
+_OBJC_IVAR_$_LocationAccuracyHandler._locationManager
+__OBJC_$_INSTANCE_VARIABLES_LocationAccuracyHandler
+__OBJC_$_PROP_LIST_LocationAccuracyHandler
+__OBJC_CLASS_RO_$_LocationAccuracyHandler
+/Users/aimac/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/geolocator_apple-1.2.2/ios/Classes/Handlers/LocationAccuracyHandler.m
+Developer/flutter/.pub-cache/hosted/pub.dartlang.org/geolocator_apple-1.2.2/ios/Classes/Handlers/LocationAccuracyHandler.m
+__77-[LocationAccuracyHandler requestTemporaryFullAccuracyWithResult:purposeKey:]_block_invoke
++[LocationAccuracyMapper toCLLocationAccuracy:]
+__OBJC_$_CLASS_METHODS_LocationAccuracyMapper
+__OBJC_METACLASS_RO_$_LocationAccuracyMapper
+__OBJC_CLASS_RO_$_LocationAccuracyMapper
+/Users/aimac/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/geolocator_apple-1.2.2/ios/Classes/Utils/LocationAccuracyMapper.m
+Developer/flutter/.pub-cache/hosted/pub.dartlang.org/geolocator_apple-1.2.2/ios/Classes/Utils/LocationAccuracyMapper.m
++[LocationDistanceMapper toCLLocationDistance:]
+__OBJC_$_CLASS_METHODS_LocationDistanceMapper
+__OBJC_METACLASS_RO_$_LocationDistanceMapper
+__OBJC_CLASS_RO_$_LocationDistanceMapper
+/Users/aimac/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/geolocator_apple-1.2.2/ios/Classes/Utils/LocationDistanceMapper.m
+Developer/flutter/.pub-cache/hosted/pub.dartlang.org/geolocator_apple-1.2.2/ios/Classes/Utils/LocationDistanceMapper.m
++[LocationMapper toDictionary:]
++[LocationMapper currentTimeInMilliSeconds:]
+_OBJC_CLASSLIST_REFERENCES_$_.5
+_OBJC_CLASSLIST_REFERENCES_$_.8
+_OBJC_SELECTOR_REFERENCES_.24
+_OBJC_SELECTOR_REFERENCES_.28
+_OBJC_SELECTOR_REFERENCES_.38
+_OBJC_SELECTOR_REFERENCES_.40
+_OBJC_SELECTOR_REFERENCES_.42
+__OBJC_$_CLASS_METHODS_LocationMapper
+__OBJC_METACLASS_RO_$_LocationMapper
+__OBJC_CLASS_RO_$_LocationMapper
+/Users/aimac/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/geolocator_apple-1.2.2/ios/Classes/Utils/LocationMapper.m
+Developer/flutter/.pub-cache/hosted/pub.dartlang.org/geolocator_apple-1.2.2/ios/Classes/Utils/LocationMapper.m
+-[LocationServiceStreamHandler onCancelWithArguments:]
+-[LocationServiceStreamHandler onListenWithArguments:eventSink:]
+-[LocationServiceStreamHandler locationManager:didChangeAuthorizationStatus:]
+-[LocationServiceStreamHandler locationManager]
+-[LocationServiceStreamHandler setLocationManager:]
+-[LocationServiceStreamHandler .cxx_destruct]
+__OBJC_$_PROTOCOL_INSTANCE_METHODS_FlutterStreamHandler
+__OBJC_$_PROTOCOL_METHOD_TYPES_FlutterStreamHandler
+__OBJC_PROTOCOL_$_FlutterStreamHandler
+__OBJC_LABEL_PROTOCOL_$_FlutterStreamHandler
+__OBJC_CLASS_PROTOCOLS_$_LocationServiceStreamHandler
+__OBJC_METACLASS_RO_$_LocationServiceStreamHandler
+__OBJC_$_INSTANCE_METHODS_LocationServiceStreamHandler
+_OBJC_IVAR_$_LocationServiceStreamHandler._eventSink
+_OBJC_IVAR_$_LocationServiceStreamHandler._locationManager
+__OBJC_$_INSTANCE_VARIABLES_LocationServiceStreamHandler
+__OBJC_$_PROP_LIST_LocationServiceStreamHandler
+__OBJC_CLASS_RO_$_LocationServiceStreamHandler
+/Users/aimac/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/geolocator_apple-1.2.2/ios/Classes/Handlers/LocationServiceStreamHandler.m
+Developer/flutter/.pub-cache/hosted/pub.dartlang.org/geolocator_apple-1.2.2/ios/Classes/Handlers/LocationServiceStreamHandler.m
++[PermissionHandler hasPermission]
+-[PermissionHandler requestPermission:errorHandler:]
+-[PermissionHandler containsLocationAlwaysDescription]
+-[PermissionHandler locationManager:didChangeAuthorizationStatus:]
+-[PermissionHandler cleanUp]
+-[PermissionHandler locationManager]
+-[PermissionHandler setLocationManager:]
+-[PermissionHandler confirmationHandler]
+-[PermissionHandler setConfirmationHandler:]
+-[PermissionHandler errorHandler]
+-[PermissionHandler setErrorHandler:]
+-[PermissionHandler .cxx_destruct]
+_OBJC_CLASSLIST_REFERENCES_$_.1
+_OBJC_SELECTOR_REFERENCES_.3
+_OBJC_SELECTOR_REFERENCES_.5
+_OBJC_SELECTOR_REFERENCES_.11
+_OBJC_SELECTOR_REFERENCES_.13
+_OBJC_CLASSLIST_REFERENCES_$_.16
+_OBJC_SELECTOR_REFERENCES_.26
+_OBJC_SELECTOR_REFERENCES_.30
+__OBJC_$_CLASS_METHODS_PermissionHandler
+__OBJC_CLASS_PROTOCOLS_$_PermissionHandler
+__OBJC_METACLASS_RO_$_PermissionHandler
+__OBJC_$_INSTANCE_METHODS_PermissionHandler
+_OBJC_IVAR_$_PermissionHandler._locationManager
+_OBJC_IVAR_$_PermissionHandler._confirmationHandler
+_OBJC_IVAR_$_PermissionHandler._errorHandler
+__OBJC_$_INSTANCE_VARIABLES_PermissionHandler
+__OBJC_$_PROP_LIST_PermissionHandler
+__OBJC_CLASS_RO_$_PermissionHandler
+/Users/aimac/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/geolocator_apple-1.2.2/ios/Classes/Handlers/PermissionHandler.m
+Developer/flutter/.pub-cache/hosted/pub.dartlang.org/geolocator_apple-1.2.2/ios/Classes/Handlers/PermissionHandler.m
++[PermissionUtils isStatusGranted:]
+__OBJC_$_CLASS_METHODS_PermissionUtils
+__OBJC_METACLASS_RO_$_PermissionUtils
+__OBJC_CLASS_RO_$_PermissionUtils
+/Users/aimac/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/geolocator_apple-1.2.2/ios/Classes/Utils/PermissionUtils.m
+Developer/flutter/.pub-cache/hosted/pub.dartlang.org/geolocator_apple-1.2.2/ios/Classes/Utils/PermissionUtils.m
+-[PositionStreamHandler initWithGeolocationHandler:PermissionHandler:]
+-[PositionStreamHandler onListenWithArguments:eventSink:]
+___57-[PositionStreamHandler onListenWithArguments:eventSink:]_block_invoke
+___57-[PositionStreamHandler onListenWithArguments:eventSink:]_block_invoke_2
+___copy_helper_block_e8_32w
+___destroy_helper_block_e8_32w
+___57-[PositionStreamHandler onListenWithArguments:eventSink:]_block_invoke.31
+___copy_helper_block_e8_32s40w
+___57-[PositionStreamHandler onListenWithArguments:eventSink:]_block_invoke.36
+-[PositionStreamHandler onCancelWithArguments:]
+-[PositionStreamHandler onLocationDidChange:]
+-[PositionStreamHandler onLocationFailureWithErrorCode:errorDescription:]
+-[PositionStreamHandler geolocationHandler]
+-[PositionStreamHandler setGeolocationHandler:]
+-[PositionStreamHandler permissionHandler]
+-[PositionStreamHandler setPermissionHandler:]
+-[PositionStreamHandler .cxx_destruct]
+_OBJC_CLASSLIST_REFERENCES_$_.14
+___block_descriptor_40_e8_32w_e20_v16?0"CLLocation"8l
+___block_descriptor_40_e8_32w_e31_v24?0"NSString"8"NSString"16l
+___block_descriptor_48_e8_32s40w_e8_v12?0i8l
+_OBJC_CLASSLIST_REFERENCES_$_.41
+__OBJC_CLASS_PROTOCOLS_$_PositionStreamHandler
+__OBJC_METACLASS_RO_$_PositionStreamHandler
+__OBJC_$_INSTANCE_METHODS_PositionStreamHandler
+_OBJC_IVAR_$_PositionStreamHandler._eventSink
+_OBJC_IVAR_$_PositionStreamHandler._geolocationHandler
+_OBJC_IVAR_$_PositionStreamHandler._permissionHandler
+__OBJC_$_INSTANCE_VARIABLES_PositionStreamHandler
+__OBJC_$_PROP_LIST_PositionStreamHandler
+__OBJC_CLASS_RO_$_PositionStreamHandler
+/Users/aimac/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/geolocator_apple-1.2.2/ios/Classes/Handlers/PositionStreamHandler.m
+Developer/flutter/.pub-cache/hosted/pub.dartlang.org/geolocator_apple-1.2.2/ios/Classes/Handlers/PositionStreamHandler.m
+__57-[PositionStreamHandler onListenWithArguments:eventSink:]_block_invoke.36
+__copy_helper_block_e8_32s40w
+__57-[PositionStreamHandler onListenWithArguments:eventSink:]_block_invoke.31
+__destroy_helper_block_e8_32w
+__copy_helper_block_e8_32w
+__57-[PositionStreamHandler onListenWithArguments:eventSink:]_block_invoke_2
+__57-[PositionStreamHandler onListenWithArguments:eventSink:]_block_invoke

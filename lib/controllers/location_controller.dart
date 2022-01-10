@@ -30,12 +30,15 @@ class LocationController extends GetxController {
   }
 
   Future<GeoPoint> getLocationAsGeopoint() async {
-    final _location = await Geolocator.getCurrentPosition();
+    final _location = await Geolocator.getCurrentPosition(
+      desiredAccuracy: LocationAccuracy.bestForNavigation,
+    );
     return GeoPoint(_location.latitude, _location.longitude);
   }
 
   void listenToLocation() {
     positionStream = Geolocator.getPositionStream(
+      desiredAccuracy: LocationAccuracy.bestForNavigation,
       distanceFilter: 1,
       intervalDuration: Duration(seconds: 1),
     ).listen((event) {
