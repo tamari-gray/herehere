@@ -2,10 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>CLIENT_ID</key>
-	<string>833322515004-qi9l4sstak68r55pu3qp0q7p34ocq6qt.apps.googleusercontent.com</string>
-	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.833322515004-qi9l4sstak68r55pu3qp0q7p34ocq6qt</string>
 	<key>API_KEY</key>
 	<string>AIzaSyDBXf6sdwkq9urBS4lwhceEBZGObdj93Tc</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +9,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.tamafreaks.canyasheme</string>
+	<string>com.herehere.canyasheme</string>
 	<key>PROJECT_ID</key>
 	<string>niira2</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:833322515004:ios:64355b99afbec4e0896139</string>
+	<string>1:833322515004:ios:046447abb69c29ab896139</string>
 </dict>
 </plist>
