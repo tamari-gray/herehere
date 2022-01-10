@@ -1,4 +1,4 @@
-com.tamafreaks.canyasheme
+com.herehere.canyasheme
 attr alpha
 attr buttonSize
 attr circleCrop

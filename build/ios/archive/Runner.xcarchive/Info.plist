@@ -11,7 +11,7 @@
 			<string>arm64</string>
 		</array>
 		<key>CFBundleIdentifier</key>
-		<string>com.tamafreaks.canyasheme</string>
+		<string>com.herehere.canyasheme</string>
 		<key>CFBundleShortVersionString</key>
 		<string>1.0.0</string>
 		<key>CFBundleVersion</key>

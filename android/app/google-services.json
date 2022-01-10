@@ -7,17 +7,12 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:833322515004:android:53a583aefb2e7079896139",
+        "mobilesdk_app_id": "1:833322515004:android:56595bc212d2e809896139",
         "android_client_info": {
-          "package_name": "com.tamafreaks.canyasheme"
+          "package_name": "com.herehere.canyasheme"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "833322515004-4q4lci8i1fhrjvvgu3fn76o5qi2n551h.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
           "current_key": "AIzaSyAjc2WCKQRRpL4Lnn0ArJCu83Qpkrx9NiY"
@@ -25,19 +20,7 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "833322515004-4q4lci8i1fhrjvvgu3fn76o5qi2n551h.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "833322515004-j8oe9u1nr4htjns7cnfolln8ec5ass6n.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.kawaiifreaks.niira2"
-              }
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }

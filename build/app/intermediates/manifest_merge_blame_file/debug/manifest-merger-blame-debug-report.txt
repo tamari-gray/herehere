@@ -1,6 +1,6 @@
 1<?xml version="1.0" encoding="utf-8"?>
 2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-3    package="com.tamafreaks.canyasheme"
+3    package="com.herehere.canyasheme"
 4    android:versionCode="1"
 5    android:versionName="1.0.0" >
 6
@@ -44,7 +44,7 @@
 27-->[:cloud_functions] /Users/aimac/Documents/Dev/niira2/build/cloud_functions/intermediates/library_manifest/debug/AndroidManifest.xml:9:9-44
 28        <activity
 28-->/Users/aimac/Documents/Dev/niira2/android/app/src/main/AndroidManifest.xml:9:9-38:20
-29            android:name="com.tamafreaks.canyasheme.MainActivity"
+29            android:name="com.herehere.canyasheme.MainActivity"
 29-->/Users/aimac/Documents/Dev/niira2/android/app/src/main/AndroidManifest.xml:10:13-41
 30            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
 30-->/Users/aimac/Documents/Dev/niira2/android/app/src/main/AndroidManifest.xml:13:13-163
@@ -163,7 +163,7 @@
 98-->[com.google.firebase:firebase-common:20.0.0] /Users/aimac/.gradle/caches/transforms-2/files-2.1/66154a7c311b49bfed22772d6215f9bc/jetified-firebase-common-20.0.0/AndroidManifest.xml:26:9-31:39
 99            android:name="com.google.firebase.provider.FirebaseInitProvider"
 99-->[com.google.firebase:firebase-common:20.0.0] /Users/aimac/.gradle/caches/transforms-2/files-2.1/66154a7c311b49bfed22772d6215f9bc/jetified-firebase-common-20.0.0/AndroidManifest.xml:27:13-77
-100            android:authorities="com.tamafreaks.canyasheme.firebaseinitprovider"
+100            android:authorities="com.herehere.canyasheme.firebaseinitprovider"
 100-->[com.google.firebase:firebase-common:20.0.0] /Users/aimac/.gradle/caches/transforms-2/files-2.1/66154a7c311b49bfed22772d6215f9bc/jetified-firebase-common-20.0.0/AndroidManifest.xml:28:13-72
 101            android:directBootAware="true"
 101-->[com.google.firebase:firebase-common:20.0.0] /Users/aimac/.gradle/caches/transforms-2/files-2.1/66154a7c311b49bfed22772d6215f9bc/jetified-firebase-common-20.0.0/AndroidManifest.xml:29:13-43

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.tamafreaks.canyasheme"
+    package="com.herehere.canyasheme"
     android:versionCode="1"
     android:versionName="1.0.0" >
 
@@ -26,7 +26,7 @@
         android:label="Can ya she me"
         android:usesCleartextTraffic="true" >
         <activity
-            android:name="com.tamafreaks.canyasheme.MainActivity"
+            android:name="com.herehere.canyasheme.MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
             android:hardwareAccelerated="true"
             android:launchMode="singleTop"
@@ -97,7 +97,7 @@
 
         <provider
             android:name="com.google.firebase.provider.FirebaseInitProvider"
-            android:authorities="com.tamafreaks.canyasheme.firebaseinitprovider"
+            android:authorities="com.herehere.canyasheme.firebaseinitprovider"
             android:directBootAware="true"
             android:exported="false"
             android:initOrder="100" />
