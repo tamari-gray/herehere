@@ -13,6 +13,7 @@ class LocationController extends GetxController {
   var serviceEnabled = false.obs;
   var locationPermission = LocationPermission.denied.obs;
   var userBearing = CompassEvent.fromList([1, 2, 3]).obs;
+  var locationAccuracy = LocationAccuracyStatus.reduced.obs;
 
   late StreamSubscription<Position> positionStream;
   late Stream<CompassEvent> userBearingStream;
@@ -35,6 +36,9 @@ class LocationController extends GetxController {
     );
     return GeoPoint(_location.latitude, _location.longitude);
   }
+
+  Future<LocationAccuracyStatus> getLocationAccuracy() async =>
+      await Geolocator.getLocationAccuracy();
 
   void listenToLocation() {
     positionStream = Geolocator.getPositionStream(

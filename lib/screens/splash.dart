@@ -6,6 +6,7 @@ import 'package:loading_indicator/loading_indicator.dart';
 import 'package:cysm/controllers/game_controller.dart';
 import 'package:cysm/controllers/location_controller.dart';
 import 'package:cysm/models/game.dart';
+import 'dart:io' show Platform;
 
 class SplashPage extends StatelessWidget {
   final LocationController _locationController = Get.find();
@@ -28,6 +29,9 @@ class SplashPage extends StatelessWidget {
                   SplashTitle(),
                   SplashSubtitle(),
                   _locationController.serviceEnabled.value &&
+                          (_locationController.locationAccuracy.value ==
+                                  LocationAccuracyStatus.precise &&
+                              Platform.isIOS) &&
                           (_locationController.locationPermission.value ==
                                   LocationPermission.always ||
                               _locationController.locationPermission.value ==
@@ -67,6 +71,8 @@ class _LocationSettingsHandlerState extends State<LocationSettingsHandler> {
         await Geolocator.isLocationServiceEnabled();
     _locationController.locationPermission.value =
         await Geolocator.requestPermission();
+    _locationController.locationAccuracy.value =
+        await Geolocator.getLocationAccuracy();
   }
 
   @override
@@ -78,6 +84,39 @@ class _LocationSettingsHandlerState extends State<LocationSettingsHandler> {
                   LocationPermission.always ||
               _locationController.locationPermission.value ==
                   LocationPermission.whileInUse) {
+            if (_locationController.locationAccuracy.value !=
+                    LocationAccuracyStatus.precise &&
+                Platform.isIOS) {
+              return Card(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    const ListTile(
+                      title: Text('Please enable precise location'),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: <Widget>[
+                        TextButton(
+                          child: const Text('Refresh'),
+                          onPressed: () async {
+                            _checkLocationSettings();
+                          },
+                        ),
+                        const SizedBox(width: 8),
+                        TextButton(
+                          child: const Text('Enable'),
+                          onPressed: () async {
+                            Geolocator.openLocationSettings();
+                          },
+                        ),
+                        const SizedBox(width: 8),
+                      ],
+                    ),
+                  ],
+                ),
+              );
+            }
             return Card(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
