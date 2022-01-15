@@ -43,8 +43,8 @@ class LocationController extends GetxController {
   void listenToLocation() {
     positionStream = Geolocator.getPositionStream(
       desiredAccuracy: LocationAccuracy.bestForNavigation,
-      distanceFilter: 1,
-      intervalDuration: Duration(seconds: 1),
+      // distanceFilter: 1,
+      // intervalDuration: Duration(seconds: 1),
     ).listen((event) {
       location = event.obs;
     });

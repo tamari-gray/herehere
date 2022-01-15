@@ -18,8 +18,8 @@ const itemDoc = `${itemsColl}/{itemId}`;
 
 const boundary = {
     // frimley
-    // center: {latitude: -39.622476, longitude: 176.830278},
-    // radius: 50,
+    center: {latitude: -39.622476, longitude: 176.830278},
+    radius: 50,
 
 
     // otane
@@ -28,8 +28,8 @@ const boundary = {
 
 
     // willowpark middle of front lawn 
-    center: { latitude: -39.6385565402019, longitude: 176.86144794537276 },
-    radius: 5,
+    // center: { latitude: -39.6385565402019, longitude: 176.86144794537276 },
+    // radius: 5,
 
 
     // karamu
@@ -64,6 +64,24 @@ exports.respawnItems = functions.firestore
             }
         }
     });
+
+exports.generateSafetyItemsOnStartGame = functions.firestore
+  .document(gameDoc)
+  .onUpdate(async (change) => {
+    const prevValue = change.before.data();
+    const newValue = change.after.data();
+
+    const prevGamePhase = prevValue.game_phase;
+    const newGamePhase = newValue.game_phase;
+
+    console.log(`prev: ${prevGamePhase}, new: ${newGamePhase}`);
+
+    if (prevGamePhase == "counting" && newGamePhase == "playing") {
+      console.log("changed from counting to playing, generating items!");
+
+      await generateNewItems();
+    }
+  });
 
 // Helper function
 async function generateNewItems() {
