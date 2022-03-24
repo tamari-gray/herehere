@@ -37,16 +37,14 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
       final _taggingPlayer = _gameController.taggingPlayer.value;
       final _pickingUpItem = _gameController.pickingUpItem.value;
 
-      final _userLocation = _locationController.location.value;
-
       final _hidersRemaining = _gameController.players
           .where((p) => !p.hasBeenTagged && !p.isTagger)
           .toList();
 
       // put live location in firestore if hider
-      if (_gamePhase == gamePhase.playing && !_isTagger) {
-        _locationController.updateLocationInDb(_userId);
-      }
+      // if (_gamePhase == gamePhase.playing && !_isTagger) {
+      //   _locationController.updateLocationInDb(_userId);
+      // }
 
       if (showTaggerIsComingDialog &&
           _gamePhase == gamePhase.playing &&

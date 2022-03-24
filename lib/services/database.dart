@@ -221,9 +221,12 @@ class Database extends GetxService {
     }
   }
 
-  Future<void> updateUserLocation(String _hiderId, Position location) async {
+  Future<void> updateUserLocation(String _hiderId, Position _location) async {
     try {
-      return await playerRef(_hiderId).update({'location': location});
+      return await playerRef(_hiderId).update({
+        'location': GeoPoint(_location.latitude, _location.longitude),
+        'location_accuracy': _location.accuracy
+      });
     } catch (e) {
       print(e);
       rethrow;

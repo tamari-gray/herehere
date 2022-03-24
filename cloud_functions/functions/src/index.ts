@@ -18,8 +18,12 @@ const itemDoc = `${itemsColl}/{itemId}`;
 
 const boundary = {
     // frimley
-    center: {latitude: -39.622476, longitude: 176.830278},
-    radius: 50,
+    // center: {latitude: -39.622476, longitude: 176.830278},
+    // radius: 50,
+
+    // karamu
+    // center: {latitude: -39.645224982023095, longitude: 176.86869669325606},
+    // radius: 25,
 
 
     // otane
@@ -32,9 +36,9 @@ const boundary = {
     // radius: 5,
 
 
-    // karamu
-    // center: { latitude: -39.644575, longitude: 176.868368},
-    // radius: 50,
+    // mayfair school, middle of grass
+    center: { latitude: -39.637657,longitude: 176.861391}, 
+    radius: 20
 };
 
 interface safetyItem {

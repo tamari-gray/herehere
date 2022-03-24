@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:enum_to_string/enum_to_string.dart';
+// import 'package:geolocator/geolocator.dart';
 
 enum gamePhase { creating, counting, playing, finished }
 
@@ -10,11 +11,13 @@ class Game {
   String id = "";
   DateTime startTime = DateTime.now();
   gamePhase phase = gamePhase.creating;
+  // Position location =
 
   Game(
     this.id,
     this.startTime,
     this.phase,
+    // this.location,
   );
 
   Map<String, Object?> defaultGame() => {

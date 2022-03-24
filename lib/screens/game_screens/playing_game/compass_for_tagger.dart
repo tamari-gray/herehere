@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:cysm/controllers/user_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
@@ -11,6 +12,7 @@ import 'package:cysm/models/player.dart';
 class CompassForTagger extends StatelessWidget {
   final GameController _gameController = Get.find();
   final LocationController _locationController = Get.find();
+  final UserController _userController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -20,8 +22,10 @@ class CompassForTagger extends StatelessWidget {
       padding: EdgeInsets.all(16.0),
       alignment: Alignment.center,
       child: Obx(() {
+        final _userLocation = _userController.user.value.location;
+        // final _userLocation = _locationController.location.value;
+
         final _userBearing = _locationController.userBearing.value.heading!;
-        final _userLocation = _locationController.location.value;
 
         // handle hiders
         final _hidersRemaining = _gameController.players

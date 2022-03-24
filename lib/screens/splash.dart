@@ -67,12 +67,7 @@ class _LocationSettingsHandlerState extends State<LocationSettingsHandler> {
   }
 
   void _checkLocationSettings() async {
-    _locationController.serviceEnabled.value =
-        await Geolocator.isLocationServiceEnabled();
-    _locationController.locationPermission.value =
-        await Geolocator.requestPermission();
-    _locationController.locationAccuracy.value =
-        await Geolocator.getLocationAccuracy();
+    await _locationController.checkLocationSettings();
   }
 
   @override

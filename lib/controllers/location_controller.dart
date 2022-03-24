@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cysm/controllers/user_controller.dart';
 import 'package:flutter_compass/flutter_compass.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
@@ -8,6 +9,7 @@ import 'package:cysm/services/database.dart';
 
 class LocationController extends GetxController {
   final Database _database = Get.find();
+  final UserController _userController = Get.find();
 
   var location = Position.fromMap({'latitude': 0.0, 'longitude': 0.0}).obs;
   var serviceEnabled = false.obs;
@@ -18,8 +20,14 @@ class LocationController extends GetxController {
   late StreamSubscription<Position> positionStream;
   late Stream<CompassEvent> userBearingStream;
 
-  updateLocationInDb(String userId) async {
-    ever(location, (_) => _database.updateUserLocation(userId, location.value));
+  // updateLocationInDb(String userId) async {
+  //   ever(location, (_) => _database.updateUserLocation(userId, location.value));
+  // }
+
+  checkLocationSettings() async {
+    serviceEnabled.value = await Geolocator.isLocationServiceEnabled();
+    locationPermission.value = await Geolocator.requestPermission();
+    locationAccuracy.value = await Geolocator.getLocationAccuracy();
   }
 
   stopUpdatingLocationInDb(String userId) {
@@ -41,12 +49,15 @@ class LocationController extends GetxController {
       await Geolocator.getLocationAccuracy();
 
   void listenToLocation() {
+    final userId = _userController.userId.value;
+
     positionStream = Geolocator.getPositionStream(
       desiredAccuracy: LocationAccuracy.bestForNavigation,
       // distanceFilter: 1,
       // intervalDuration: Duration(seconds: 1),
     ).listen((event) {
-      location = event.obs;
+      // location = event.obs;
+      _database.updateUserLocation(userId, event);
     });
   }
 
