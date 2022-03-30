@@ -57,18 +57,22 @@ class LocationController extends GetxController {
       // intervalDuration: Duration(seconds: 1),
     ).listen((event) {
       // location = event.obs;
+      // print(event.accuracy);
       _database.updateUserLocation(userId, event);
     });
   }
 
   bool isWithinFindingDistance(int _distance) {
-    return _distance <= 3 ? true : false;
+    return _distance <= 7 ? true : false;
   }
 
-  int distanceFromUser(Position _playerOrItemLoc) {
+  int distanceFromUser(
+    Position _userLoc,
+    Position _playerOrItemLoc,
+  ) {
     return Geolocator.distanceBetween(
-      location.value.latitude,
-      location.value.longitude,
+      _userLoc.latitude,
+      _userLoc.longitude,
       _playerOrItemLoc.latitude,
       _playerOrItemLoc.longitude,
     ).floor();
