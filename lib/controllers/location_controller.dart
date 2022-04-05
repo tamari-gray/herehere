@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cysm/controllers/user_controller.dart';
@@ -11,7 +12,7 @@ class LocationController extends GetxController {
   final Database _database = Get.find();
   final UserController _userController = Get.find();
 
-  var location = Position.fromMap({'latitude': 0.0, 'longitude': 0.0}).obs;
+  var location = Position.fromMap({'latitude': 0.5, 'longitude': 0.5}).obs;
   var serviceEnabled = false.obs;
   var locationPermission = LocationPermission.denied.obs;
   var userBearing = CompassEvent.fromList([1, 2, 3]).obs;
@@ -57,11 +58,12 @@ class LocationController extends GetxController {
       // intervalDuration: Duration(seconds: 1),
     ).listen((event) {
       // location = event.obs;
-      // print(event.accuracy);
+      print(event.accuracy);
       _database.updateUserLocation(userId, event);
     });
   }
 
+  // checks if item or hider is within 7m radius
   bool isWithinFindingDistance(int _distance) {
     return _distance <= 7 ? true : false;
   }
@@ -78,19 +80,32 @@ class LocationController extends GetxController {
     ).floor();
   }
 
-  double bearingBetween(Position _playerOrItemLoc) {
-    return Geolocator.bearingBetween(
-      _playerOrItemLoc.latitude,
-      _playerOrItemLoc.longitude,
-      location.value.latitude,
-      location.value.longitude,
-    );
+  double bearingBetween(Position _userLoc, Position _playerOrItemLoc) {
+    // return Geolocator.bearingBetween(
+    //   location.value.latitude,
+    //   location.value.longitude,
+    //   _playerOrItemLoc.latitude,
+    //   _playerOrItemLoc.longitude,
+    // );
+    final _geoPlayerOrItemLoc =
+        LatLng(_playerOrItemLoc.latitude, _playerOrItemLoc.longitude);
+    final _playerLoc = LatLng(_userLoc.latitude, _userLoc.longitude);
+
+    return finalBearingBetweenTwoGeoPoints(_geoPlayerOrItemLoc, _playerLoc)
+        .toDouble();
   }
 
-  double angleFromUser(Position _playerOrItemLoc) {
-    final _bearingBetween = bearingBetween(_playerOrItemLoc);
+  double angleFromUser(Position _userLoc, Position _playerOrItemLoc) {
+    final _bearingBetween = bearingBetween(_userLoc, _playerOrItemLoc);
+    // print('bearing');
+    // print(_bearingBetween);
+
+    final _userHeading = userBearing.value.heading;
+    print(_userHeading);
+
+    // return _bearingBetween;
     if (_bearingBetween < 180) {
-      final deltaAngle = (userBearing.value.heading! - _bearingBetween) + 180;
+      final deltaAngle = (_userHeading! - _bearingBetween) + 180;
       if (deltaAngle < 0) {
         return deltaAngle + 360.0;
       } else {
@@ -105,4 +120,38 @@ class LocationController extends GetxController {
       }
     }
   }
+}
+
+class LatLng {
+  double lat = 0;
+  double lng = 0;
+  LatLng(this.lat, this.lng);
+}
+
+/// calculate the bearing from point l1 to point l2
+num bearingBetweenTwoGeoPoints(LatLng l1, LatLng l2) {
+  num l1LatRadians = degreesToRadians(l1.lat);
+  num l2LatRadians = degreesToRadians(l2.lat);
+  num lngRadiansDiff = degreesToRadians(l2.lng - l1.lng);
+  num y = sin(lngRadiansDiff) * cos(l2LatRadians);
+  num x = cos(l1LatRadians) * sin(l2LatRadians) -
+      sin(l1LatRadians) * cos(l2LatRadians) * cos(lngRadiansDiff);
+  num radians = atan2(y, x);
+
+  return (radiansToDegrees(radians) + 360) % 360;
+}
+
+/// calculate the final bearing from point l1 to point l2
+num finalBearingBetweenTwoGeoPoints(LatLng l1, LatLng l2) {
+  return (bearingBetweenTwoGeoPoints(l2, l1) + 180) % 360;
+}
+
+/// convert degrees to radians
+num degreesToRadians(num degrees) {
+  return degrees * pi / 180;
+}
+
+/// convert degrees to radians
+num radiansToDegrees(num radians) {
+  return radians * 180 / pi;
 }

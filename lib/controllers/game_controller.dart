@@ -43,7 +43,8 @@ class GameController extends GetxController {
   List<Hider> hidersWithAngleAndDistance(
       Position _userLocation, double _userBearing, List<Player> _hiders) {
     return _hiders.map((_hider) {
-      final _angle = _locationController.angleFromUser(_hider.location);
+      final _angle =
+          _locationController.angleFromUser(_userLocation, _hider.location);
       final _distance =
           _locationController.distanceFromUser(_userLocation, _hider.location);
       return Hider(
@@ -63,7 +64,8 @@ class GameController extends GetxController {
   List<SafetyItem> itemsWithAngleAndDistance(
       Position _userLocation, double _userBearing, List<SafetyItem> _items) {
     return _items.map((_item) {
-      final _angle = _locationController.angleFromUser(_item.location);
+      final _angle =
+          _locationController.angleFromUser(_userLocation, _item.location);
       final _distance =
           _locationController.distanceFromUser(_userLocation, _item.location);
       final _newItem = SafetyItem(

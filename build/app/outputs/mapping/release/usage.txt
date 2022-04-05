@@ -10829,8 +10829,6 @@ androidx.core.content.res.ConfigurationHelper
 kotlin.internal.OnlyInputTypes
 com.google.errorprone.annotations.Immutable
 androidx.core.view.accessibility.AccessibilityViewCommand$ScrollToPositionArguments
-com.google.firebase.installations.remote.AutoValue_InstallationResponse:
-    public com.google.firebase.installations.remote.InstallationResponse$Builder toBuilder()
 com.google.firebase.firestore.util.Util:
     public void <init>()
     public static java.lang.String autoId()
@@ -10838,6 +10836,8 @@ com.google.firebase.firestore.util.Util:
     public static varargs java.util.List collectUpdateArguments(int,java.lang.Object,java.lang.Object,java.lang.Object[])
     private static final int AUTO_ID_LENGTH
     private static final java.lang.String AUTO_ID_ALPHABET
+com.google.firebase.installations.remote.AutoValue_InstallationResponse:
+    public com.google.firebase.installations.remote.InstallationResponse$Builder toBuilder()
 com.google.common.cache.LongAddables$2
 com.google.common.collect.Lists$TwoPlusArrayList
 com.google.protobuf.Struct
