@@ -97,13 +97,7 @@ class LocationController extends GetxController {
 
   double angleFromUser(Position _userLoc, Position _playerOrItemLoc) {
     final _bearingBetween = bearingBetween(_userLoc, _playerOrItemLoc);
-    // print('bearing');
-    // print(_bearingBetween);
-
     final _userHeading = userBearing.value.heading;
-    print(_userHeading);
-
-    // return _bearingBetween;
     if (_bearingBetween < 180) {
       final deltaAngle = (_userHeading! - _bearingBetween) + 180;
       if (deltaAngle < 0) {
