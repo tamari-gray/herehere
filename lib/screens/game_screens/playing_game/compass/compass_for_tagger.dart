@@ -24,8 +24,6 @@ class CompassForTagger extends StatelessWidget {
       alignment: Alignment.center,
       child: Obx(() {
         final _userLocation = _userController.user.value.location;
-        // final _userLocation = _locationController.location.value;
-
         final _userBearing = _locationController.userBearing.value.heading!;
 
         // handle hiders

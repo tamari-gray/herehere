@@ -58,7 +58,7 @@ class LocationController extends GetxController {
       // intervalDuration: Duration(seconds: 1),
     ).listen((event) {
       // location = event.obs;
-      print(event.accuracy);
+      // print(event.accuracy);
       _database.updateUserLocation(userId, event);
     });
   }
@@ -81,38 +81,42 @@ class LocationController extends GetxController {
   }
 
   double bearingBetween(Position _userLoc, Position _playerOrItemLoc) {
-    // return Geolocator.bearingBetween(
-    //   location.value.latitude,
-    //   location.value.longitude,
-    //   _playerOrItemLoc.latitude,
-    //   _playerOrItemLoc.longitude,
-    // );
-    final _geoPlayerOrItemLoc =
-        LatLng(_playerOrItemLoc.latitude, _playerOrItemLoc.longitude);
-    final _playerLoc = LatLng(_userLoc.latitude, _userLoc.longitude);
+    return Geolocator.bearingBetween(
+      _userLoc.latitude,
+      _userLoc.longitude,
+      _playerOrItemLoc.latitude,
+      _playerOrItemLoc.longitude,
+    );
+    // final _geoPlayerOrItemLoc =
+    //     LatLng(_playerOrItemLoc.latitude, _playerOrItemLoc.longitude);
+    // final _playerLoc = LatLng(_userLoc.latitude, _userLoc.longitude);
 
-    return finalBearingBetweenTwoGeoPoints(_geoPlayerOrItemLoc, _playerLoc)
-        .toDouble();
+    // return finalBearingBetweenTwoGeoPoints(_geoPlayerOrItemLoc, _playerLoc)
+    //     .toDouble();
   }
 
   double angleFromUser(Position _userLoc, Position _playerOrItemLoc) {
     final _bearingBetween = bearingBetween(_userLoc, _playerOrItemLoc);
     final _userHeading = userBearing.value.heading;
-    if (_bearingBetween < 180) {
-      final deltaAngle = (_userHeading! - _bearingBetween) + 180;
-      if (deltaAngle < 0) {
-        return deltaAngle + 360.0;
-      } else {
-        return deltaAngle;
-      }
-    } else {
-      final angle = (userBearing.value.heading! - _bearingBetween);
-      if (angle < 0) {
-        return angle + 360.0;
-      } else {
-        return angle;
-      }
-    }
+    final deltaAngle = (_userHeading! - _bearingBetween);
+
+    return deltaAngle;
+
+    // if (_bearingBetween < 180) {
+    //   final deltaAngle = (_userHeading! - _bearingBetween) + 180;
+    //   if (deltaAngle < 0) {
+    //     return deltaAngle + 360.0;
+    //   } else {
+    //     return deltaAngle;
+    //   }
+    // } else {
+    //   final angle = (userBearing.value.heading! - _bearingBetween);
+    //   if (angle < 0) {
+    //     return angle + 360.0;
+    //   } else {
+    //     return angle;
+    //   }
+    // }
   }
 }
 

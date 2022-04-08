@@ -13,11 +13,11 @@ class HelperArrow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final angleInRadians = (angle! * (pi / 360) * -2);
+    final angleInRadians = (angle! * pi) / 180;
     return Positioned(
       bottom: 310,
       child: Transform.rotate(
-        angle: angleInRadians,
+        angle: -angleInRadians,
         origin: Offset(0, 130),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,

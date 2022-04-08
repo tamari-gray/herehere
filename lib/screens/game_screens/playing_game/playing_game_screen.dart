@@ -19,7 +19,6 @@ class PlayingGameScreen extends StatefulWidget {
 class _PlayingGameScreenState extends State<PlayingGameScreen> {
   final GameController _gameController = Get.find();
   final UserController _userController = Get.find();
-  final LocationController _locationController = Get.find();
   final Database _database = Get.find();
 
   bool showTaggerIsComingDialog = true;
@@ -40,11 +39,6 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
       final _hidersRemaining = _gameController.players
           .where((p) => !p.hasBeenTagged && !p.isTagger)
           .toList();
-
-      // put live location in firestore if hider
-      // if (_gamePhase == gamePhase.playing && !_isTagger) {
-      //   _locationController.updateLocationInDb(_userId);
-      // }
 
       if (showTaggerIsComingDialog &&
           _gamePhase == gamePhase.playing &&
@@ -229,6 +223,7 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
       middleText:
           'Tagger will be coming soon! find a hiding spot and wait for the safety items to spawn!',
       textConfirm: 'Ok',
+      // onWillPop: ,
       onConfirm: () async {
         setState(() {
           showTaggerIsComingDialog = false;

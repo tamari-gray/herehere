@@ -30,7 +30,7 @@ class UserController extends GetxController {
   Future<void> joinGamePlusOne(
       String _username, bool isAdmin, GeoPoint _location) async {
     await _database.joinGame(
-        'yeet it', false, GeoPoint(-39.638554342980385, 176.86135365332194));
+        'yeet it', false, GeoPoint(-39.63873726809591, 176.86164435458016));
     userId.value = await _database.joinGame(_username, true, _location);
   }
 

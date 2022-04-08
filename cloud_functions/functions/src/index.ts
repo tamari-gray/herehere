@@ -32,13 +32,13 @@ const boundary = {
 
 
     // willowpark middle of front lawn 
-    // center: { latitude: -39.6385565402019, longitude: 176.86144794537276 },
-    // radius: 5,
+    center: { latitude: -39.6385565402019, longitude: 176.86144794537276 },
+    radius: 20,
 
 
     // mayfair school, middle of grass
-    center: { latitude: -39.637657,longitude: 176.861391}, 
-    radius: 20
+    // center: { latitude: -39.637657,longitude: 176.861391}, 
+    // radius: 20
 };
 
 interface safetyItem {
