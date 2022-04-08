@@ -18,7 +18,7 @@ class HelperArrow extends StatelessWidget {
       bottom: 310,
       child: Transform.rotate(
         angle: -angleInRadians,
-        origin: Offset(0, 130),
+        origin: Offset(0, 140),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
