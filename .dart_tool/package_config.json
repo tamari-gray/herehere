@@ -32,6 +32,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "async_button_builder",
+      "rootUri": "file:///Users/aimac/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/async_button_builder-2.2.0+1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "boolean_selector",
       "rootUri": "file:///Users/aimac/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/boolean_selector-2.1.0",
       "packageUri": "lib/",
@@ -284,6 +290,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "freezed_annotation",
+      "rootUri": "file:///Users/aimac/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/freezed_annotation-1.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.14"
+    },
+    {
       "name": "frontend_server_client",
       "rootUri": "file:///Users/aimac/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/frontend_server_client-2.1.2",
       "packageUri": "lib/",
@@ -482,6 +494,12 @@
       "languageVersion": "2.13"
     },
     {
+      "name": "rounded_loading_button",
+      "rootUri": "file:///Users/aimac/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/rounded_loading_button-2.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "rxdart",
       "rootUri": "file:///Users/aimac/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/rxdart-0.27.2",
       "packageUri": "lib/",
@@ -650,7 +668,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2022-04-04T14:10:05.287276Z",
+  "generated": "2022-04-10T13:56:24.981869Z",
   "generator": "pub",
   "generatorVersion": "2.14.4"
 }

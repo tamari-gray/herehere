@@ -1,3 +1,4 @@
+import 'package:async_button_builder/async_button_builder.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
@@ -7,6 +8,7 @@ import 'package:cysm/controllers/game_controller.dart';
 import 'package:cysm/controllers/location_controller.dart';
 import 'package:cysm/models/game.dart';
 import 'dart:io' show Platform;
+import 'package:rounded_loading_button/rounded_loading_button.dart';
 
 class SplashPage extends StatelessWidget {
   final LocationController _locationController = Get.find();
@@ -198,13 +200,22 @@ class _LogInState extends State<LogIn> {
   final usernameController = TextEditingController();
   final GameController _gameController = Get.find();
   final LocationController _locationController = Get.find();
-  bool _joiningGame = false;
   GeoPoint _location = GeoPoint(0, 0);
+
+  final RoundedLoadingButtonController _loginBtnController =
+      RoundedLoadingButtonController();
 
   @override
   void initState() {
     getLocation();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    // Clean up the text controller when the widget is disposed.
+    usernameController.dispose();
+    super.dispose();
   }
 
   getLocation() async {
@@ -215,12 +226,16 @@ class _LogInState extends State<LogIn> {
     });
   }
 
-  @override
-  void dispose() {
-    // Clean up the text controller when the widget is disposed.
-    usernameController.dispose();
-    _joiningGame = false;
-    super.dispose();
+  void _login(String _username) async {
+    if (_username != '') {
+      _username == 'reset game now'
+          ? await _gameController.resetGame()
+          : await _gameController.joinGame(
+              _username,
+              _location,
+            );
+      _loginBtnController.success();
+    }
   }
 
   @override
@@ -272,32 +287,35 @@ class _LogInState extends State<LogIn> {
                               controller: usernameController,
                             ),
                           ),
-                          OutlinedButton(
-                            onPressed: () async {
-                              if (!_joiningGame) {
-                                setState(() {
-                                  _joiningGame = true;
-                                });
-                                final _username = usernameController.text;
-                                if (_username != '') {
-                                  _username == 'reset game now'
-                                      ? await _gameController.resetGame()
-                                      : await _gameController.joinGame(
-                                          _username,
-                                          _location,
-                                        );
-                                }
-                                setState(() {
-                                  _joiningGame = false;
-                                });
-                              }
-                            },
+                          AsyncButtonBuilder(
+                            showError: false,
+                            showSuccess: false,
+                            loadingWidget: Text('Joining game...'),
                             child: Text(
-                              _joiningGame ? 'Joining game...' : 'Play',
+                              'Join game',
                               style: TextStyle(
                                 color: const Color(0xff82fab8),
                               ),
                             ),
+                            onPressed: () async {
+                              final _username = usernameController.text;
+                              if (_username != '') {
+                                _username == 'reset game now'
+                                    ? await _gameController.resetGame()
+                                    : await _gameController.joinGame(
+                                        _username,
+                                        _location,
+                                      );
+                              }
+
+                              throw 'yikes, problem logging in.';
+                            },
+                            builder: (context, child, callback, buttonState) {
+                              return OutlinedButton(
+                                onPressed: callback,
+                                child: child,
+                              );
+                            },
                           ),
                         ],
                       ),
@@ -368,4 +386,10 @@ class SplashTitle extends StatelessWidget {
       ),
     );
   }
+}
+
+@override
+Widget build(BuildContext context) {
+  // TODO: implement build
+  throw UnimplementedError();
 }
