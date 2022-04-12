@@ -46,9 +46,12 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
           _gamePhase == gamePhase.playing &&
           !_isTagger &&
           _userId != '') {
-        WidgetsBinding.instance!.addPostFrameCallback(
-          (_) => taggerComingDialog(),
-        );
+        WidgetsBinding.instance!.addPostFrameCallback((_) {
+          setState(() {
+            showTaggerIsComingDialog = false;
+          });
+          taggerComingDialog();
+        });
       }
 
       if (showGoHideDialog && _gamePhase == gamePhase.counting && !_isTagger) {
@@ -244,9 +247,6 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
       middleText: 'Find safety items to keep your location safe!',
       textConfirm: 'Ok',
       onConfirm: () async {
-        setState(() {
-          showTaggerIsComingDialog = false;
-        });
         Get.back();
       },
     );
