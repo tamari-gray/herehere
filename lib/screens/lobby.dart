@@ -1,3 +1,4 @@
+import 'package:cysm/controllers/location_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cysm/controllers/game_controller.dart';
@@ -7,29 +8,31 @@ import 'package:cysm/services/database.dart';
 class Lobby extends StatelessWidget {
   final UserController _userController = Get.find();
   final GameController _gameController = Get.find();
+  final LocationController _locationController = Get.find();
   final Database _database = Get.find();
 
   @override
   Widget build(BuildContext context) {
     return Obx(() {
       final bool isAdmin = _userController.user.value.isAdmin;
+      final _userId = _userController.userId.value;
       return Scaffold(
         appBar: AppBar(
           title: isAdmin ? Text('Select tagger') : Text('lobby'),
           actions: [
             ElevatedButton(
               onPressed: () async {
-                await _database.leaveGame(_userController.userId.value);
-                _userController.userId.value = '';
+                await _locationController.stopUpdatingLocationInDb(_userId);
+                await _userController.leaveGame();
               },
               child: Text('leave game'),
             ),
             isAdmin
                 ? ElevatedButton(
                     onPressed: () async {
-                      // resetGameDialog();
-                      await _database.reset();
-                      _userController.userId.value = '';
+                      await _locationController
+                          .stopUpdatingLocationInDb(_userId);
+                      await _gameController.resetGame();
                     },
                     child: Text('reset'),
                   )

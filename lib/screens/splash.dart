@@ -290,7 +290,12 @@ class _LogInState extends State<LogIn> {
                           AsyncButtonBuilder(
                             showError: false,
                             showSuccess: false,
-                            loadingWidget: Text('Joining game...'),
+                            loadingWidget: Text(
+                              'Loading...',
+                              style: TextStyle(
+                                color: const Color(0xff82fab8),
+                              ),
+                            ),
                             child: Text(
                               'Join game',
                               style: TextStyle(

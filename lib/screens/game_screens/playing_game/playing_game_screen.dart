@@ -19,9 +19,11 @@ class PlayingGameScreen extends StatefulWidget {
 class _PlayingGameScreenState extends State<PlayingGameScreen> {
   final GameController _gameController = Get.find();
   final UserController _userController = Get.find();
+  final LocationController _locationController = Get.find();
   final Database _database = Get.find();
 
-  bool showTaggerIsComingDialog = true;
+  bool showTaggerIsComingDialog = false;
+  bool showGoHideDialog = true;
   SafetyItem foundItem = SafetyItem.fromDefault();
 
   @override
@@ -49,23 +51,24 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
         );
       }
 
-      if (showTaggerIsComingDialog &&
-          _gamePhase == gamePhase.counting &&
-          !_isTagger) {
-        WidgetsBinding.instance!.addPostFrameCallback(
-          (_) => goHideDialog(),
-        );
+      if (showGoHideDialog && _gamePhase == gamePhase.counting && !_isTagger) {
+        WidgetsBinding.instance!.addPostFrameCallback((_) {
+          setState(() {
+            showGoHideDialog = false;
+          });
+          goHideDialog();
+        });
       }
 
       if (_userController.user.value.hasBeenTagged) {
         WidgetsBinding.instance!.addPostFrameCallback(
-          (_) => hiderFinishedGameDialog(_hidersRemaining.length),
+          (_) => hiderFinishedGameDialog(_hidersRemaining.length, _userId),
         );
       }
 
       if (_isTagger && _hidersRemaining.length == 0) {
         WidgetsBinding.instance!.addPostFrameCallback(
-          (_) => taggerFinishedGameDialog(),
+          (_) => taggerFinishedGameDialog(_userId),
         );
       }
 
@@ -76,7 +79,7 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
           actions: [
             _isAdmin
                 ? ElevatedButton(
-                    onPressed: () async => await resetGameDialog(),
+                    onPressed: () async => await resetGameDialog(_userId),
                     child: Text('reset'),
                   )
                 : ElevatedButton(
@@ -88,8 +91,9 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
               child: Container(),
             ),
             IconButton(
-              onPressed: () async =>
-                  _isTagger ? await resetGameDialog() : await leaveGameDialog(),
+              onPressed: () async => _isTagger
+                  ? await resetGameDialog(_userId)
+                  : await leaveGameDialog(_userId),
               icon: Icon(Icons.logout),
             ),
           ],
@@ -191,7 +195,7 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
         });
   }
 
-  Future<dynamic> taggerFinishedGameDialog() async {
+  Future<dynamic> taggerFinishedGameDialog(String userId) async {
     return Get.defaultDialog(
       title: 'Game finished!',
       middleText:
@@ -199,19 +203,21 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
       textConfirm: 'Continue',
       onConfirm: () async {
         Get.back();
-        // await _userController.leaveGame();
+        await _locationController.stopUpdatingLocationInDb(userId);
         await _gameController.resetGame();
       },
     );
   }
 
-  Future<dynamic> hiderFinishedGameDialog(int playersRemaining) async {
+  Future<dynamic> hiderFinishedGameDialog(
+      int playersRemaining, String userId) async {
     return Get.defaultDialog(
       title: 'You came ${placing(playersRemaining + 1)}',
       middleText: 'Thanks for the game :)',
       textConfirm: 'Continue',
       onConfirm: () async {
         Get.back();
+        await _locationController.stopUpdatingLocationInDb(userId);
         await _userController.leaveGame();
       },
     );
@@ -223,10 +229,9 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
       middleText:
           'Tagger will be coming soon! find a hiding spot and wait for the safety items to spawn!',
       textConfirm: 'Ok',
-      // onWillPop: ,
       onConfirm: () async {
         setState(() {
-          showTaggerIsComingDialog = false;
+          showTaggerIsComingDialog = true;
         });
         Get.back();
       },
@@ -247,24 +252,26 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
     );
   }
 
-  Future<dynamic> resetGameDialog() async {
+  Future<dynamic> resetGameDialog(String _userId) async {
     return Get.defaultDialog(
         title: 'Leaving will reset the game',
         textConfirm: 'leave',
         middleText: 'or tap outside box to cancel',
         onConfirm: () async {
           Get.back();
+          await _locationController.stopUpdatingLocationInDb(_userId);
           await _gameController.resetGame();
         });
   }
 
-  Future<dynamic> leaveGameDialog() async {
+  Future<dynamic> leaveGameDialog(String _userId) async {
     return Get.defaultDialog(
         title: 'Are you sure you want to leave?',
         textConfirm: 'leave game',
         middleText: '',
         onConfirm: () async {
           Get.back();
+          await _locationController.stopUpdatingLocationInDb(_userId);
           await _userController.leaveGame();
         });
   }

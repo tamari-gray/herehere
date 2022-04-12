@@ -71,7 +71,9 @@ class UserController extends GetxController {
     ever(pickedUpItemsTimes, (_) => calcLocationSafetyTime());
   }
 
-  void resetUser() => userId.value = "";
+  void resetUser() async {
+    userId.value = "";
+  }
 
   Future<void> leaveGame() async {
     final _userId = userId.value;
