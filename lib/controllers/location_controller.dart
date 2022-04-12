@@ -16,7 +16,7 @@ class LocationController extends GetxController {
   var serviceEnabled = false.obs;
   var locationPermission = LocationPermission.denied.obs;
   var userBearing = CompassEvent.fromList([1, 2, 3]).obs;
-  var locationAccuracy = LocationAccuracyStatus.reduced.obs;
+  var locationAccuracy = LocationAccuracyStatus.precise.obs;
 
   late StreamSubscription<Position> positionStream;
   late Stream<CompassEvent> userBearingStream;
