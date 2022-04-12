@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'package:cysm/controllers/user_controller.dart';
 import 'package:cysm/screens/game_screens/playing_game/compass/helper_arrow.dart';
 import 'package:flutter/material.dart';

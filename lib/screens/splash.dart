@@ -8,7 +8,6 @@ import 'package:cysm/controllers/game_controller.dart';
 import 'package:cysm/controllers/location_controller.dart';
 import 'package:cysm/models/game.dart';
 import 'dart:io' show Platform;
-import 'package:rounded_loading_button/rounded_loading_button.dart';
 
 class SplashPage extends StatelessWidget {
   final LocationController _locationController = Get.find();
@@ -202,9 +201,6 @@ class _LogInState extends State<LogIn> {
   final LocationController _locationController = Get.find();
   GeoPoint _location = GeoPoint(0, 0);
 
-  final RoundedLoadingButtonController _loginBtnController =
-      RoundedLoadingButtonController();
-
   @override
   void initState() {
     getLocation();
@@ -224,18 +220,6 @@ class _LogInState extends State<LogIn> {
     setState(() {
       _location = _locationAsGeopoint;
     });
-  }
-
-  void _login(String _username) async {
-    if (_username != '') {
-      _username == 'reset game now'
-          ? await _gameController.resetGame()
-          : await _gameController.joinGame(
-              _username,
-              _location,
-            );
-      _loginBtnController.success();
-    }
   }
 
   @override
@@ -391,10 +375,4 @@ class SplashTitle extends StatelessWidget {
       ),
     );
   }
-}
-
-@override
-Widget build(BuildContext context) {
-  // TODO: implement build
-  throw UnimplementedError();
 }
