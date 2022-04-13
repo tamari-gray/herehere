@@ -79,7 +79,6 @@ class GameController extends GetxController {
   }
 
   Future<void> joinGame(String _username, GeoPoint _locationAsGeopoint) async {
-    _locationController.listenToLocation();
     _locationController.listenToPLayerBearing();
 
     if (_username == 'kawaiifreak97') {
@@ -90,6 +89,8 @@ class GameController extends GetxController {
     } else {
       _userController.joinGame(_username, false, _locationAsGeopoint);
     }
+
+    _locationController.listenToLocation();
   }
 
   Future<dynamic> tagPlayers() async {
