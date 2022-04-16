@@ -87,7 +87,7 @@ class GameController extends GetxController {
       await _userController.joinGamePlusOne(
           'kawaiifreak97', true, _locationAsGeopoint);
     } else {
-      _userController.joinGame(_username, false, _locationAsGeopoint);
+      await _userController.joinGame(_username, false, _locationAsGeopoint);
     }
 
     _locationController.listenToLocation();
