@@ -296,8 +296,6 @@ class _LogInState extends State<LogIn> {
                                         _location,
                                       );
                               }
-
-                              throw 'yikes, problem logging in.';
                             },
                             builder: (context, child, callback, buttonState) {
                               return OutlinedButton(
