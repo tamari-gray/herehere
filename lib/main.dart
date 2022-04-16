@@ -73,7 +73,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'can ya she me',
+      title: 'herehere',
       theme: ThemeData(
         primarySwatch: Colors.orange,
       ),
