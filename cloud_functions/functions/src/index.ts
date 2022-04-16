@@ -16,31 +16,6 @@ const playersColl = `${gameDoc}/players`;
 const itemsColl = `${gameDoc}/items`;
 const itemDoc = `${itemsColl}/{itemId}`;
 
-const boundary = {
-    // frimley
-    // center: {latitude: -39.622476, longitude: 176.830278},
-    // radius: 50,
-
-    // karamu
-    // center: {latitude: -39.645224982023095, longitude: 176.86869669325606},
-    // radius: 25,
-
-
-    // otane
-    // center: {latitude: -39.895878454725036, longitude: 176.6297118718396},
-    // radius: 50,
-
-
-    // willowpark middle of front lawn 
-    center: { latitude: -39.6385565402019, longitude: 176.86144794537276 },
-    radius: 20,
-
-
-    // mayfair school, middle of grass
-    // center: { latitude: -39.637657,longitude: 176.861391}, 
-    // radius: 20
-};
-
 interface safetyItem {
     // eslint-disable-next-line camelcase
     item_picked_up: boolean,
@@ -105,10 +80,15 @@ async function generateNewItems() {
     if (amountOfItems == 0.5) {
     amountOfItemsRoundedDown = 1
     } 
-  
+
+    // get boundary
+    const boundary = await db.doc(gameDoc).get().then((doc) => {
+      return doc.get("boundary");
+    });
+   
     // generate random positions for items
     for (let index = 0; index < amountOfItemsRoundedDown; index++) {
-      const randomCoords = randomLocation.randomCirclePoint(boundary.center, boundary.radius);
+      const randomCoords = randomLocation.randomCirclePoint(boundary["centre"], boundary["radius"]);
       const newItemGeopoint = new firestore.GeoPoint(randomCoords.latitude, randomCoords.longitude);
       const hash = Geohash.encode(randomCoords.latitude, randomCoords.longitude);
       const newItem: safetyItem = {
