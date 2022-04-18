@@ -63,9 +63,9 @@ class LocationController extends GetxController {
     });
   }
 
-  // checks if item or hider is within 7m radius
+  // checks if item or hider is within 8m radius
   bool isWithinFindingDistance(int _distance) {
-    return _distance <= 7 ? true : false;
+    return _distance <= 8 ? true : false;
   }
 
   int distanceFromUser(
