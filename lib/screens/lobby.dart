@@ -63,7 +63,7 @@ class Lobby extends StatelessWidget {
                       children: [
                         Expanded(
                           child: Text(
-                            player.username,
+                            '${player.username}: ${player.locationAccuracy}',
                             style: TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.bold,

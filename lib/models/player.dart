@@ -8,6 +8,7 @@ class Player {
   bool isTagger = false;
   bool hasBeenTagged = false;
   bool locationHidden = false;
+  double locationAccuracy = 0;
   Position location = Position.fromMap({'latitude': 1.0, 'longitude': 0.0});
 
   Player(
@@ -41,6 +42,7 @@ class Player {
       'latitude': doc["location"].latitude,
       'longitude': doc["location"].longitude,
     });
+    locationAccuracy = doc["location_accuracy"] as double;
   }
 
   Player.fromDocumentSnapshot(DocumentSnapshot doc) {

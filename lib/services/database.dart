@@ -21,14 +21,17 @@ class Database extends GetxService {
   DocumentReference<Map<String, dynamic>> playerRef(String id) =>
       playersRef().doc(id);
 
-  newPlayer(String _username, bool _isAdmin, GeoPoint _location) => {
+  newPlayer(String _username, bool _isAdmin, GeoPoint _location,
+          double _locationAccuracy) =>
+      {
         'dateCreated': Timestamp.now(),
         'username': _username,
         'is_admin': _isAdmin,
         'is_tagger': false,
         'has_been_tagged': false,
         'location_hidden': false,
-        'location': _location
+        'location': _location,
+        'location_accuracy': _locationAccuracy
       };
 
   Stream<Player> userDocStream(String userId) {
@@ -41,14 +44,11 @@ class Database extends GetxService {
     });
   }
 
-  Future<String> joinGame(
-    String username,
-    bool isAdmin,
-    GeoPoint location,
-  ) async {
+  Future<String> joinGame(String username, bool isAdmin, GeoPoint location,
+      {double locationAccuracy: 0.0}) async {
     try {
       return await playersRef()
-          .add(newPlayer(username, isAdmin, location))
+          .add(newPlayer(username, isAdmin, location, locationAccuracy))
           .then((docref) {
         return docref.id;
       });
