@@ -354,7 +354,7 @@ class SplashTitle extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.fromLTRB(0, 200, 0, 0),
       child: Text(
-        'herehere',
+        'Herehere',
         style: TextStyle(
           fontFamily: 'Roboto',
           fontSize: 64,
