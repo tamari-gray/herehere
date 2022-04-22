@@ -24,6 +24,9 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
 
   bool showTaggerIsComingDialog = false;
   bool showGoHideDialog = true;
+  bool showHiderFinishedDialog = true;
+  bool showtaggerFinishedGameDialog = true;
+
   SafetyItem foundItem = SafetyItem.fromDefault();
 
   @override
@@ -63,15 +66,27 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
         });
       }
 
-      if (_userController.user.value.hasBeenTagged) {
+      if (showHiderFinishedDialog && _userController.user.value.hasBeenTagged) {
         WidgetsBinding.instance!.addPostFrameCallback(
-          (_) => hiderFinishedGameDialog(_hidersRemaining.length, _userId),
+          (_) {
+            setState(() {
+              showHiderFinishedDialog = false;
+            });
+            hiderFinishedGameDialog(_hidersRemaining.length, _userId);
+          },
         );
       }
 
-      if (_isTagger && _hidersRemaining.length == 0) {
+      if (showtaggerFinishedGameDialog &&
+          _isTagger &&
+          _hidersRemaining.length == 0) {
         WidgetsBinding.instance!.addPostFrameCallback(
-          (_) => taggerFinishedGameDialog(_userId),
+          (_) {
+            setState(() {
+              showtaggerFinishedGameDialog = false;
+            });
+            taggerFinishedGameDialog(_userId);
+          },
         );
       }
 
