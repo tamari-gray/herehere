@@ -30,17 +30,18 @@ class CompassForTagger extends StatelessWidget {
             .where((p) => !p.hasBeenTagged && !p.isTagger)
             .toList();
 
-        final _unsafeHiders =
-            _hidersRemaining.where((h) => !h.locationHidden).toList();
-
-        final _hidersWithDistanceAndAngle =
+        final _allHidersWithDistanceAndAngle =
             _gameController.hidersWithAngleAndDistance(
           _userLocation,
           _userBearing,
-          _unsafeHiders,
+          _hidersRemaining,
         );
 
-        final _foundHiders = _hidersWithDistanceAndAngle
+        final _unsafeHiders = _allHidersWithDistanceAndAngle
+            .where((h) => !h.locationHidden)
+            .toList();
+
+        final _foundHiders = _allHidersWithDistanceAndAngle
             .where(
               (_hider) =>
                   _locationController
@@ -60,7 +61,7 @@ class CompassForTagger extends StatelessWidget {
                 children: _foundHiders.isEmpty
                     ? [
                         if (_gamePhase == gamePhase.playing)
-                          ...helperArrows(_hidersWithDistanceAndAngle),
+                          ...helperArrows(_unsafeHiders),
                         NorthArrow(),
                       ]
                     : [FoundHiders(hiders: _foundHiders)],
