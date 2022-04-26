@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cysm/controllers/location_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -42,6 +43,11 @@ class Lobby extends StatelessWidget {
         floatingActionButton: isAdmin
             ? FloatingActionButton.extended(
                 onPressed: () async {
+                  final _location = _userController.user.value.location;
+                  await _database.setBoundary(GeoPoint(
+                    _location.latitude,
+                    _location.longitude,
+                  ));
                   await _database.playGame();
                 },
                 label: _gameController.players.any((player) => player.isTagger)

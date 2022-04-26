@@ -10,7 +10,7 @@ class Database extends GetxService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   DocumentReference<Map<String, dynamic>> gameRef() =>
-      _firestore.collection("beta").doc("game");
+      _firestore.collection("kiwi-game-starter").doc("game");
 
   CollectionReference<Map<String, dynamic>> itemsRef() =>
       gameRef().collection("items");
@@ -244,6 +244,21 @@ class Database extends GetxService {
           (snap) => snap.docs.forEach((doc) async => await leaveGame(doc.id)));
       return itemsRef().get().then(
           (snap) => snap.docs.forEach((doc) async => await deleteItem(doc.id)));
+    } catch (e) {
+      print(e);
+      rethrow;
+    }
+  }
+
+  Future<void> setBoundary(GeoPoint _boundaryLocation) async {
+    try {
+      await gameRef().update({
+        'boundary': {
+          'centre': _boundaryLocation,
+          'location_name': 'kiwi-game-starter-testing-location',
+          'radius': 10
+        },
+      });
     } catch (e) {
       print(e);
       rethrow;

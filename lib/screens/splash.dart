@@ -288,14 +288,10 @@ class _LogInState extends State<LogIn> {
                             ),
                             onPressed: () async {
                               final _username = usernameController.text;
-                              if (_username != '') {
-                                _username == 'reset game now'
-                                    ? await _gameController.resetGame()
-                                    : await _gameController.joinGame(
-                                        _username,
-                                        _location,
-                                      );
-                              }
+                              await _gameController.joinGame(
+                                _username,
+                                _location,
+                              );
                             },
                             builder: (context, child, callback, buttonState) {
                               return OutlinedButton(
