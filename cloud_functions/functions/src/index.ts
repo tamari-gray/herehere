@@ -16,6 +16,8 @@ const playersColl = `${gameDoc}/players`;
 const itemsColl = `${gameDoc}/items`;
 const itemDoc = `${itemsColl}/{itemId}`;
 
+
+
 interface safetyItem {
     // eslint-disable-next-line camelcase
     item_picked_up: boolean,
@@ -62,47 +64,139 @@ exports.generateSafetyItemsOnStartGame = functions.firestore
     }
   });
 
-// Helper function
+  // Helper function
 async function generateNewItems() {
-    const items: safetyItem[] = [];
-  
-    // get hiders from firestore
-    const unTaggedHidersQuery = db.collection(playersColl).where("is_tagger", "==", false).where("has_been_tagged", "==", false);
-    const numberOfHidersLeft: number = await unTaggedHidersQuery.get().then((querySnapshot) => {
-      return querySnapshot.size;
-    });
-  
-    // get 50% of remainingHiders rounded down = numberofitems
-    const amountOfItems = (50 / 100) * numberOfHidersLeft;
-    var amountOfItemsRoundedDown = Math.floor(amountOfItems);
-    console.log(`amount of items: ${amountOfItems}, rounded down: ${amountOfItemsRoundedDown}`);
-    
-    if (amountOfItems == 0.5) {
-    amountOfItemsRoundedDown = 1
-    } 
+  const items: safetyItem[] = [];
 
-    // get boundary
-    const boundary = await db.doc(gameDoc).get().then((doc) => {
-      return doc.get("boundary");
-    });
-   
-    // generate random positions for items
-    for (let index = 0; index < amountOfItemsRoundedDown; index++) {
-      const randomCoords = randomLocation.randomCirclePoint(boundary["centre"], boundary["radius"]);
-      const newItemGeopoint = new firestore.GeoPoint(randomCoords.latitude, randomCoords.longitude);
-      const hash = Geohash.encode(randomCoords.latitude, randomCoords.longitude);
-      const newItem: safetyItem = {
-        item_picked_up: false,
-        point: {
-          geopoint: newItemGeopoint,
-          geohash: hash,
-        },
-      };
+  // get hiders from firestore
+  const unTaggedHidersQuery = db.collection(playersColl).where("is_tagger", "==", false).where("has_been_tagged", "==", false);
+  const numberOfHidersLeft: number = await unTaggedHidersQuery.get().then((querySnapshot) => {
+    return querySnapshot.size;
+  });
+
+  // get 50% of remainingHiders rounded down = numberofitems
+  const amountOfItems = (50 / 100) * numberOfHidersLeft;
+  var amountOfItemsRoundedDown = Math.floor(amountOfItems);
+  console.log(`amount of items: ${amountOfItems}, rounded down: ${amountOfItemsRoundedDown}`);
   
-      items.push(newItem);
-    }
-  
-    //put items in db
-    items.forEach((newItem) => db.collection(itemsColl).add(newItem));
+  if (amountOfItems == 0.5) {
+  amountOfItemsRoundedDown = 1
+  } 
+
+  // get boundary
+  const boundary = await db.doc(gameDoc).get().then((doc) => {
+    return doc.get("boundary");
+  });
+ 
+  // generate random positions for items
+  for (let index = 0; index < amountOfItemsRoundedDown; index++) {
+    const randomCoords = randomLocation.randomCirclePoint(boundary["centre"], boundary["radius"]);
+    const newItemGeopoint = new firestore.GeoPoint(randomCoords.latitude, randomCoords.longitude);
+    const hash = Geohash.encode(randomCoords.latitude, randomCoords.longitude);
+    const newItem: safetyItem = {
+      item_picked_up: false,
+      point: {
+        geopoint: newItemGeopoint,
+        geohash: hash,
+      },
+    };
+
+    items.push(newItem);
   }
+
+  //put items in db
+  items.forEach((newItem) => db.collection(itemsColl).add(newItem));
+}
+
+
+
+// kiwi game starter functions vv  /////////////////////////////////////////////////
+
+const kiwiGameDoc = "kiwi-game-starter/game";
+const kiwiPlayersColl = `${kiwiGameDoc}/players`;
+const kiwiItemsColl = `${kiwiGameDoc}/items`;
+const kiwiItemDoc = `${kiwiItemsColl}/{itemId}`;
+
+  exports.kiwiRespawnItems = functions.firestore
+    .document(kiwiItemDoc)
+    .onUpdate(async (change) => {
+        const newValue = change.after.data();
+
+        if (newValue.item_picked_up === true) {
+            console.log("item picked up");
+
+            const itemsNotPickedUp = await db.collection(kiwiItemsColl).where("item_picked_up", "==", false).get();
+
+            if (itemsNotPickedUp.size === 0) {
+                console.log("all items picked up! generating new items!");
+                // delete old items? figure out after do user pick up item
+                await kiwiGenerateNewItems();
+            }
+        }
+    });
+
+exports.kiwiGenerateSafetyItemsOnStartGame = functions.firestore
+  .document(kiwiGameDoc)
+  .onUpdate(async (change) => {
+    const prevValue = change.before.data();
+    const newValue = change.after.data();
+
+    const prevGamePhase = prevValue.game_phase;
+    const newGamePhase = newValue.game_phase;
+
+    console.log(`prev: ${prevGamePhase}, new: ${newGamePhase}`);
+
+    if (prevGamePhase == "counting" && newGamePhase == "playing") {
+      console.log("changed from counting to playing, generating items!");
+
+      await kiwiGenerateNewItems();
+    }
+  });
+
+  // Helper function
+async function kiwiGenerateNewItems() {
+  const items: safetyItem[] = [];
+
+  // get hiders from firestore
+  const unTaggedHidersQuery = db.collection(kiwiPlayersColl).where("is_tagger", "==", false).where("has_been_tagged", "==", false);
+  const numberOfHidersLeft: number = await unTaggedHidersQuery.get().then((querySnapshot) => {
+    return querySnapshot.size;
+  });
+
+  // get 50% of remainingHiders rounded down = numberofitems
+  const amountOfItems = (50 / 100) * numberOfHidersLeft;
+  var amountOfItemsRoundedDown = Math.floor(amountOfItems);
+  console.log(`amount of items: ${amountOfItems}, rounded down: ${amountOfItemsRoundedDown}`);
+  
+  if (amountOfItems == 0.5) {
+  amountOfItemsRoundedDown = 1
+  } 
+
+  // get boundary
+  const boundary = await db.doc(kiwiGameDoc).get().then((doc) => {
+    return doc.get("boundary");
+  });
+ 
+  // generate random positions for items
+  for (let index = 0; index < amountOfItemsRoundedDown; index++) {
+    const randomCoords = randomLocation.randomCirclePoint(boundary["centre"], boundary["radius"]);
+    const newItemGeopoint = new firestore.GeoPoint(randomCoords.latitude, randomCoords.longitude);
+    const hash = Geohash.encode(randomCoords.latitude, randomCoords.longitude);
+    const newItem: safetyItem = {
+      item_picked_up: false,
+      point: {
+        geopoint: newItemGeopoint,
+        geohash: hash,
+      },
+    };
+
+    items.push(newItem);
+  }
+
+  //put items in db
+  items.forEach((newItem) => db.collection(kiwiItemsColl).add(newItem));
+}
+
+
+
 

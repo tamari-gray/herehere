@@ -89,7 +89,7 @@ class GameController extends GetxController {
       } else if (_username == 'kawaiiplusone') {
         await _userController.joinGamePlusOne(
             'kawaiifreak97', true, _locationAsGeopoint);
-      } else if (_username == 'kiwigamestarter') {
+      } else if (_username == 'kiwi-admin') {
         await _userController.joinGame(_username, true, _locationAsGeopoint);
       } else {
         await _userController.joinGame(_username, false, _locationAsGeopoint);
