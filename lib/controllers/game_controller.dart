@@ -126,6 +126,8 @@ class GameController extends GetxController {
   }
 
   Future<void> resetGame() async {
+    final _userId = _userController.userId.value;
+    _locationController.stopUpdatingLocationInDb(_userId);
     _userController.resetUser();
     await _database.reset();
   }
