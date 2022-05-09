@@ -79,18 +79,26 @@ class GameController extends GetxController {
   }
 
   Future<void> joinGame(String _username, GeoPoint _locationAsGeopoint) async {
-    _locationController.listenToPLayerBearing();
+    if (_username != '') {
+      _locationController.listenToPLayerBearing();
 
-    if (_username == 'kawaiifreak97') {
-      await _userController.joinGame(_username, true, _locationAsGeopoint);
-    } else if (_username == 'kawaiiplusone') {
-      await _userController.joinGamePlusOne(
-          'kawaiifreak97', true, _locationAsGeopoint);
-    } else {
-      await _userController.joinGame(_username, false, _locationAsGeopoint);
+      if (_username == 'reset game now') {
+        await resetGame();
+      } else {
+        if (_username == 'kawaiifreak97') {
+          await _userController.joinGame(_username, true, _locationAsGeopoint);
+        } else if (_username == 'kawaiiplusone') {
+          await _userController.joinGamePlusOne(
+              'kawaiifreak97', true, _locationAsGeopoint);
+        } else if (_username == 'kiwi-admin') {
+          await _userController.joinGame(_username, true, _locationAsGeopoint);
+        } else {
+          await _userController.joinGame(_username, false, _locationAsGeopoint);
+        }
+
+        _locationController.listenToLocation();
+      }
     }
-
-    _locationController.listenToLocation();
   }
 
   Future<dynamic> tagPlayers() async {
