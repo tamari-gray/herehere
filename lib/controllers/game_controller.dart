@@ -151,7 +151,7 @@ class GameController extends GetxController {
           : 'Tagged ${_hiders.map((e) => e.username).join(",")}!',
       textConfirm: 'Ok',
       onConfirm: () => Get.back(),
-      middleText: '${players.length} players left',
+      middleText: '${hidersRemaining().length - 1} players left',
     );
   }
 
