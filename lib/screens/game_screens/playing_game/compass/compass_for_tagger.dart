@@ -43,10 +43,8 @@ class CompassForTagger extends StatelessWidget {
 
         final _foundHiders = _allHidersWithDistanceAndAngle
             .where(
-              (_hider) =>
-                  _locationController
-                      .isWithinFindingDistance(_hider.distanceFromUser) &&
-                  !_hider.locationHidden,
+              (_hider) => _locationController
+                  .isWithinFindingDistance(_hider.distanceFromUser),
             )
             .toList();
         _gameController.foundHiders.value = _foundHiders;
