@@ -48,7 +48,9 @@ class MockLocationController extends GetxController
 class MockGameController extends GetxController
     with Mock
     implements GameController {
-  final game = Game("id", DateTime.now(), gamePhase.playing).obs;
+  final game = Game("id", DateTime.now(), gamePhase.playing,
+          GeneratingItems(false, DateTime.now()))
+      .obs;
   final players = [mockHider, mockHider].obs;
   final items = List<SafetyItem>.empty().obs;
   var taggingPlayer = false.obs;

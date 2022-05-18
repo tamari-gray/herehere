@@ -13,7 +13,9 @@ import 'compass_for_tagger.dart';
 
 class CompassForHider extends StatelessWidget {
   final GameController _gameController = Get.find();
+
   final LocationController _locationController = Get.find();
+
   final UserController _userController = Get.find();
 
   @override
@@ -28,6 +30,14 @@ class CompassForHider extends StatelessWidget {
         final _userBearing = _locationController.userBearing.value.heading!;
 
         // handle items
+        if (_gameController.game.value.generatingItems.generating &&
+            !_gameController.itemRespawnTimerIsGoing.value) {
+          _gameController.startItemRespawnTimer();
+        }
+
+        if (!_gameController.game.value.generatingItems.generating)
+          _gameController.stopItemRespawnTimer();
+
         final _items = _gameController.items;
         final _itemsWithDistanceAndAngle =
             _gameController.itemsWithAngleAndDistance(
@@ -59,7 +69,19 @@ class CompassForHider extends StatelessWidget {
                     : [
                         if (_gamePhase == gamePhase.playing)
                           ...helperArrows(_itemsWithDistanceAndAngle),
-                        NorthArrow(),
+                        _items.isNotEmpty
+                            ? NorthArrow()
+                            : Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Center(
+                                    child: Text(
+                                      'Safety items respawning in: ${_gameController.itemRespawnTime.value}',
+                                      style: TextStyle(fontSize: 20),
+                                    ),
+                                  ),
+                                ],
+                              ),
                       ],
               );
       }),
@@ -112,6 +134,28 @@ class FoundItems extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class ItemTimer extends StatelessWidget {
+  final GameController _gameController = Get.find();
+  @override
+  Widget build(BuildContext context) {
+    return Transform.rotate(
+      angle: 0,
+      child: _gameController.game.value.phase == gamePhase.counting
+          ? Image.asset(
+              'assets/niira_compass_basic.png',
+              width: 155,
+              height: 155,
+            )
+          : Image.asset(
+              'assets/niira_compass_basic.png',
+              fit: BoxFit.scaleDown,
+              width: 75,
+              height: 75,
+            ),
     );
   }
 }

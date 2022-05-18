@@ -196,15 +196,24 @@ class Database extends GetxService {
     }
   }
 
-  Future<void> pickUpItems(List<SafetyItem> _items, String _playerId) async {
+  Future<int> pickUpItems(List<SafetyItem> _items, String _playerId) async {
     try {
-      _items.forEach((_item) async {
-        await itemsRef().doc(_item.id).update({'item_picked_up': true});
-        await playerRef(_playerId).update({'location_hidden': true});
-        await playerRef(_playerId)
-            .collection("items")
-            .add({"time_picked_up": DateTime.now().microsecondsSinceEpoch});
+      int _itemsPickedUp = 0;
+      await Future.forEach(_items, (SafetyItem _item) async {
+        final _itemFromDb = await itemsRef().doc(_item.id).get();
+        final _itemFromDbAsMap = _itemFromDb.data();
+        final _isPickedUp = _itemFromDbAsMap!['item_picked_up'] as bool;
+
+        if (_isPickedUp == false) {
+          _itemsPickedUp++;
+          await itemsRef().doc(_item.id).update({'item_picked_up': true});
+          await playerRef(_playerId).update({'location_hidden': true});
+          await playerRef(_playerId)
+              .collection("items")
+              .add({"time_picked_up": DateTime.now().microsecondsSinceEpoch});
+        }
       });
+      return _itemsPickedUp;
     } catch (e) {
       print(e);
       rethrow;

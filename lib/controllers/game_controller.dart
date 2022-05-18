@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
@@ -24,12 +26,36 @@ class GameController extends GetxController {
   var taggingPlayer = false.obs;
   var pickingUpItem = false.obs;
 
+  Timer _itemRespawnTimer = Timer(Duration(seconds: 0), () => 0);
+  var itemRespawnTime = 30.obs;
+  var itemRespawnTimerIsGoing = false.obs;
+
   @override
   void onInit() {
     super.onInit();
     game.bindStream(_database.gameStream());
     players.bindStream(_database.playersStream());
     items.bindStream(_database.availableSafetyItemStream());
+  }
+
+  void stopItemRespawnTimer() {
+    _itemRespawnTimer.cancel();
+    itemRespawnTimerIsGoing = false.obs;
+    itemRespawnTime = 30.obs;
+  }
+
+  void startItemRespawnTimer() {
+    itemRespawnTimerIsGoing = true.obs;
+    itemRespawnTime = 30.obs;
+
+    _itemRespawnTimer = Timer.periodic(Duration(seconds: 1), (timer) {
+      if (itemRespawnTime.value >= 1) {
+        itemRespawnTime.value--;
+      }
+      if (itemRespawnTime.value <= 0) {
+        stopItemRespawnTimer();
+      }
+    });
   }
 
   int timeToTagAllHiders() =>
@@ -117,13 +143,15 @@ class GameController extends GetxController {
   Future<dynamic> pickUpItems() async {
     pickingUpItem = true.obs;
     final _userId = _userController.userId.value;
+
     if (foundItems.isEmpty) {
       pickingUpItem = false.obs;
       return noItemsFoundDialog();
     } else {
-      await _database.pickUpItems(foundItems, _userId);
+      final amountOfPickedUpItems =
+          await _database.pickUpItems(foundItems, _userId);
       pickingUpItem = false.obs;
-      itemsPickedUpDialog(foundItems.length);
+      itemsPickedUpDialog(amountOfPickedUpItems);
     }
   }
 

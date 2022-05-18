@@ -284,6 +284,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "flutter_timer_countdown",
+      "rootUri": "file:///Users/aimac/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_timer_countdown-1.0.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "flutter_web_plugins",
       "rootUri": "file:///Users/aimac/Developer/flutter/packages/flutter_web_plugins",
       "packageUri": "lib/",
@@ -668,7 +674,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2022-05-09T11:54:53.704281Z",
+  "generated": "2022-05-17T01:15:03.886156Z",
   "generator": "pub",
   "generatorVersion": "2.14.4"
 }

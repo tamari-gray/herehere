@@ -39,7 +39,11 @@ exports.respawnItems = functions.firestore
             if (itemsNotPickedUp.size === 0) {
                 console.log("all items picked up! generating new items!");
                 // delete old items? figure out after do user pick up item
-                await generateNewItems();
+                await db.doc(gameDoc).update({"generating_items": {
+                  "generating": true,
+                  "time": firestore.FieldValue.serverTimestamp(),
+                }});
+                setTimeout(() => generateNewItems(), 30000);
             }
         }
     });
@@ -104,5 +108,11 @@ async function generateNewItems() {
   
     //put items in db
     items.forEach((newItem) => db.collection(itemsColl).add(newItem));
+
+    await db.doc(gameDoc).update({"generating_items": {
+      "generating": false,
+      "time": firestore.FieldValue.serverTimestamp()
+    }});
+
   }
 
