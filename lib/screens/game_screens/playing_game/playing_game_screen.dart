@@ -68,11 +68,14 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
 
       if (showHiderFinishedDialog && _userController.user.value.hasBeenTagged) {
         WidgetsBinding.instance!.addPostFrameCallback(
-          (_) {
+          (_) async {
             setState(() {
               showHiderFinishedDialog = false;
             });
-            hiderFinishedGameDialog(_hidersRemaining.length, _userId);
+            final _hidersForHiderFinishedDialog = _hidersRemaining.length;
+            await _locationController.stopUpdatingLocationInDb(_userId);
+            await _userController.leaveGame();
+            hiderFinishedGameDialog(_hidersForHiderFinishedDialog);
           },
         );
       }
@@ -81,11 +84,15 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
           _isTagger &&
           _hidersRemaining.length == 0) {
         WidgetsBinding.instance!.addPostFrameCallback(
-          (_) {
+          (_) async {
             setState(() {
               showtaggerFinishedGameDialog = false;
             });
-            taggerFinishedGameDialog(_userId);
+            final _hiders = _gameController.allHiders();
+            final _time = _gameController.timeToTagAllHiders();
+            await _locationController.stopUpdatingLocationInDb(_userId);
+            await _gameController.resetGame();
+            taggerFinishedGameDialog(_hiders, _time);
           },
         );
       }
@@ -213,31 +220,22 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
         });
   }
 
-  Future<dynamic> taggerFinishedGameDialog(String userId) async {
+  Future<dynamic> taggerFinishedGameDialog(int _hiders, int _time) {
     return Get.defaultDialog(
       title: 'Game finished!',
       middleText:
-          'Good job! you tagged ${_gameController.allHiders()} players in ${_gameController.timeToTagAllHiders()} minutes. Thanks for the game :) ',
+          'Good job! you tagged $_hiders players in $_time} minutes. Thanks for the game :) ',
       textConfirm: 'Continue',
-      onConfirm: () async {
-        Get.back();
-        await _locationController.stopUpdatingLocationInDb(userId);
-        await _gameController.resetGame();
-      },
+      onConfirm: () => Get.back(),
     );
   }
 
-  Future<dynamic> hiderFinishedGameDialog(
-      int playersRemaining, String userId) async {
+  Future<dynamic> hiderFinishedGameDialog(int playersRemaining) async {
     return Get.defaultDialog(
       title: 'You came ${placing(playersRemaining + 1)}',
       middleText: 'Thanks for the game :)',
       textConfirm: 'Continue',
-      onConfirm: () async {
-        Get.back();
-        await _locationController.stopUpdatingLocationInDb(userId);
-        await _userController.leaveGame();
-      },
+      onConfirm: () => Get.back(),
     );
   }
 
