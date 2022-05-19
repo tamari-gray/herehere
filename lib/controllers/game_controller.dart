@@ -39,7 +39,7 @@ class GameController extends GetxController {
   }
 
   void stopItemRespawnTimer() {
-    _itemRespawnTimer.cancel();
+    if (_itemRespawnTimer.isActive) _itemRespawnTimer.cancel();
     itemRespawnTimerIsGoing = false.obs;
     itemRespawnTime = 30.obs;
   }

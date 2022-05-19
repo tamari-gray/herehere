@@ -224,7 +224,7 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
     return Get.defaultDialog(
       title: 'Game finished!',
       middleText:
-          'Good job! you tagged $_hiders players in $_time} minutes. Thanks for the game :) ',
+          'Good job! you tagged $_hiders players in $_time minutes. Thanks for the game :) ',
       textConfirm: 'Continue',
       onConfirm: () => Get.back(),
     );

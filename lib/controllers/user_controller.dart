@@ -73,11 +73,11 @@ class UserController extends GetxController {
 
   void resetUser() async {
     userId.value = "";
+    if (_timer.isActive) _timer.cancel();
   }
 
   Future<void> leaveGame() async {
-    final _userId = userId.value;
+    await _database.leaveGame(userId.value);
     resetUser();
-    await _database.leaveGame(_userId);
   }
 }

@@ -60,6 +60,12 @@ class Database extends GetxService {
 
   Future<void> leaveGame(String id) async {
     try {
+      await playerRef(id).collection("items").get().then(
+            (snap) => snap.docs.forEach(
+              (_doc) async =>
+                  await playerRef(id).collection("items").doc(_doc.id).delete(),
+            ),
+          );
       return await playerRef(id).delete();
     } catch (e) {
       print(e);
@@ -189,7 +195,9 @@ class Database extends GetxService {
 
   Future<void> hiderItemsExpire(String _playerId) async {
     try {
-      await playerRef(_playerId).update({'location_hidden': false});
+      final _user = await playerRef(_playerId).get();
+      if (_user.exists)
+        await playerRef(_playerId).update({'location_hidden': false});
     } catch (e) {
       print(e);
       rethrow;
