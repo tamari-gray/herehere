@@ -13,7 +13,7 @@
 		<key>CFBundleIdentifier</key>
 		<string>com.herehere.canyasheme</string>
 		<key>CFBundleShortVersionString</key>
-		<string>1.3.01</string>
+		<string>3.2.1</string>
 		<key>CFBundleVersion</key>
 		<string>1</string>
 		<key>SigningIdentity</key>
@@ -24,7 +24,7 @@
 	<key>ArchiveVersion</key>
 	<integer>2</integer>
 	<key>CreationDate</key>
-	<date>2022-05-09T12:03:24Z</date>
+	<date>2022-05-19T07:18:10Z</date>
 	<key>Name</key>
 	<string>Runner</string>
 	<key>SchemeName</key>
