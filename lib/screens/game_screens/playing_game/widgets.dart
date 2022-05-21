@@ -9,11 +9,19 @@ class LocationHiddenBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OutlinedButton.icon(
+      style: ButtonStyle(
+        backgroundColor: MaterialStateProperty.all(Color(0xff82fab8)),
+      ),
       onPressed: () {},
-      icon: Icon(Icons.check),
+      icon: Icon(
+        Icons.check,
+        color: Colors.black,
+      ),
       label: Obx(() {
         return Text(
-            'Location safe for ${_userController.locationHiddenTimer.value}s');
+          'Location safe for ${_userController.locationHiddenTimer.value}s',
+          style: TextStyle(color: Colors.black),
+        );
       }),
     );
   }
