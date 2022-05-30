@@ -1,7 +1,6 @@
 import 'package:cysm/controllers/user_controller.dart';
 import 'package:cysm/screens/game_screens/playing_game/compass/helper_arrow.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
 import 'package:get/state_manager.dart';
 import 'package:cysm/controllers/game_controller.dart';
@@ -57,11 +56,30 @@ class CompassForTagger extends StatelessWidget {
                 clipBehavior: Clip.none,
                 alignment: AlignmentDirectional.center,
                 children: _foundHiders.isEmpty
-                    ? [
-                        if (_gamePhase == gamePhase.playing)
-                          ...helperArrows(_unsafeHiders),
-                        NorthArrow(),
-                      ]
+                    ? _unsafeHiders.isEmpty
+                        ? [
+                            // if hiders arent in finding distance and all have safety items
+                            Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  SizedBox(
+                                    height: 50,
+                                  ),
+                                  Text(
+                                    'All hiders locations are safe, for now...',
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ]),
+                            NorthArrow(),
+                          ]
+                        : [
+                            if (_gamePhase == gamePhase.playing)
+                              ...helperArrows(_unsafeHiders),
+                            NorthArrow(),
+                          ]
                     : [FoundHiders(hiders: _foundHiders)],
               );
       }),

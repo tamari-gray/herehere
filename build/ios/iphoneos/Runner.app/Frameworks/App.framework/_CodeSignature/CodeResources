@@ -18,7 +18,7 @@
 		</data>
 		<key>flutter_assets/NOTICES.Z</key>
 		<data>
-		2V74ns55k06SMaVH5NmWR19NzH4=
+		4m7Jd1jJLojmAGBzpNWbj3mcMOQ=
 		</data>
 		<key>flutter_assets/assets/arrow_niira_sm.png</key>
 		<data>
@@ -38,15 +38,15 @@
 		</data>
 		<key>flutter_assets/fonts/MaterialIcons-Regular.otf</key>
 		<data>
-		33xe6rFwPlxRnZOgZWsODADpUI4=
+		mcmNrC70e/OT89y/p5EgxkVsLrs=
 		</data>
 		<key>flutter_assets/isolate_snapshot_data</key>
 		<data>
-		j58ZaJgxEhtmGJxhHo73d32iYFI=
+		R8t+x9XBrUa8sB1GUR3eCv30Zps=
 		</data>
 		<key>flutter_assets/kernel_blob.bin</key>
 		<data>
-		NdhVXvyiGtWLNPnRjLVBeixtIlY=
+		+00rj3kytmBvL1gADGAO0GFYH3A=
 		</data>
 		<key>flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
 		<data>
@@ -54,17 +54,13 @@
 		</data>
 		<key>flutter_assets/vm_snapshot_data</key>
 		<data>
-		GSdeSSVKlMZc4dGp6K8FmNf4taU=
+		svMbLaZxxwZfWzego4N5XtFC5zQ=
 		</data>
 	</dict>
 	<key>files2</key>
 	<dict>
 		<key>flutter_assets/AssetManifest.json</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			UinCk4dhaB0MM6xDTJnK3YLQo+U=
-			</data>
 			<key>hash2</key>
 			<data>
 			u02502c/HVnPnam3Z9Q6rIUBMNfBQfXRLTJqsEoDD5E=
@@ -72,10 +68,6 @@
 		</dict>
 		<key>flutter_assets/FontManifest.json</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			vKJkVIcw+LGHFnKJGwrQwCREv68=
-			</data>
 			<key>hash2</key>
 			<data>
 			zX4DZFvESy3Ue3y2JvUcTsv1Whl6t3JBYotHrBZfviE=
@@ -83,21 +75,13 @@
 		</dict>
 		<key>flutter_assets/NOTICES.Z</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			2V74ns55k06SMaVH5NmWR19NzH4=
-			</data>
 			<key>hash2</key>
 			<data>
-			N9GaTNVcAT4Qi6+g05Z7GDtYByqsKGATHgLNEPGdE/M=
+			3UyXO1DYXnSLba8WSwG15UHWlHC5hxWBue25XYvupxY=
 			</data>
 		</dict>
 		<key>flutter_assets/assets/arrow_niira_sm.png</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			BDG0hhoY9iGju3aZKojp3SDwA+c=
-			</data>
 			<key>hash2</key>
 			<data>
 			lxhnVEXGuE8FRBmPBpm9D8oFGoQkLV0NCtS93c45Bng=
@@ -105,10 +89,6 @@
 		</dict>
 		<key>flutter_assets/assets/crystal_.png</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			Jkj7wH7WuCBvF/HqLjQpHj60B7w=
-			</data>
 			<key>hash2</key>
 			<data>
 			8ypQcJCX8dLI43NtrAyMFJL4IYZE6e+vLnQhYB+7aws=
@@ -116,10 +96,6 @@
 		</dict>
 		<key>flutter_assets/assets/niira_compass_basic.png</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			qMJlZ0JVbMxPuJal4jgxvecoNkk=
-			</data>
 			<key>hash2</key>
 			<data>
 			SMpGxPkLHRFq2l9rw7dnoLZ2TmZRJCgjmBjS9ZCQRNs=
@@ -127,10 +103,6 @@
 		</dict>
 		<key>flutter_assets/assets/swiper.jpeg</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			dIoHhK6PiPK7Wx8OaMFCT1eiBDY=
-			</data>
 			<key>hash2</key>
 			<data>
 			nti1POoltI/4Y9gt+Hco+4Po+XF0Fk8kGnSk8LlaNBE=
@@ -138,43 +110,27 @@
 		</dict>
 		<key>flutter_assets/fonts/MaterialIcons-Regular.otf</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			33xe6rFwPlxRnZOgZWsODADpUI4=
-			</data>
 			<key>hash2</key>
 			<data>
-			0E0I/gLatnGI9y4elyWPSg2LWYJSPgLt6hMvgJD5+rQ=
+			BugRRJlkJdABYrpi+ZDcvZjsh+EPQ4Uf2ST65b83vlc=
 			</data>
 		</dict>
 		<key>flutter_assets/isolate_snapshot_data</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			j58ZaJgxEhtmGJxhHo73d32iYFI=
-			</data>
 			<key>hash2</key>
 			<data>
-			O2mgX/4QpiIaR3Relq6EGshnOo+RCjbxxYoqeo+kJuY=
+			IOG/uUg7wSbLPl7zG1BqL4vZnYQTsm58gjLEH9+IAA4=
 			</data>
 		</dict>
 		<key>flutter_assets/kernel_blob.bin</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			NdhVXvyiGtWLNPnRjLVBeixtIlY=
-			</data>
 			<key>hash2</key>
 			<data>
-			PH9m8okoqEni83/CGm09I7t1UHmuDzkga8nXoT4rFVw=
+			36wZlFJ8gvzYQ2YfV2ltuVrsrj7snP97A2wbeGxmttI=
 			</data>
 		</dict>
 		<key>flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			P7bb/oR3EhwqCIH1M6LyTuBIWYU=
-			</data>
 			<key>hash2</key>
 			<data>
 			x6NX+tjyECiQtyzbbjyY8U2zoZ7GDbJtE+T+k/dzgI0=
@@ -182,13 +138,9 @@
 		</dict>
 		<key>flutter_assets/vm_snapshot_data</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			GSdeSSVKlMZc4dGp6K8FmNf4taU=
-			</data>
 			<key>hash2</key>
 			<data>
-			w1vt9GEbbsxDdWG+Cns8O0OA28qaaHi/gkQ1bDZezNk=
+			+1kl6HQCQA9+W1I2RiVVuP7qKbF3Lhs9oAPQpyf+jpo=
 			</data>
 		</dict>
 	</dict>

@@ -49,7 +49,7 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
           _gamePhase == gamePhase.playing &&
           !_isTagger &&
           _userId != '') {
-        WidgetsBinding.instance!.addPostFrameCallback((_) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
           setState(() {
             showTaggerIsComingDialog = false;
           });
@@ -58,7 +58,7 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
       }
 
       if (showGoHideDialog && _gamePhase == gamePhase.counting && !_isTagger) {
-        WidgetsBinding.instance!.addPostFrameCallback((_) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
           setState(() {
             showGoHideDialog = false;
           });
@@ -67,7 +67,7 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
       }
 
       if (showHiderFinishedDialog && _userController.user.value.hasBeenTagged) {
-        WidgetsBinding.instance!.addPostFrameCallback(
+        WidgetsBinding.instance.addPostFrameCallback(
           (_) async {
             setState(() {
               showHiderFinishedDialog = false;
@@ -83,7 +83,7 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
       if (showtaggerFinishedGameDialog &&
           _isTagger &&
           _hidersRemaining.length == 0) {
-        WidgetsBinding.instance!.addPostFrameCallback(
+        WidgetsBinding.instance.addPostFrameCallback(
           (_) async {
             setState(() {
               showtaggerFinishedGameDialog = false;

@@ -42,7 +42,7 @@
 		</data>
 		<key>Modules/flutter_compass.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		F0ZMcBBC9cdpVJ+Upm1slu3itKg=
+		4VCyFvll3SFSdgh4rkT2AAGBC3A=
 		</data>
 		<key>Modules/flutter_compass.swiftmodule/arm64.swiftdoc</key>
 		<data>
@@ -50,7 +50,7 @@
 		</data>
 		<key>Modules/flutter_compass.swiftmodule/arm64.swiftmodule</key>
 		<data>
-		F0ZMcBBC9cdpVJ+Upm1slu3itKg=
+		4VCyFvll3SFSdgh4rkT2AAGBC3A=
 		</data>
 		<key>Modules/flutter_compass.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
@@ -58,7 +58,7 @@
 		</data>
 		<key>Modules/flutter_compass.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		sWN6hPYHfUoxxsst/vgKI/jX14Q=
+		suILp2MIIDbdakeho1xfZi12Kbw=
 		</data>
 		<key>Modules/flutter_compass.swiftmodule/x86_64.swiftdoc</key>
 		<data>
@@ -66,7 +66,7 @@
 		</data>
 		<key>Modules/flutter_compass.swiftmodule/x86_64.swiftmodule</key>
 		<data>
-		sWN6hPYHfUoxxsst/vgKI/jX14Q=
+		suILp2MIIDbdakeho1xfZi12Kbw=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -135,7 +135,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			KTDBIFbRftyfRsCEeXVWVjPTQFdqg14y1j+cPnZijuw=
+			9UuaLrz0H396geySjdeJgORzDho8hQvbuH6gntN1gds=
 			</data>
 		</dict>
 		<key>Modules/flutter_compass.swiftmodule/arm64.swiftdoc</key>
@@ -149,7 +149,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			KTDBIFbRftyfRsCEeXVWVjPTQFdqg14y1j+cPnZijuw=
+			9UuaLrz0H396geySjdeJgORzDho8hQvbuH6gntN1gds=
 			</data>
 		</dict>
 		<key>Modules/flutter_compass.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
@@ -163,7 +163,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			1EAi6ma3oWL2rSEfwla9jFhUESX8BKrNn5u5gGm9TvQ=
+			m7aipOPqq2qOiBQoapQMM4hA+w2AQXVeV0/E1LFPz+Q=
 			</data>
 		</dict>
 		<key>Modules/flutter_compass.swiftmodule/x86_64.swiftdoc</key>
@@ -177,7 +177,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			1EAi6ma3oWL2rSEfwla9jFhUESX8BKrNn5u5gGm9TvQ=
+			m7aipOPqq2qOiBQoapQMM4hA+w2AQXVeV0/E1LFPz+Q=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

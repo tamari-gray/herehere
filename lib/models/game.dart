@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:enum_to_string/enum_to_string.dart';
 
+// ignore: camel_case_types
 enum gamePhase { creating, counting, playing, finished }
 
 class GeneratingItems {
