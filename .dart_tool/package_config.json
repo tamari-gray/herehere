@@ -27,9 +27,9 @@
     },
     {
       "name": "async",
-      "rootUri": "file:///Users/aimac/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/async-2.9.0",
+      "rootUri": "file:///Users/aimac/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/async-2.8.2",
       "packageUri": "lib/",
-      "languageVersion": "2.14"
+      "languageVersion": "2.12"
     },
     {
       "name": "async_button_builder",
@@ -257,7 +257,7 @@
       "name": "flutter",
       "rootUri": "file:///Users/aimac/Developer/flutter/packages/flutter",
       "packageUri": "lib/",
-      "languageVersion": "2.17"
+      "languageVersion": "2.12"
     },
     {
       "name": "flutter_compass",
@@ -674,7 +674,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2022-05-30T07:30:36.386015Z",
+  "generated": "2022-06-01T05:41:47.703437Z",
   "generator": "pub",
-  "generatorVersion": "2.18.0-44.1.beta"
+  "generatorVersion": "2.17.1"
 }

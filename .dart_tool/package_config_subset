@@ -15,9 +15,9 @@ args
 file:///Users/aimac/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/args-2.3.0/
 file:///Users/aimac/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/args-2.3.0/lib/
 async
-2.14
-file:///Users/aimac/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/async-2.9.0/
-file:///Users/aimac/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/async-2.9.0/lib/
+2.12
+file:///Users/aimac/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/async-2.8.2/
+file:///Users/aimac/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/async-2.8.2/lib/
 async_button_builder
 2.12
 file:///Users/aimac/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/async_button_builder-2.2.0+1/
@@ -431,7 +431,7 @@ sky_engine
 file:///Users/aimac/Developer/flutter/bin/cache/pkg/sky_engine/
 file:///Users/aimac/Developer/flutter/bin/cache/pkg/sky_engine/lib/
 flutter
-2.17
+2.12
 file:///Users/aimac/Developer/flutter/packages/flutter/
 file:///Users/aimac/Developer/flutter/packages/flutter/lib/
 flutter_test
