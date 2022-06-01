@@ -91,7 +91,7 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
             final _hiders = _gameController.allHiders();
             final _time = _gameController.timeToTagAllHiders();
             await _locationController.stopUpdatingLocationInDb(_userId);
-            await _gameController.resetGame();
+            await _userController.leaveGame();
             taggerFinishedGameDialog(_hiders, _time);
           },
         );

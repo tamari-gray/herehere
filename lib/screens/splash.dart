@@ -226,17 +226,7 @@ class _LogInState extends State<LogIn> {
   Widget build(BuildContext context) {
     return Obx(() {
       return _gameController.game.value.phase != gamePhase.creating
-          ? Padding(
-              padding: const EdgeInsets.fromLTRB(0, 150, 0, 0),
-              child: Container(
-                child: Center(
-                  child: Text(
-                    'Game being played, please wait.',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-              ),
-            )
+          ? GameBeingPlayed()
           : _location == GeoPoint(0, 0)
               ? Padding(
                   padding: const EdgeInsets.fromLTRB(0, 150, 0, 0),
@@ -305,6 +295,53 @@ class _LogInState extends State<LogIn> {
                   )),
                 );
     });
+  }
+}
+
+class GameBeingPlayed extends StatelessWidget {
+  GameBeingPlayed({
+    Key? key,
+  }) : super(key: key);
+
+  final GameController _gameController = Get.find();
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(0, 150, 0, 0),
+      child: Column(
+        children: [
+          Container(
+            child: Center(
+              child: Text(
+                'Game being played, please wait.',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(80, 120, 0, 0),
+            child: TextField(
+              cursorColor: const Color(0xff82fab8),
+              style: TextStyle(color: Colors.white),
+              autofocus: false,
+              decoration: InputDecoration(
+                labelText: 'admin password',
+                labelStyle: TextStyle(
+                  color: const Color(0xff82fab8),
+                ),
+                border: InputBorder.none,
+              ),
+              onChanged: (text) {
+                if (text == 'reset game now') {
+                  _gameController.resetGame();
+                }
+              },
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
 
