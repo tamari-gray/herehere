@@ -326,7 +326,7 @@ class GameBeingPlayed extends StatelessWidget {
               style: TextStyle(color: Colors.white),
               autofocus: false,
               decoration: InputDecoration(
-                labelText: 'admin password',
+                labelText: 'admin',
                 labelStyle: TextStyle(
                   color: const Color(0xff82fab8),
                 ),
