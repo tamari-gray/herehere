@@ -39,7 +39,11 @@ class LocationController extends GetxController {
     userBearing.bindStream(FlutterCompass.events!);
   }
 
-  Future<GeoPoint> getLocationAsGeopoint() async {
+  Future<GeoPoint> getLocationData() async {
+    listenToLocation();
+    listenToPLayerBearing();
+
+
     final _location = await Geolocator.getCurrentPosition(
       desiredAccuracy: LocationAccuracy.bestForNavigation,
     );
@@ -50,16 +54,13 @@ class LocationController extends GetxController {
       await Geolocator.getLocationAccuracy();
 
   void listenToLocation() {
-    final userId = _userController.userId.value;
-
     positionStream = Geolocator.getPositionStream(
       desiredAccuracy: LocationAccuracy.bestForNavigation,
       // distanceFilter: 1,
       // intervalDuration: Duration(seconds: 1),
     ).listen((event) {
-      // location = event.obs;
-      // print(event.accuracy);
-      _database.updateUserLocation(userId, event);
+      final userId = _userController.userId.value;
+      if (userId != "") _database.updateUserLocation(userId, event);
     });
   }
 

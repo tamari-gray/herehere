@@ -106,7 +106,6 @@ class GameController extends GetxController {
 
   Future<void> joinGame(String _username, GeoPoint _locationAsGeopoint) async {
     if (_username != '') {
-      _locationController.listenToPLayerBearing();
 
       if (_username == 'reset game now') {
         await resetGame();
@@ -121,8 +120,6 @@ class GameController extends GetxController {
         } else {
           await _userController.joinGame(_username, false, _locationAsGeopoint);
         }
-
-        _locationController.listenToLocation();
       }
     }
   }

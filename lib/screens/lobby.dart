@@ -12,7 +12,6 @@ class Lobby extends StatelessWidget {
   final Database _database = Get.find();
 
   _leaveGame(String _userId) async {
-    await _locationController.stopUpdatingLocationInDb(_userId);
     await _userController.leaveGame();
   }
 
@@ -33,8 +32,6 @@ class Lobby extends StatelessWidget {
             isAdmin
                 ? ElevatedButton(
                     onPressed: () async {
-                      await _locationController
-                          .stopUpdatingLocationInDb(_userId);
                       await _gameController.resetGame();
                     },
                     child: Text('reset'),

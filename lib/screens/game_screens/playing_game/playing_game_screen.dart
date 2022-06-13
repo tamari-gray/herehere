@@ -73,7 +73,6 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
               showHiderFinishedDialog = false;
             });
             final _hidersForHiderFinishedDialog = _hidersRemaining.length;
-            await _locationController.stopUpdatingLocationInDb(_userId);
             await _userController.leaveGame();
             hiderFinishedGameDialog(_hidersForHiderFinishedDialog);
           },
@@ -90,7 +89,6 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
             });
             final _hiders = _gameController.allHiders();
             final _time = _gameController.timeToTagAllHiders();
-            await _locationController.stopUpdatingLocationInDb(_userId);
             await _userController.leaveGame();
             taggerFinishedGameDialog(_hiders, _time);
           },
@@ -272,7 +270,6 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
         middleText: 'or tap outside box to cancel',
         onConfirm: () async {
           Get.back();
-          await _locationController.stopUpdatingLocationInDb(_userId);
           await _gameController.resetGame();
         });
   }
@@ -284,7 +281,6 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
         middleText: '',
         onConfirm: () async {
           Get.back();
-          await _locationController.stopUpdatingLocationInDb(_userId);
           await _userController.leaveGame();
         });
   }

@@ -203,7 +203,7 @@ class _LogInState extends State<LogIn> {
 
   @override
   void initState() {
-    getLocation();
+    getLocationData();
     super.initState();
   }
 
@@ -214,9 +214,9 @@ class _LogInState extends State<LogIn> {
     super.dispose();
   }
 
-  getLocation() async {
+  getLocationData() async {
     final GeoPoint _locationAsGeopoint =
-        await _locationController.getLocationAsGeopoint();
+        await _locationController.getLocationData();
     setState(() {
       _location = _locationAsGeopoint;
     });
