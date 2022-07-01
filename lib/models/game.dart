@@ -19,6 +19,7 @@ class Game {
   DateTime startTime = DateTime.now();
   gamePhase phase = gamePhase.creating;
   GeneratingItems generatingItems = GeneratingItems(false, DateTime(1));
+  String justTaggedPlayers = "";
 
   Game(
     this.id,
@@ -35,28 +36,13 @@ class Game {
     phase = gamePhase.creating;
   }
 
-  // Game.fromQueryDocumentSnapshot(QueryDocumentSnapshot doc) {
-  //   id = doc.id;
-  //   phase = EnumToString.fromString(
-  //           gamePhase.values, doc["game_phase"].toString()) ??
-  //       gamePhase.creating;
-  //   startTime = DateTime.fromMillisecondsSinceEpoch(doc['start_time']);
-  //   print(doc["generating_items"]);
-
-  //   generatingItems = GeneratingItems(
-  //     doc["generating_items"]!["generating"] ?? false,
-  //     (doc["generating_items"]!["time"] as Timestamp).toDate(),
-  //   );
-  // }
-
   Game.fromDocumentSnapshot(DocumentSnapshot doc) {
     id = doc.id;
     phase = EnumToString.fromString(
             gamePhase.values, doc["game_phase"].toString()) ??
         gamePhase.creating;
     startTime = DateTime.fromMillisecondsSinceEpoch(doc['start_time']);
-    final hi = doc["generating_items"];
-    print(hi);
+    justTaggedPlayers = doc["just_tagged_players"] ?? "";
     generatingItems = GeneratingItems(
       doc["generating_items"]!["generating"] ?? false,
       (doc["generating_items"]!["time"] as Timestamp).toDate(),

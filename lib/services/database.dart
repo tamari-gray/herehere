@@ -230,6 +230,9 @@ class Database extends GetxService {
 
   Future<void> tagHiders(List<Player> _hiders) async {
     try {
+      gameRef().update({
+        "just_tagged_players": _hiders.map((e) => e.username).join(" and ")
+      });
       _hiders.forEach((_hider) async =>
           await playerRef(_hider.id).update({'has_been_tagged': true}));
     } catch (e) {
@@ -255,6 +258,7 @@ class Database extends GetxService {
   Future<void> reset() async {
     try {
       await gameRef().update({
+        'just_tagged_players': "",
         'game_phase': EnumToString.convertToString(gamePhase.creating),
       });
       await playersRef().get().then(

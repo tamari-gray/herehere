@@ -26,6 +26,9 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
   bool showGoHideDialog = true;
   bool showHiderFinishedDialog = true;
   bool showtaggerFinishedGameDialog = true;
+  bool showJustTaggedDialog = true;
+
+  String lastTaggedHiders = "";
 
   SafetyItem foundItem = SafetyItem.fromDefault();
 
@@ -44,6 +47,8 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
       final _hidersRemaining = _gameController.players
           .where((p) => !p.hasBeenTagged && !p.isTagger)
           .toList();
+
+      final justTaggedPlayers = _gameController.game.value.justTaggedPlayers;
 
       if (showTaggerIsComingDialog &&
           _gamePhase == gamePhase.playing &&
@@ -91,6 +96,20 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
             final _time = _gameController.timeToTagAllHiders();
             await _userController.leaveGame();
             taggerFinishedGameDialog(_hiders, _time);
+          },
+        );
+      }
+
+      if (justTaggedPlayers.isNotEmpty &&
+          !_isTagger &&
+          showJustTaggedDialog &&
+          lastTaggedHiders != justTaggedPlayers) {
+        WidgetsBinding.instance.addPostFrameCallback(
+          (_) async {
+            setState(() {
+              showJustTaggedDialog = false;
+            });
+            justTaggedDialog(justTaggedPlayers, _hidersRemaining.length);
           },
         );
       }
@@ -185,6 +204,20 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
         ),
       );
     });
+  }
+
+  Future<dynamic> justTaggedDialog(String _justTaggedHiders, int _hidersLeft) {
+    return Get.defaultDialog(
+        title: '$_justTaggedHiders was tagged!',
+        middleText: '$_hidersLeft hiders left',
+        textConfirm: 'Cool beans',
+        onConfirm: () {
+          setState(() {
+            showJustTaggedDialog = true;
+            lastTaggedHiders = _justTaggedHiders;
+          });
+          Get.back();
+        });
   }
 
   Future<dynamic> checkIfTaggerFinishedCountingDialog() async {

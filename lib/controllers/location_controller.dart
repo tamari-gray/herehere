@@ -43,7 +43,6 @@ class LocationController extends GetxController {
     listenToLocation();
     listenToPLayerBearing();
 
-
     final _location = await Geolocator.getCurrentPosition(
       desiredAccuracy: LocationAccuracy.bestForNavigation,
     );
@@ -66,7 +65,7 @@ class LocationController extends GetxController {
 
   // checks if item or hider is within 8m radius
   bool isWithinFindingDistance(int _distance) {
-    return _distance <= 8 ? true : false;
+    return _distance <= 15 ? true : false;
   }
 
   int distanceFromUser(
