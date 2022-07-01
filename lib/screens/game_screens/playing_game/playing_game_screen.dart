@@ -103,7 +103,8 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
       if (justTaggedPlayers.isNotEmpty &&
           !_isTagger &&
           showJustTaggedDialog &&
-          lastTaggedHiders != justTaggedPlayers) {
+          lastTaggedHiders != justTaggedPlayers &&
+          _hidersRemaining.length != 0) {
         WidgetsBinding.instance.addPostFrameCallback(
           (_) async {
             setState(() {
