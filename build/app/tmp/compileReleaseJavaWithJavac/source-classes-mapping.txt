@@ -1,0 +1,4 @@
+io/flutter/plugins/GeneratedPluginRegistrant.java
+ io.flutter.plugins.GeneratedPluginRegistrant
+com/canyasheme/herehere/BuildConfig.java
+ com.canyasheme.herehere.BuildConfig

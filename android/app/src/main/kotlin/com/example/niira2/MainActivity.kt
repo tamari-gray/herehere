@@ -1,4 +1,4 @@
-package com.herehere.canyasheme
+package com.canyasheme.herehere
 
 import io.flutter.embedding.android.FlutterActivity
 

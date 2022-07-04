@@ -54,9 +54,8 @@ class LocationController extends GetxController {
 
   void listenToLocation() {
     positionStream = Geolocator.getPositionStream(
-      desiredAccuracy: LocationAccuracy.bestForNavigation,
-      // distanceFilter: 1,
-      // intervalDuration: Duration(seconds: 1),
+      locationSettings:
+          LocationSettings(accuracy: LocationAccuracy.bestForNavigation),
     ).listen((event) {
       final userId = _userController.userId.value;
       if (userId != "") _database.updateUserLocation(userId, event);
