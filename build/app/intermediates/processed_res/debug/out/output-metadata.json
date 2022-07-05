@@ -4,14 +4,14 @@
     "type": "PROCESSED_RES",
     "kind": "Directory"
   },
-  "applicationId": "com.herehere.canyasheme",
+  "applicationId": "com.canyasheme.herehere",
   "variantName": "processDebugResources",
   "elements": [
     {
       "type": "SINGLE",
       "filters": [],
-      "versionCode": 3,
-      "versionName": "3.2.1",
+      "versionCode": 1,
+      "versionName": "3.2.3",
       "outputFile": "resources-debug.ap_"
     }
   ]

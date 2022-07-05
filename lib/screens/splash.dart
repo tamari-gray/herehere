@@ -31,8 +31,9 @@ class SplashPage extends StatelessWidget {
                   SplashSubtitle(),
                   _locationController.serviceEnabled.value &&
                           (_locationController.locationAccuracy.value ==
-                                  LocationAccuracyStatus.precise &&
-                              Platform.isIOS) &&
+                                      LocationAccuracyStatus.precise &&
+                                  Platform.isIOS ||
+                              Platform.isAndroid) &&
                           (_locationController.locationPermission.value ==
                                   LocationPermission.always ||
                               _locationController.locationPermission.value ==

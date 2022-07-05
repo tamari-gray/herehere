@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.herehere.canyasheme"
-    android:versionCode="3"
-    android:versionName="3.2.1" >
+    package="com.canyasheme.herehere"
+    android:versionCode="1"
+    android:versionName="3.2.3" >
 
     <uses-sdk
         android:minSdkVersion="23"
@@ -14,6 +14,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" /> <!-- Required by older versions of Google Play services to create IID tokens -->
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
@@ -26,7 +27,7 @@
         android:label="can ya she me"
         android:usesCleartextTraffic="true" >
         <activity
-            android:name="com.herehere.canyasheme.MainActivity"
+            android:name="com.canyasheme.herehere.MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
             android:hardwareAccelerated="true"
             android:launchMode="singleTop"
@@ -94,6 +95,11 @@
                 android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsRegistrar"
                 android:value="com.google.firebase.components.ComponentRegistrar" />
         </service>
+        <service
+            android:name="com.baseflow.geolocator.GeolocatorLocationService"
+            android:enabled="true"
+            android:exported="false"
+            android:foregroundServiceType="location" />
 
         <uses-library
             android:name="androidx.window.extensions"
@@ -104,7 +110,7 @@
 
         <provider
             android:name="com.google.firebase.provider.FirebaseInitProvider"
-            android:authorities="com.herehere.canyasheme.firebaseinitprovider"
+            android:authorities="com.canyasheme.herehere.firebaseinitprovider"
             android:directBootAware="true"
             android:exported="false"
             android:initOrder="100" />
