@@ -33,7 +33,7 @@ dependencies:
   enum_to_string: ^2.0.1
   marquee: ^2.2.0
   flutter_compass: ^0.7.0
-  geolocator: ^8.2.1
+  geolocator: ^9.0.0
   loading_indicator: ^3.0.2
   vector_math: ^2.1.0
   mocktail: ^0.3.0

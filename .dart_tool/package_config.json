@@ -291,13 +291,13 @@
     },
     {
       "name": "geolocator",
-      "rootUri": "file:///Users/aimac/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/geolocator-8.2.1",
+      "rootUri": "file:///Users/aimac/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/geolocator-9.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "geolocator_android",
-      "rootUri": "file:///Users/aimac/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/geolocator_android-3.2.1",
+      "rootUri": "file:///Users/aimac/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/geolocator_android-4.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
@@ -375,7 +375,7 @@
     },
     {
       "name": "json_annotation",
-      "rootUri": "file:///Users/aimac/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/json_annotation-4.5.0",
+      "rootUri": "file:///Users/aimac/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/json_annotation-4.6.0",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
@@ -662,7 +662,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2022-06-23T00:13:08.307359Z",
+  "generated": "2022-07-11T13:13:06.843813Z",
   "generator": "pub",
   "generatorVersion": "2.18.0-165.1.beta"
 }
