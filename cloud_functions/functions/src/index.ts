@@ -59,8 +59,8 @@ exports.generateSafetyItemsOnStartGame = functions.firestore
 
     console.log(`prev: ${prevGamePhase}, new: ${newGamePhase}`);
 
-    if (prevGamePhase == "counting" && newGamePhase == "playing") {
-      console.log("changed from counting to playing, generating items!");
+    if (prevGamePhase == "creating" && newGamePhase == "counting") {
+      console.log("gamephase changed from creating to counting, generating items!");
 
       await generateNewItems();
     }
