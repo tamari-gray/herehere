@@ -1,9 +1,0 @@
-[debug] [2022-05-18T07:17:49.264Z] ----------------------------------------------------------------------
-[debug] [2022-05-18T07:17:49.309Z] Command:       /usr/local/bin/node /usr/local/bin/firebase deploy --only functions
-[debug] [2022-05-18T07:17:49.309Z] CLI Version:   9.21.0
-[debug] [2022-05-18T07:17:49.309Z] Platform:      darwin
-[debug] [2022-05-18T07:17:49.309Z] Node Version:  v14.18.1
-[debug] [2022-05-18T07:17:49.342Z] Time:          Wed May 18 2022 19:17:49 GMT+1200 (New Zealand Standard Time)
-[debug] [2022-05-18T07:17:49.342Z] ----------------------------------------------------------------------
-[debug] 
-[debug] [2022-05-18T07:17:49.348Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
