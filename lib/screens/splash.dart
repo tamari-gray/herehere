@@ -9,11 +9,35 @@ import 'package:cysm/controllers/location_controller.dart';
 import 'package:cysm/models/game.dart';
 import 'dart:io' show Platform;
 
-class SplashPage extends StatelessWidget {
+class SplashPage extends StatefulWidget {
+  @override
+  State<SplashPage> createState() => _SplashPageState();
+}
+
+class _SplashPageState extends State<SplashPage> {
   final LocationController _locationController = Get.find();
+
+  @override
+  void initState() {
+    super.initState();
+    _checkMagnetometer();
+  }
+
+  _checkMagnetometer() async {
+    await _locationController.listenToPLayerBearing();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Obx(() {
+      final magnetometer = _locationController.userBearing.value;
+
+      final magnetometerExists = magnetometer.accuracy != null &&
+              magnetometer.heading != 0.0 &&
+              magnetometer.headingForCameraMode != 0.0
+          ? true
+          : false;
+
       return Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.black,
@@ -29,20 +53,29 @@ class SplashPage extends StatelessWidget {
                 children: <Widget>[
                   SplashTitle(),
                   SplashSubtitle(),
-                  _locationController.serviceEnabled.value &&
-                          (_locationController.locationAccuracy.value ==
-                                      LocationAccuracyStatus.precise &&
-                                  Platform.isIOS ||
-                              Platform.isAndroid) &&
-                          (_locationController.locationPermission.value ==
-                                  LocationPermission.always ||
-                              _locationController.locationPermission.value ==
-                                  LocationPermission.whileInUse)
-                      ? LogIn()
-                      : Padding(
-                          padding: const EdgeInsets.fromLTRB(10, 50, 10, 0),
-                          child: LocationSettingsHandler(),
-                        ),
+                  !magnetometerExists
+                      ? Padding(
+                          padding: const EdgeInsets.fromLTRB(50, 100, 50, 0),
+                          child: Text(
+                            "Sorry Herehere does not work on this device. Please find a suitable phone with a magnetometer to play.",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        )
+                      : (_locationController.serviceEnabled.value &&
+                              (_locationController.locationAccuracy.value ==
+                                          LocationAccuracyStatus.precise &&
+                                      Platform.isIOS ||
+                                  Platform.isAndroid) &&
+                              (_locationController.locationPermission.value ==
+                                      LocationPermission.always ||
+                                  _locationController
+                                          .locationPermission.value ==
+                                      LocationPermission.whileInUse))
+                          ? LogIn()
+                          : Padding(
+                              padding: const EdgeInsets.fromLTRB(10, 50, 10, 0),
+                              child: LocationSettingsHandler(),
+                            ),
                 ],
               ),
             ),

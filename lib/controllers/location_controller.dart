@@ -41,7 +41,6 @@ class LocationController extends GetxController {
 
   Future<GeoPoint> getLocationData() async {
     listenToLocation();
-    listenToPLayerBearing();
 
     final _location = await Geolocator.getCurrentPosition(
       desiredAccuracy: LocationAccuracy.bestForNavigation,
