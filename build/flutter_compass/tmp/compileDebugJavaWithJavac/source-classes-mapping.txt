@@ -1,5 +1,0 @@
-com/hemanthraj/fluttercompass/FlutterCompassPlugin.java
- com.hemanthraj.fluttercompass.FlutterCompassPlugin
- com.hemanthraj.fluttercompass.FlutterCompassPlugin$1
-com/hemanthraj/fluttercompass/BuildConfig.java
- com.hemanthraj.fluttercompass.BuildConfig
