@@ -32,11 +32,10 @@ class _SplashPageState extends State<SplashPage> {
     return Obx(() {
       final magnetometer = _locationController.userBearing.value;
 
-      final magnetometerExists = magnetometer.accuracy != null &&
-              magnetometer.heading != 0.0 &&
-              magnetometer.headingForCameraMode != 0.0
-          ? true
-          : false;
+      final magnetometerExists =
+          magnetometer.accuracy != null && magnetometer.heading != 0.0
+              ? true
+              : false;
 
       return Scaffold(
         resizeToAvoidBottomInset: false,
