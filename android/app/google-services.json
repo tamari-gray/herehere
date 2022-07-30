@@ -1,0 +1,88 @@
+{
+  "project_info": {
+    "project_number": "1094973828546",
+    "project_id": "can-ya-she-me",
+    "storage_bucket": "can-ya-she-me.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1094973828546:android:1875928eb2045ab0693a5b",
+        "android_client_info": {
+          "package_name": "com.canyasheme.herehere"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1094973828546-ubbkub1m920pi2nq06nqpsa3fhrvupg8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAvBr4zNvzwP4uPMlGGko7f7RIsm_6gAbY"
+        },
+        {
+          "current_key": "AIzaSyBAoZ9sI1lUPnoT2_dhxnuptNTsZfuK4EY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1094973828546-ubbkub1m920pi2nq06nqpsa3fhrvupg8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1094973828546-moutvr8n2iafti53i2vi3ohfpbbimapr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.herehere.canyasheme"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1094973828546:android:b47ef926b1261276693a5b",
+        "android_client_info": {
+          "package_name": "com.herehere.canyasheme"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1094973828546-ubbkub1m920pi2nq06nqpsa3fhrvupg8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAvBr4zNvzwP4uPMlGGko7f7RIsm_6gAbY"
+        },
+        {
+          "current_key": "AIzaSyBAoZ9sI1lUPnoT2_dhxnuptNTsZfuK4EY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1094973828546-ubbkub1m920pi2nq06nqpsa3fhrvupg8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1094973828546-moutvr8n2iafti53i2vi3ohfpbbimapr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.herehere.canyasheme"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

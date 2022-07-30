@@ -1,11 +1,11 @@
 {
-    "name": "niira2",
-    "short_name": "niira2",
+    "name": "can ya she me",
+    "short_name": "cysm",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "Super spotlight",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
