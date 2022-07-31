@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:cysm/controllers/game_controller.dart';
-import 'package:cysm/controllers/location_controller.dart';
-import 'package:cysm/controllers/user_controller.dart';
-import 'package:cysm/models/game.dart';
-import 'package:cysm/models/safety_item.dart';
-import 'package:cysm/screens/game_screens/playing_game/Compass/compass_for_hider.dart';
-import 'package:cysm/screens/game_screens/playing_game/Compass/compass_for_tagger.dart';
-import 'package:cysm/screens/game_screens/playing_game/widgets.dart';
-import 'package:cysm/services/database.dart';
-import 'package:cysm/utilities/placing.dart';
+import 'package:herehere/controllers/game_controller.dart';
+import 'package:herehere/controllers/location_controller.dart';
+import 'package:herehere/controllers/user_controller.dart';
+import 'package:herehere/models/game.dart';
+import 'package:herehere/models/safety_item.dart';
+import 'package:herehere/screens/game_screens/playing_game/Compass/compass_for_hider.dart';
+import 'package:herehere/screens/game_screens/playing_game/Compass/compass_for_tagger.dart';
+import 'package:herehere/screens/game_screens/playing_game/widgets.dart';
+import 'package:herehere/services/database.dart';
+import 'package:herehere/utilities/placing.dart';
 
 class PlayingGameScreen extends StatefulWidget {
   @override
@@ -237,7 +237,7 @@ class _PlayingGameScreenState extends State<PlayingGameScreen> {
     return Get.defaultDialog(
         titleStyle: TextStyle(fontSize: 28),
         titlePadding: EdgeInsets.fromLTRB(0, 20, 0, 0),
-        title: 'How to play cysm',
+        title: 'How to play herehere',
         textConfirm: 'Bring it on frank',
         contentPadding: EdgeInsets.all(15),
         content: Text(

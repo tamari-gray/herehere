@@ -1,12 +1,12 @@
-import 'package:cysm/controllers/user_controller.dart';
-import 'package:cysm/screens/game_screens/playing_game/compass/helper_arrow.dart';
+import 'package:herehere/controllers/user_controller.dart';
+import 'package:herehere/screens/game_screens/playing_game/compass/helper_arrow.dart';
 import 'package:flutter/material.dart';
 import 'package:get/instance_manager.dart';
 import 'package:get/state_manager.dart';
-import 'package:cysm/controllers/game_controller.dart';
-import 'package:cysm/controllers/location_controller.dart';
-import 'package:cysm/models/game.dart';
-import 'package:cysm/models/safety_item.dart';
+import 'package:herehere/controllers/game_controller.dart';
+import 'package:herehere/controllers/location_controller.dart';
+import 'package:herehere/models/game.dart';
+import 'package:herehere/models/safety_item.dart';
 
 import 'compass_for_tagger.dart';
 
