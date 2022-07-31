@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:loading_indicator/loading_indicator.dart';
-import 'package:cysm/controllers/game_controller.dart';
-import 'package:cysm/controllers/location_controller.dart';
-import 'package:cysm/models/game.dart';
+import 'package:herehere/controllers/game_controller.dart';
+import 'package:herehere/controllers/location_controller.dart';
+import 'package:herehere/models/game.dart';
 import 'dart:io' show Platform;
 
 class SplashPage extends StatefulWidget {

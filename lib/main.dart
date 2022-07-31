@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
-import 'package:cysm/controllers/game_controller.dart';
-import 'package:cysm/controllers/location_controller.dart';
-import 'package:cysm/controllers/user_controller.dart';
-import 'package:cysm/screens/game_screens/game_screen.dart';
-import 'package:cysm/screens/splash.dart';
-import 'package:cysm/services/database.dart';
+import 'package:herehere/controllers/game_controller.dart';
+import 'package:herehere/controllers/location_controller.dart';
+import 'package:herehere/controllers/user_controller.dart';
+import 'package:herehere/screens/game_screens/game_screen.dart';
+import 'package:herehere/screens/splash.dart';
+import 'package:herehere/services/database.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

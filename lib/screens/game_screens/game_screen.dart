@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
-import 'package:cysm/controllers/game_controller.dart';
-import 'package:cysm/models/game.dart';
-import 'package:cysm/screens/lobby.dart';
-import 'package:cysm/screens/game_screens/playing_game/playing_game_screen.dart';
+import 'package:herehere/controllers/game_controller.dart';
+import 'package:herehere/models/game.dart';
+import 'package:herehere/screens/lobby.dart';
+import 'package:herehere/screens/game_screens/playing_game/playing_game_screen.dart';
 
 class JoinedGame extends StatefulWidget {
   @override

@@ -3,12 +3,12 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
-import 'package:cysm/controllers/location_controller.dart';
-import 'package:cysm/controllers/user_controller.dart';
-import 'package:cysm/models/game.dart';
-import 'package:cysm/models/player.dart';
-import 'package:cysm/models/safety_item.dart';
-import 'package:cysm/services/database.dart';
+import 'package:herehere/controllers/location_controller.dart';
+import 'package:herehere/controllers/user_controller.dart';
+import 'package:herehere/models/game.dart';
+import 'package:herehere/models/player.dart';
+import 'package:herehere/models/safety_item.dart';
+import 'package:herehere/services/database.dart';
 
 class GameController extends GetxController {
   final Database _database = Get.find();
@@ -106,7 +106,6 @@ class GameController extends GetxController {
 
   Future<void> joinGame(String _username, GeoPoint _locationAsGeopoint) async {
     if (_username != '') {
-
       if (_username == 'reset game now') {
         await resetGame();
       } else {

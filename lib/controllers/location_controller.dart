@@ -2,11 +2,11 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:cysm/controllers/user_controller.dart';
+import 'package:herehere/controllers/user_controller.dart';
 import 'package:flutter_compass/flutter_compass.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
-import 'package:cysm/services/database.dart';
+import 'package:herehere/services/database.dart';
 
 class LocationController extends GetxController {
   final Database _database = Get.find();

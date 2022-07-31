@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:cysm/controllers/game_controller.dart';
-import 'package:cysm/controllers/user_controller.dart';
+import 'package:herehere/controllers/game_controller.dart';
+import 'package:herehere/controllers/user_controller.dart';
 
 class LocationHiddenBanner extends StatelessWidget {
   final UserController _userController = Get.find();
