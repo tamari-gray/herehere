@@ -34,16 +34,27 @@ class HelperArrow extends StatelessWidget {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(0, 5, 0, 15),
-              child: Image.asset(
-                'assets/arrow_niira_sm.png',
-                width: 50,
-                height: 70,
-              ),
-            ),
+            Arrow(),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class Arrow extends StatelessWidget {
+  const Arrow({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(0, 5, 0, 15),
+      child: Image.asset(
+        'assets/arrow_niira_sm.png',
+        width: 50,
+        height: 70,
       ),
     );
   }

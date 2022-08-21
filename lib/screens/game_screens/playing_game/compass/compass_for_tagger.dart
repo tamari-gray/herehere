@@ -25,9 +25,7 @@ class CompassForTagger extends StatelessWidget {
         final _userBearing = _locationController.userBearing.value.heading!;
 
         // handle hiders
-        final _hidersRemaining = _gameController.players
-            .where((p) => !p.hasBeenTagged && !p.isTagger)
-            .toList();
+        final _hidersRemaining = _gameController.hidersRemaining;
 
         final _allHidersWithDistanceAndAngle =
             _gameController.hidersWithAngleAndDistance(
@@ -46,11 +44,16 @@ class CompassForTagger extends StatelessWidget {
                   .isWithinFindingDistance(_hider.distanceFromUser),
             )
             .toList();
-        _gameController.foundHiders.value = _foundHiders;
+
+        _gameController.foundHiders.value = _allHidersWithDistanceAndAngle;
         final _gamePhase = _gameController.game.value.phase;
 
         return _gamePhase == gamePhase.counting
             ? NorthArrow()
+            // : HelperArrow(
+            //     angle: _allHidersWithDistanceAndAngle.first.angleFromUser,
+            //     distance:
+            //         _allHidersWithDistanceAndAngle.first.distanceFromUser);
             : Stack(
                 fit: StackFit.expand,
                 clipBehavior: Clip.none,
@@ -59,20 +62,7 @@ class CompassForTagger extends StatelessWidget {
                     ? _unsafeHiders.isEmpty
                         ? [
                             // if hiders arent in finding distance and all have safety items
-                            Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  SizedBox(
-                                    height: 50,
-                                  ),
-                                  Text(
-                                    'All hiders locations are safe, for now...',
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                    ),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ]),
+                            AllHidersSafe(),
                             NorthArrow(),
                           ]
                         : [
@@ -93,6 +83,28 @@ class CompassForTagger extends StatelessWidget {
         .toList();
     _hidersAsHelperArrows.sort((a, b) => b.distance!.compareTo(a.distance!));
     return _hidersAsHelperArrows;
+  }
+}
+
+class AllHidersSafe extends StatelessWidget {
+  const AllHidersSafe({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+      SizedBox(
+        height: 50,
+      ),
+      Text(
+        'All hiders locations are safe, for now...',
+        style: TextStyle(
+          fontSize: 20,
+        ),
+        textAlign: TextAlign.center,
+      ),
+    ]);
   }
 }
 

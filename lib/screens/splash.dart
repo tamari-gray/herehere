@@ -3,7 +3,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
-import 'package:loading_indicator/loading_indicator.dart';
 import 'package:herehere/controllers/game_controller.dart';
 import 'package:herehere/controllers/location_controller.dart';
 import 'package:herehere/models/game.dart';
@@ -210,14 +209,10 @@ class _LocationSettingsHandlerState extends State<LocationSettingsHandler> {
           }
         }
         return Container(
-          child: LoadingIndicator(
-            indicatorType: Indicator.ballScaleMultiple,
-            colors: const [Colors.white],
-            strokeWidth: 2,
-            backgroundColor: Colors.black,
-            pathBackgroundColor: Colors.black,
-          ),
-        );
+            child: Center(
+          child:
+              Text("location services loading error... please poo your pants"),
+        ));
       },
     );
   }
