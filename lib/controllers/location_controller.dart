@@ -2,8 +2,8 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:herehere/controllers/user_controller.dart';
 import 'package:flutter_compass/flutter_compass.dart';
+import 'package:herehere/controllers/user_controller.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:herehere/services/database.dart';
@@ -19,11 +19,6 @@ class LocationController extends GetxController {
   var locationAccuracy = LocationAccuracyStatus.precise.obs;
 
   late StreamSubscription<Position> positionStream;
-  late Stream<CompassEvent> userBearingStream;
-
-  // updateLocationInDb(String userId) async {
-  //   ever(location, (_) => _database.updateUserLocation(userId, location.value));
-  // }
 
   checkLocationSettings() async {
     serviceEnabled.value = await Geolocator.isLocationServiceEnabled();

@@ -28,59 +28,83 @@ class _SplashPageState extends State<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      backgroundColor: Colors.black,
+      body: SingleChildScrollView(
+        reverse: true,
+        padding:
+            EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+        child: Container(
+          padding: EdgeInsets.fromLTRB(0, 0, 0, 50),
+          child: Center(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                SplashTitle(),
+                SplashSubtitle(),
+                CheckForMagnetometer(),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class CheckForMagnetometer extends StatelessWidget {
+  final LocationController _locationController = Get.find();
+
+  @override
+  Widget build(BuildContext context) {
     return Obx(() {
       final magnetometer = _locationController.userBearing.value;
+      print(magnetometer);
 
       final magnetometerExists =
           magnetometer.accuracy != null && magnetometer.heading != 0.0
               ? true
               : false;
 
-      return Scaffold(
-        resizeToAvoidBottomInset: false,
-        backgroundColor: Colors.black,
-        body: SingleChildScrollView(
-          reverse: true,
-          padding:
-              EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-          child: Container(
-            padding: EdgeInsets.fromLTRB(0, 0, 0, 50),
-            child: Center(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  SplashTitle(),
-                  SplashSubtitle(),
-                  !magnetometerExists
-                      ? Padding(
-                          padding: const EdgeInsets.fromLTRB(50, 100, 50, 0),
-                          child: Text(
-                            "Sorry Herehere does not work on this device. Please find a suitable phone with a magnetometer to play.",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        )
-                      : (_locationController.serviceEnabled.value &&
-                              (_locationController.locationAccuracy.value ==
-                                          LocationAccuracyStatus.precise &&
-                                      Platform.isIOS ||
-                                  Platform.isAndroid) &&
-                              (_locationController.locationPermission.value ==
-                                      LocationPermission.always ||
-                                  _locationController
-                                          .locationPermission.value ==
-                                      LocationPermission.whileInUse))
-                          ? LogIn()
-                          : Padding(
-                              padding: const EdgeInsets.fromLTRB(10, 50, 10, 0),
-                              child: LocationSettingsHandler(),
-                            ),
-                ],
-              ),
-            ),
-          ),
-        ),
-      );
+      return !magnetometerExists
+          ? UserHasNoMagnetometerPrompt()
+          : locationPermissionsChecks()
+              ? LogIn()
+              : Padding(
+                  padding: const EdgeInsets.fromLTRB(10, 50, 10, 0),
+                  child: LocationSettingsHandler(),
+                );
     });
+  }
+
+  bool locationPermissionsChecks() {
+    return (_locationController.serviceEnabled.value &&
+        (_locationController.locationAccuracy.value ==
+                    LocationAccuracyStatus.precise &&
+                Platform.isIOS ||
+            Platform.isAndroid) &&
+        (_locationController.locationPermission.value ==
+                LocationPermission.always ||
+            _locationController.locationPermission.value ==
+                LocationPermission.whileInUse));
+  }
+}
+
+class UserHasNoMagnetometerPrompt extends StatelessWidget {
+  const UserHasNoMagnetometerPrompt({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(50, 100, 50, 0),
+      child: Text(
+        "Sorry Herehere does not work on this device. Please find a suitable phone with a magnetometer to play.",
+        style: TextStyle(color: Colors.white),
+      ),
+    );
   }
 }
 

@@ -23,19 +23,33 @@ class HelperArrow extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Card(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  '${distance!} m',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ),
+            Distance(distance: distance),
             Arrow(),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class Distance extends StatelessWidget {
+  const Distance({
+    Key? key,
+    required this.distance,
+  }) : super(key: key);
+
+  final int? distance;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Text(
+          '${distance!} m',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
     );
