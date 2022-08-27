@@ -45,15 +45,11 @@ class CompassForTagger extends StatelessWidget {
             )
             .toList();
 
-        _gameController.foundHiders.value = _allHidersWithDistanceAndAngle;
+        _gameController.foundHiders.value = _foundHiders;
         final _gamePhase = _gameController.game.value.phase;
 
         return _gamePhase == gamePhase.counting
             ? NorthArrow()
-            // : HelperArrow(
-            //     angle: _allHidersWithDistanceAndAngle.first.angleFromUser,
-            //     distance:
-            //         _allHidersWithDistanceAndAngle.first.distanceFromUser);
             : Stack(
                 fit: StackFit.expand,
                 clipBehavior: Clip.none,
