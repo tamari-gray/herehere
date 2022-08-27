@@ -20,6 +20,8 @@ class GameController extends GetxController {
   final players = List<Player>.empty().obs;
   final items = List<SafetyItem>.empty().obs;
 
+  var hidersRemaining = List<Player>.empty().obs;
+
   var foundHiders = List<Player>.empty().obs;
   var foundItems = List<SafetyItem>.empty().obs;
 
@@ -36,6 +38,8 @@ class GameController extends GetxController {
     game.bindStream(_database.gameStream());
     players.bindStream(_database.playersStream());
     items.bindStream(_database.availableSafetyItemStream());
+
+    ever(players, (_) => (calcHidersRemaining()));
   }
 
   void stopItemRespawnTimer() {
@@ -61,8 +65,8 @@ class GameController extends GetxController {
   int timeToTagAllHiders() =>
       DateTime.now().difference(game.value.startTime).inMinutes;
 
-  List<Player> hidersRemaining() =>
-      players.where((p) => !p.hasBeenTagged && !p.isTagger).toList();
+  void calcHidersRemaining() => hidersRemaining =
+      players.where((p) => !p.hasBeenTagged && !p.isTagger).toList().obs;
 
   int allHiders() => players.where((p) => !p.isTagger).length;
 

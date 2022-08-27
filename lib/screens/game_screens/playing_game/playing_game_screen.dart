@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:herehere/controllers/game_controller.dart';
-import 'package:herehere/controllers/location_controller.dart';
 import 'package:herehere/controllers/user_controller.dart';
 import 'package:herehere/models/game.dart';
 import 'package:herehere/models/safety_item.dart';
@@ -9,7 +8,8 @@ import 'package:herehere/screens/game_screens/playing_game/Compass/compass_for_h
 import 'package:herehere/screens/game_screens/playing_game/Compass/compass_for_tagger.dart';
 import 'package:herehere/screens/game_screens/playing_game/widgets.dart';
 import 'package:herehere/services/database.dart';
-import 'package:herehere/utilities/placing.dart';
+
+import '../../../utilities/placing.dart';
 
 class PlayingGameScreen extends StatefulWidget {
   @override
@@ -19,7 +19,6 @@ class PlayingGameScreen extends StatefulWidget {
 class _PlayingGameScreenState extends State<PlayingGameScreen> {
   final GameController _gameController = Get.find();
   final UserController _userController = Get.find();
-  final LocationController _locationController = Get.find();
   final Database _database = Get.find();
 
   bool showTaggerIsComingDialog = false;

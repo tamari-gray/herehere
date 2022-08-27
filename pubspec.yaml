@@ -3,7 +3,7 @@ description: les go
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-version: 3.2.5+3
+version: 3.2.6+4
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
@@ -16,9 +16,9 @@ dependencies:
   cupertino_icons: ^1.0.2
   enum_to_string: ^2.0.1
   marquee: ^2.2.0
-  flutter_compass: ^0.7.0
+  flutter_compass: 
+    git: https://github.com/hemanthrajv/flutter_compass.git
   geolocator: ^9.0.0
-  loading_indicator: ^3.0.2
   vector_math: ^2.1.0
   mocktail: ^0.3.0
   fake_cloud_firestore: ^1.1.3
