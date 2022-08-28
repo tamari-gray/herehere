@@ -1,4 +1,3 @@
-import 'package:herehere/controllers/location_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:herehere/controllers/game_controller.dart';
@@ -8,7 +7,6 @@ import 'package:herehere/services/database.dart';
 class Lobby extends StatelessWidget {
   final UserController _userController = Get.find();
   final GameController _gameController = Get.find();
-  final LocationController _locationController = Get.find();
   final Database _database = Get.find();
 
   _leaveGame(String _userId) async {

@@ -60,7 +60,6 @@ class CheckForMagnetometer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(() {
       final magnetometer = _locationController.userBearing.value;
-      print(magnetometer);
 
       final magnetometerExists =
           magnetometer.accuracy != null && magnetometer.heading != 0.0
